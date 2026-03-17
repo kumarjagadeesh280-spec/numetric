@@ -1,201 +1,2158 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Numetric - Bookkeeping & Accounting Solutions</title>
-    <meta name="description"
-        content="Numetric simplifies and scales financial operations for SMBs with smart, cloud-based bookkeeping and accounting solutions.">
+    <title>NUMETRIC - Accounting & Bookkeeping Services for Australian CPAs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        :root {
+            --primary: #1e3a8a;
+            --primary-dark: #1e40af;
+            --secondary: #2c3e50;
+            --accent: #06b6d4;
+            --accent-light: #e0f2fe;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --success: #10b981;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        html {
+            scroll-behavior: smooth;
+        }
 
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--bg-white);
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .cta-btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .cta-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(30, 58, 138, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: rgba(6, 182, 212, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 600;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            background: #06d6e0;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--bg-light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .about-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .about-box h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .about-box p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .values {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .value-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-item h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .value-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Services Section */
+        .services {
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-card {
+            background: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: 10px;
+            border-top: 4px solid var(--accent);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            background: white;
+            box-shadow: 0 8px 24px rgba(30, 58, 138, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Why Choose Us */
+        .why-choose {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .why-choose h2 {
+            color: white;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .why-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .why-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .why-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .why-card p {
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        /* Blog Section */
+        .blog {
+            background: var(--bg-light);
+        }
+
+        .blog-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: flex-start;
+        }
+
+        .blog-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 2px solid var(--accent-light);
+        }
+
+        .blog-form h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .blog-submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .blog-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(30, 58, 138, 0.3);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .blog-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .blog-card-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 2rem;
+            color: white;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .blog-card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-card-date {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .blog-card-content {
+            padding: 1.5rem;
+        }
+
+        .blog-card-excerpt {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .blog-card-author {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        .no-blogs {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            background: white;
+            border-radius: 10px;
+            border: 2px dashed #e5e7eb;
+        }
+
+        /* Reviews Section */
+        .reviews {
+            background: white;
+        }
+
+        .reviews-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reviews-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            align-items: center;
+        }
+
+        .reviews-stats {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .rating-display {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .rating-large {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .rating-info {
+            flex: 1;
+        }
+
+        .rating-stars {
+            color: #fbbf24;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .rating-count {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .rating-bars {
+            margin-top: 2rem;
+        }
+
+        .rating-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .rating-bar-label {
+            width: 50px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .rating-bar-progress {
+            flex: 1;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .rating-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .rating-bar-count {
+            width: 40px;
+            text-align: right;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        /* Review Form */
+        .review-form-section {
+            background: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .review-form-section h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .star {
+            color: #d1d5db;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .star:hover,
+        .star.active {
+            color: #fbbf24;
+            transform: scale(1.1);
+        }
+
+        .review-submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .review-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(30, 58, 138, 0.3);
+        }
+
+        .reviews-list {
+            margin-top: 3rem;
+        }
+
+        .reviews-list-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .review-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .review-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .review-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .review-author {
+            flex: 1;
+        }
+
+        .review-author-name {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .review-author-company {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .review-rating {
+            color: #fbbf24;
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+
+        .review-text {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .review-date {
+            color: #d1d5db;
+            font-size: 0.8rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        /* Response Section */
+        .review-responses {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .response-item {
+            background: var(--accent-light);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .response-header {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .response-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+        }
+
+        .response-text {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .response-date {
+            color: var(--text-light);
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .response-form {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 6px;
+            border: 1px dashed var(--accent);
+        }
+
+        .response-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .response-form-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .response-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .response-btn-submit {
+            background: var(--primary);
+            color: white;
+        }
+
+        .response-btn-submit:hover {
+            background: var(--primary-dark);
+        }
+
+        .response-btn-cancel {
+            background: #e5e7eb;
+            color: var(--text-dark);
+        }
+
+        .response-btn-cancel:hover {
+            background: #d1d5db;
+        }
+
+        .toggle-response-btn {
+            background: transparent;
+            color: var(--accent);
+            padding: 0;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .toggle-response-btn:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .no-reviews {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            background: white;
+            border-radius: 10px;
+            border: 2px dashed #e5e7eb;
+        }
+
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--success);
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Process Section */
+        .process {
+            background: white;
+        }
+
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+            z-index: 0;
+        }
+
+        .process-step {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+        }
+
+        .process-step h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            background: var(--bg-light);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1.5rem 0;
+            background: white;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .faq-question:hover {
+            color: var(--accent);
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            display: none;
+            margin-top: 1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .contact h2 {
+            color: white;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+            align-items: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-text p {
+            opacity: 0.9;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            background: white;
+            color: var(--text-dark);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        .submit-btn {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: #06d6e0;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.3rem;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                display: none;
+            }
+
+            nav {
+                flex-wrap: wrap;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .about-content,
+            .contact-wrapper,
+            .reviews-header,
+            .blog-header {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid,
+            .values,
+            .why-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-timeline {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-timeline::before {
+                display: none;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-
 <body>
-
+    <!-- Header -->
     <header>
-        <div class="container nav-container">
-            <a href="#" class="logo">Numetric</a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#vision">Vision</a></li>
-                    <li><a href="#contact" class="btn-nav">Contact Us</a></li>
-                </ul>
-                <div class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
+        <nav>
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="barGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="100" cy="100" r="95" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+                        <rect x="65" y="120" width="12" height="30" fill="#1e3a8a" rx="2"/>
+                        <rect x="85" y="105" width="12" height="45" fill="url(#barGradient)" rx="2"/>
+                        <rect x="105" y="85" width="12" height="65" fill="#1e3a8a" rx="2"/>
+                        <rect x="125" y="70" width="12" height="80" fill="url(#barGradient)" rx="2"/>
+                        <path d="M 60 100 L 75 115 L 95 85" stroke="#10b981" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
-            </nav>
-        </div>
+                NUMETRIC
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#why-choose">Why Us</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Contact Our Team</button>
+        </nav>
     </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="container hero-content">
-                <span class="badge">Simplify & Scale</span>
-                <h1>Smart Financial Operations for <span class="gradient-text">Growing Businesses</span></h1>
-                <p>We become your reliable back-office partner, helping you stay focused on growth while we handle the
-                    numbers.</p>
-                <div class="hero-btns">
-                    <a href="#contact" class="btn btn-primary">Get Started</a>
-                    <a href="#services" class="btn btn-secondary">Explore Services</a>
-                </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Take Control of Your Business — With Smarter Books</h1>
+            <p class="tagline">Professional Accounting & Bookkeeping for Australian CPAs & BAS Agents</p>
+            <p class="subtitle">Expert offshore accounting services that reduce costs, improve accuracy, and free up your team for higher-value client work.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Contact Our Team</button>
+                <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">Learn More</button>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- About Section -->
-        <section id="about" class="about section-padding">
-            <div class="container about-grid">
-                <div class="about-content">
-                    <h2 class="section-title">Who We Are</h2>
-                    <p class="lead">Numetric helps small and medium businesses simplify and scale their financial
-                        operations through smart, cloud-based bookkeeping and accounting solutions.</p>
-                    <p>Founded in 2020, we provide AI-powered support for invoicing, accounts payable/receivable,
-                        finalization, and compliance. Whether you're an entrepreneur, accounting firm, or a service
-                        provider, our team operates as your dedicated back-office partner.</p>
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2>About NUMETRIC</h2>
+            <p class="section-subtitle">Expert accounting and bookkeeping solutions for Australian professional service firms</p>
+            
+            <div class="about-content">
+                <div>
+                    <h3>Our Mission</h3>
+                    <p>To empower Australian CPA firms and BAS agents by providing world-class accounting and bookkeeping services, enabling them to focus on client relationships and strategic advisory work while we handle their back-office operations with exceptional quality and reliability.</p>
+                    <p>We believe in delivering superior results at significantly lower costs, without compromising compliance or accuracy. Our team combines deep technical expertise with thorough knowledge of Australian accounting standards and regulations.</p>
                 </div>
-                <div class="about-image">
-                    <img src="office_team.png" alt="Numetric Team"
-                        style="width: 100%; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+                <div class="about-box">
+                    <h4>🎯 Our Vision</h4>
+                    <p>To become the trusted offshore accounting partner for forward-thinking Australian professional service firms, recognized for reliability, expertise, and exceptional value delivery.</p>
                 </div>
             </div>
-            </div>
-        </section>
 
-        <!-- Services Section -->
-        <section id="services" class="services section-padding bg-light">
-            <div class="container">
-                <div class="section-header center">
-                    <h2 class="section-title">Our Services</h2>
-                    <p>Comprehensive financial solutions tailored for your business needs.</p>
+            <div class="values">
+                <div class="value-item">
+                    <div class="value-icon">✓</div>
+                    <h4>Accuracy First</h4>
+                    <p>Every transaction, every entry, every report reviewed with precision and full compliance with Australian standards.</p>
                 </div>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="icon-box"><i class="fas fa-book"></i></div>
-                        <h3>Bookkeeping & Accounting</h3>
-                        <p>Accurate and timely recording of financial transactions to keep your books audit-ready.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="icon-box"><i class="fas fa-file-invoice-dollar"></i></div>
-                        <h3>AP/AR Management</h3>
-                        <p>Efficient management of accounts payable and receivable to optimize cash flow.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="icon-box"><i class="fas fa-money-check-alt"></i></div>
-                        <h3>Payroll Processing</h3>
-                        <p>Seamless payroll management ensuring your team is paid on time, every time.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="icon-box"><i class="fas fa-balance-scale"></i></div>
-                        <h3>Tax Compliance Support</h3>
-                        <p> Expert support to navigate complex tax regulations and ensure full compliance.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="icon-box"><i class="fas fa-clipboard-check"></i></div>
-                        <h3>Finalization Assistance</h3>
-                        <p>Detailed assistance in finalizing accounts for year-end reporting and audits.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="icon-box"><i class="fas fa-chart-pie"></i></div>
-                        <h3>Business Insight Dashboards</h3>
-                        <p>Visual aids and reports to provide actionable insights into your business performance.</p>
-                    </div>
+                <div class="value-item">
+                    <div class="value-icon">⚡</div>
+                    <h4>Speed & Efficiency</h4>
+                    <p>Fast turnaround times without sacrificing quality. Your clients get results when they need them.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">🔒</div>
+                    <h4>Compliance Focused</h4>
+                    <p>Full compliance with Australian Accounting Standards, ATO requirements, and BAS lodgement rules.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Tools Section -->
-        <section class="tools section-padding">
-            <div class="container">
-                <div class="section-header center">
-                    <h2 class="section-title">Tools We Work With</h2>
-                    <p>Seamlessly integrating with the industry's leading financial platforms.</p>
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <p class="section-subtitle">Comprehensive accounting solutions tailored to your clients' needs</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>📊 Monthly Bookkeeping & Accounting</h3>
+                    <p>Complete monthly accounting support including journal entries, account reconciliation, financial statement preparation, and comprehensive reporting.</p>
+                    <ul class="service-features">
+                        <li>General ledger management</li>
+                        <li>Account reconciliation</li>
+                        <li>Monthly financial statements</li>
+                        <li>Working capital analysis</li>
+                        <li>Audit trail documentation</li>
+                    </ul>
                 </div>
-                <div class="tools-grid">
-                    <div class="tool-item"><span>Tally</span></div>
-                    <div class="tool-item"><span>SAP</span></div>
-                    <div class="tool-item"><span>QuickBooks</span></div>
-                    <div class="tool-item"><span>Zoho</span></div>
-                    <div class="tool-item"><span>Xero</span></div>
-                    <div class="tool-item"><span>Excel</span></div>
-                    <div class="tool-item"><span>Google Workspace</span></div>
-                    <div class="tool-item"><span>AI Automations</span></div>
+
+                <div class="service-card">
+                    <h3>💼 Payroll Processing</h3>
+                    <p>End-to-end payroll services compliant with Australian employment regulations, PAYG requirements, and superannuation obligations.</p>
+                    <ul class="service-features">
+                        <li>Weekly/fortnightly/monthly payroll</li>
+                        <li>PAYG withholding calculations</li>
+                        <li>Superannuation processing</li>
+                        <li>Leave accrual tracking</li>
+                        <li>ATO compliance reporting</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>📈 Financial Statements & Reporting</h3>
+                    <p>Professional financial statements prepared in compliance with Australian Accounting Standards for management, lenders, or regulatory purposes.</p>
+                    <ul class="service-features">
+                        <li>Balance sheet preparation</li>
+                        <li>Income statement compilation</li>
+                        <li>Cash flow statements</li>
+                        <li>Management reports</li>
+                        <li>Financial analysis & insights</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>🔍 Account Reconciliation</h3>
+                    <p>Detailed account reconciliation ensuring accuracy and identifying discrepancies for all asset, liability, and equity accounts.</p>
+                    <ul class="service-features">
+                        <li>Bank reconciliation</li>
+                        <li>Credit card matching</li>
+                        <li>Vendor statement reconciliation</li>
+                        <li>Fixed asset tracking</li>
+                        <li>Discrepancy resolution</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>⚙️ Ancillary Services</h3>
+                    <p>Additional support services to keep your operations running smoothly, from data entry to ad-hoc accounting tasks.</p>
+                    <ul class="service-features">
+                        <li>Invoice processing</li>
+                        <li>Data entry & conversion</li>
+                        <li>Ad-hoc accounting tasks</li>
+                        <li>Spreadsheet management</li>
+                        <li>Custom reporting</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>🎓 Xero Integration & Support</h3>
+                    <p>Expert Xero setup, configuration, training, and ongoing support. We're Xero L1 & L2 certified for complete accounting software mastery.</p>
+                    <ul class="service-features">
+                        <li>Xero setup & configuration</li>
+                        <li>Chart of accounts optimization</li>
+                        <li>Automation & workflows</li>
+                        <li>Staff training & support</li>
+                        <li>Regular system optimization</li>
+                    </ul>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Vision Section -->
-        <section id="vision" class="vision section-padding bg-dark text-white">
-            <div class="container center">
-                <div class="vision-content">
-                    <i class="fas fa-star vision-icon"></i>
-                    <h2 class="section-title text-white">Our Vision</h2>
-                    <p class="vision-text">"To be the most trusted and tech-forward accounting partner for growing
-                        businesses worldwide."</p>
+    <!-- Why Choose Us -->
+    <section class="why-choose" id="why-choose">
+        <div class="container">
+            <h2>Why Choose NUMETRIC?</h2>
+            <p class="section-subtitle">Trusted by Australian accounting professionals for quality, reliability, and value</p>
+            
+            <div class="why-grid">
+                <div class="why-card">
+                    <h3>💰 Cost Savings</h3>
+                    <p>Significantly reduce back-office costs without compromising quality. Offshore expertise at a fraction of local pricing improves your margins.</p>
+                </div>
+
+                <div class="why-card">
+                    <h3>✨ Quality & Accuracy</h3>
+                    <p>Xero L1 & L2 certified professional with extensive accounting expertise. Every transaction reviewed with meticulous attention to detail.</p>
+                </div>
+
+                <div class="why-card">
+                    <h3>⚡ Fast Turnaround</h3>
+                    <p>Quick delivery of accounting services without delays. Our efficient processes ensure your clients' reporting needs are met on schedule.</p>
+                </div>
+
+                <div class="why-card">
+                    <h3>📋 Compliance Assured</h3>
+                    <p>Deep expertise in Australian Accounting Standards, ATO requirements, and BAS obligations. Regulatory compliance built into every process.</p>
+                </div>
+
+                <div class="why-card">
+                    <h3>👥 Dedicated Support</h3>
+                    <p>Your dedicated account liaison ensures continuity, understands your clients' needs, and provides personalized service that exceeds expectations.</p>
+                </div>
+
+                <div class="why-card">
+                    <h3>🔒 Data Security</h3>
+                    <p>Enterprise-grade security protocols protect all financial data. Complete confidentiality and secure document handling as standard.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="contact section-padding">
-            <div class="container">
-                <div class="contact-wrapper">
-                    <div class="contact-text">
-                        <h2 class="section-title">Let's Work Together</h2>
-                        <p>Ready to simplify your financial operations? Get in touch with us today.</p>
-                        <ul class="contact-details">
-                            <li><i class="fas fa-envelope"></i>info@numetricinc.com</li>
-                            <li><i class="fab fa-linkedin"></i><a href="https://www.linkedin.com/company/numetricinc/"
-                                    target="_blank" style="color: inherit; text-decoration: none;">Numetric LinkedIn</a>
-                            </li>
-                            <li><i class="fas fa-map-marker-alt"></i>Global Services</li>
-                        </ul>
-                    </div>
-                    <form class="contact-form">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" placeholder="Your Name" required>
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <h2>Blog & Articles</h2>
+            <p class="section-subtitle">Stay updated with accounting insights, tips, and industry trends</p>
+            
+            <div class="blog-header">
+                <div>
+                    <h3 style="margin-bottom: 1rem;">Latest Articles</h3>
+                    <div class="blog-grid" id="blogGrid">
+                        <div class="no-blogs">
+                            <p>No articles yet. Check back soon for accounting insights and tips!</p>
                         </div>
+                    </div>
+                </div>
+
+                <div class="blog-form">
+                    <h3>📝 Add New Article</h3>
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem;">Share your accounting knowledge and insights with your audience.</p>
+                    
+                    <form id="blogForm" onsubmit="submitBlogPost(event)">
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" placeholder="Your Email" required>
+                            <label for="blogTitle">Article Title *</label>
+                            <input type="text" id="blogTitle" name="title" required placeholder="e.g., 5 Tips for Better Bookkeeping">
                         </div>
+
                         <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" rows="4" placeholder="How can we help?" required></textarea>
+                            <label for="blogExcerpt">Summary/Excerpt *</label>
+                            <textarea id="blogExcerpt" name="excerpt" required placeholder="Brief summary of your article (shown in list)..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary full-width">Send Message</button>
+
+                        <div class="form-group">
+                            <label for="blogContent">Full Article Content *</label>
+                            <textarea id="blogContent" name="content" required placeholder="Write your complete article here..."></textarea>
+                        </div>
+
+                        <button type="submit" class="blog-submit-btn">Publish Article</button>
                     </form>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
-
-    <footer>
-        <div class="container footer-content">
-            <div class="footer-logo">Numetric</div>
-            <p>&copy; 2024 Numetric. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://www.linkedin.com/company/numetricinc/" target="_blank"><i
-                        class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
+    <!-- Process Section -->
+    <section class="process">
+        <div class="container">
+            <h2>How We Work</h2>
+            <p class="section-subtitle">A streamlined process designed for your success</p>
+            
+            <div class="process-timeline">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Discovery</h4>
+                    <p>We understand your requirements, client base, and specific accounting needs.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Setup</h4>
+                    <p>Configure systems, establish processes, and prepare for seamless knowledge transfer.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Execution</h4>
+                    <p>Deliver consistent, accurate accounting services with regular communication.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Growth</h4>
+                    <p>Scale services with your business, expanding capabilities as needs evolve.</p>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews" id="reviews">
+        <div class="reviews-container container">
+            <h2 style="margin-bottom: 1rem;">Client Reviews & Testimonials</h2>
+            <p class="section-subtitle">Real feedback from accounting professionals we've worked with</p>
+            
+            <div class="reviews-header">
+                <!-- Rating Stats -->
+                <div class="reviews-stats">
+                    <div class="rating-display">
+                        <div class="rating-large" id="averageRating">4.8</div>
+                        <div class="rating-info">
+                            <div class="rating-stars" id="starDisplay">★★★★★</div>
+                            <div class="rating-count"><span id="totalReviews">0</span> reviews</div>
+                        </div>
+                    </div>
+                    
+                    <div class="rating-bars">
+                        <div class="rating-bar">
+                            <div class="rating-bar-label">5 ★</div>
+                            <div class="rating-bar-progress">
+                                <div class="rating-bar-fill" id="bar5" style="width: 80%;"></div>
+                            </div>
+                            <div class="rating-bar-count" id="count5">0</div>
+                        </div>
+                        <div class="rating-bar">
+                            <div class="rating-bar-label">4 ★</div>
+                            <div class="rating-bar-progress">
+                                <div class="rating-bar-fill" id="bar4" style="width: 20%;"></div>
+                            </div>
+                            <div class="rating-bar-count" id="count4">0</div>
+                        </div>
+                        <div class="rating-bar">
+                            <div class="rating-bar-label">3 ★</div>
+                            <div class="rating-bar-progress">
+                                <div class="rating-bar-fill" id="bar3" style="width: 0%;"></div>
+                            </div>
+                            <div class="rating-bar-count" id="count3">0</div>
+                        </div>
+                        <div class="rating-bar">
+                            <div class="rating-bar-label">2 ★</div>
+                            <div class="rating-bar-progress">
+                                <div class="rating-bar-fill" id="bar2" style="width: 0%;"></div>
+                            </div>
+                            <div class="rating-bar-count" id="count2">0</div>
+                        </div>
+                        <div class="rating-bar">
+                            <div class="rating-bar-label">1 ★</div>
+                            <div class="rating-bar-progress">
+                                <div class="rating-bar-fill" id="bar1" style="width: 0%;"></div>
+                            </div>
+                            <div class="rating-bar-count" id="count1">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Form -->
+                <div class="review-form-section">
+                    <h3>📝 Write a Review</h3>
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem;">Share your experience with NUMETRIC. Your feedback helps us improve and helps other accounting professionals make informed decisions.</p>
+                    
+                    <div class="success-message" id="successMessage">
+                        ✓ Thank you! Your review has been posted successfully.
+                    </div>
+
+                    <form id="reviewForm" onsubmit="submitReview(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="reviewName">Your Name *</label>
+                                <input type="text" id="reviewName" name="name" required placeholder="e.g., John Smith">
+                            </div>
+                            <div class="form-group">
+                                <label for="reviewCompany">Company Name *</label>
+                                <input type="text" id="reviewCompany" name="company" required placeholder="e.g., ABC CPA Services">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Rating *</label>
+                            <div class="star-rating" id="starRating">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            <input type="hidden" id="reviewRating" name="rating" value="0" required>
+                        </div>
+
+                        <div class="form-group full">
+                            <label for="reviewText">Your Review *</label>
+                            <textarea id="reviewText" name="review" required placeholder="Share your experience with NUMETRIC. What did you appreciate most? How has our service helped your firm?"></textarea>
+                        </div>
+
+                        <button type="submit" class="review-submit-btn">Submit Review</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Reviews Display -->
+            <div class="reviews-list">
+                <h3 class="reviews-list-title">Recent Reviews</h3>
+                <div class="reviews-grid" id="reviewsGrid">
+                    <div class="no-reviews">
+                        <p>No reviews yet. Be the first to share your experience!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <p class="section-subtitle">Common questions about our services and process</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is my data secure with an offshore provider?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, absolutely. We implement enterprise-grade security protocols, encrypted data transfers, secure file handling, and strict confidentiality agreements. Your clients' financial information is protected with the same rigor as any local provider. We understand the sensitivity of accounting data and treat it with utmost care.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do you ensure compliance with Australian standards?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        We maintain deep expertise in Australian Accounting Standards, ATO requirements, BAS lodgement rules, and superannuation regulations. Our processes are built around these standards, and we stay current with regulatory changes. Every report and entry is reviewed for compliance.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What's your typical turnaround time for accounting services?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Turnaround times depend on the service, but we aim for quick delivery without compromising quality. Monthly accounting: typically 5-7 business days. Payroll: within 2-3 business days. Financial statements: 7-10 business days. We can discuss specific timelines based on your needs.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can you handle multiple clients or all my back-office work?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! We can support a single client or manage your entire back-office portfolio. We scale with your growth and can handle multiple clients simultaneously with dedicated account management for each relationship.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do we integrate with our existing systems?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        We work with the systems you use, particularly Xero where we're L1 & L2 certified. We can also work with other accounting software and will establish secure, efficient data transfer methods and regular communication protocols.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What's the cost structure?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        We offer flexible pricing based on service complexity and volume. We'll work with you to understand your needs and provide transparent quotes. Most clients see significant cost savings compared to local outsourcing while receiving premium quality service.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do you handle client onboarding?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        We provide a structured onboarding process: initial discovery, system setup, detailed documentation review, knowledge transfer, and a ramp-up period with close oversight. We ensure you're completely comfortable before full handoff.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <p class="section-subtitle">Ready to transform your back-office operations?</p>
+            
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3 style="margin-top: 0;">Contact Information</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p><a href="mailto:info@numetricinc.com" style="color: white; text-decoration: none;">info@numetricinc.com</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-text">
+                            <h4>Location</h4>
+                            <p>Nellore, Andhra Pradesh<br>India</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">⏰</div>
+                        <div class="contact-text">
+                            <h4>Response Time</h4>
+                            <p>We typically respond within 24 hours and are available for meetings across time zones.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Company Name</label>
+                        <input type="text" id="company" name="company" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div style="margin-bottom: 1.5rem;">
+                <div class="logo" style="justify-content: center; color: white; margin-bottom: 1rem;">
+                    <div class="logo-icon" style="width: 40px; height: 40px;">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="barGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="100" cy="100" r="95" fill="none" stroke="white" stroke-width="2"/>
+                            <rect x="65" y="120" width="12" height="30" fill="white" rx="2"/>
+                            <rect x="85" y="105" width="12" height="45" fill="url(#barGradient2)" rx="2"/>
+                            <rect x="105" y="85" width="12" height="65" fill="white" rx="2"/>
+                            <rect x="125" y="70" width="12" height="80" fill="url(#barGradient2)" rx="2"/>
+                            <path d="M 60 100 L 75 115 L 95 85" stroke="#10b981" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    NUMETRIC
+                </div>
+            </div>
+            <p>Professional accounting & bookkeeping services for Australian CPA firms and BAS agents.</p>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="social-links">
+            <a href="https://www.linkedin.com/company/numetricinc/" target="_blank" class="social-link" title="LinkedIn">
+                <span>in</span>
+            </a>
+        </div>
+
+        <div class="footer-links">
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#why-choose">Why Us</a>
+            <a href="#blog">Blog</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024-2026 NUMETRIC. All rights reserved. | Accounting Services for Australian Professionals</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
-</body>
+    <script>
+        // ========== BLOG FUNCTIONALITY ==========
+        let currentlyEditingReviewId = null;
 
+        function loadBlogPosts() {
+            const stored = localStorage.getItem('numetricBlog');
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function saveBlogPosts(posts) {
+            localStorage.setItem('numetricBlog', JSON.stringify(posts));
+        }
+
+        function submitBlogPost(event) {
+            event.preventDefault();
+
+            const post = {
+                id: Date.now(),
+                title: document.getElementById('blogTitle').value,
+                excerpt: document.getElementById('blogExcerpt').value,
+                content: document.getElementById('blogContent').value,
+                date: new Date().toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                })
+            };
+
+            const posts = loadBlogPosts();
+            posts.unshift(post);
+            saveBlogPosts(posts);
+
+            document.getElementById('blogForm').reset();
+            displayBlogPosts();
+        }
+
+        function displayBlogPosts() {
+            const posts = loadBlogPosts();
+            const grid = document.getElementById('blogGrid');
+
+            if (posts.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-blogs">
+                        <p>No articles yet. Check back soon for accounting insights and tips!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = posts.map(post => `
+                <div class="blog-card">
+                    <div class="blog-card-header">
+                        <div class="blog-card-title">${escapeHtml(post.title)}</div>
+                        <div class="blog-card-date">${post.date}</div>
+                    </div>
+                    <div class="blog-card-content">
+                        <p class="blog-card-excerpt">${escapeHtml(post.excerpt)}</p>
+                        <details style="color: var(--accent); cursor: pointer; font-weight: 600;">
+                            <summary>Read Full Article</summary>
+                            <div style="margin-top: 1rem; color: var(--text-light); font-weight: normal;">
+                                ${escapeHtml(post.content).replace(/\n/g, '<br>')}
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ========== REVIEWS FUNCTIONALITY ==========
+        let selectedRating = 0;
+
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', function() {
+                selectedRating = this.dataset.value;
+                document.getElementById('reviewRating').value = selectedRating;
+                updateStarDisplay();
+            });
+
+            star.addEventListener('mouseover', function() {
+                const hoverValue = this.dataset.value;
+                document.querySelectorAll('.star').forEach(s => {
+                    s.classList.toggle('active', s.dataset.value <= hoverValue);
+                });
+            });
+        });
+
+        document.getElementById('starRating').addEventListener('mouseleave', updateStarDisplay);
+
+        function updateStarDisplay() {
+            document.querySelectorAll('.star').forEach(s => {
+                s.classList.toggle('active', s.dataset.value <= selectedRating);
+            });
+        }
+
+        function loadReviews() {
+            const stored = localStorage.getItem('numetricReviews');
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function saveReviews(reviews) {
+            localStorage.setItem('numetricReviews', JSON.stringify(reviews));
+        }
+
+        function submitReview(event) {
+            event.preventDefault();
+
+            const rating = parseInt(document.getElementById('reviewRating').value);
+            if (rating === 0) {
+                alert('Please select a rating');
+                return;
+            }
+
+            const review = {
+                id: Date.now(),
+                name: document.getElementById('reviewName').value,
+                company: document.getElementById('reviewCompany').value,
+                rating: rating,
+                text: document.getElementById('reviewText').value,
+                date: new Date().toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                }),
+                responses: []
+            };
+
+            const reviews = loadReviews();
+            reviews.unshift(review);
+            saveReviews(reviews);
+
+            const successMsg = document.getElementById('successMessage');
+            successMsg.classList.add('show');
+            setTimeout(() => successMsg.classList.remove('show'), 3000);
+
+            document.getElementById('reviewForm').reset();
+            selectedRating = 0;
+            updateStarDisplay();
+
+            displayReviews();
+            updateRatingStats();
+        }
+
+        function displayReviews() {
+            const reviews = loadReviews();
+            const grid = document.getElementById('reviewsGrid');
+
+            if (reviews.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-reviews">
+                        <p>No reviews yet. Be the first to share your experience!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = reviews.map(review => `
+                <div class="review-card">
+                    <div class="review-card-header">
+                        <div class="review-author">
+                            <div class="review-author-name">${escapeHtml(review.name)}</div>
+                            <div class="review-author-company">${escapeHtml(review.company)}</div>
+                        </div>
+                        <div class="review-rating">${'★'.repeat(review.rating)}</div>
+                    </div>
+                    <p class="review-text">"${escapeHtml(review.text)}"</p>
+                    <div class="review-date">${review.date}</div>
+                    
+                    ${review.responses && review.responses.length > 0 ? `
+                        <div class="review-responses">
+                            <strong style="color: var(--primary); font-size: 0.9rem;">Response from NUMETRIC:</strong>
+                            ${review.responses.map(resp => `
+                                <div class="response-item">
+                                    <div class="response-text">${escapeHtml(resp.text)}</div>
+                                    <div class="response-date">${resp.date}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+
+                    <button class="toggle-response-btn" onclick="toggleResponseForm(${review.id})">
+                        ${review.responses && review.responses.length > 0 ? 'Add Another Response' : 'Respond to Review'}
+                    </button>
+                    <div id="response-form-${review.id}" class="response-form" style="display: none;">
+                        <textarea id="response-text-${review.id}" placeholder="Write your response to this review..."></textarea>
+                        <div class="response-form-buttons">
+                            <button class="response-btn response-btn-submit" onclick="submitResponse(${review.id})">Post Response</button>
+                            <button class="response-btn response-btn-cancel" onclick="toggleResponseForm(${review.id})">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleResponseForm(reviewId) {
+            const form = document.getElementById(`response-form-${reviewId}`);
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+            if (form.style.display === 'block') {
+                document.getElementById(`response-text-${reviewId}`).focus();
+            }
+        }
+
+        function submitResponse(reviewId) {
+            const responseText = document.getElementById(`response-text-${reviewId}`).value;
+            
+            if (!responseText.trim()) {
+                alert('Please write a response');
+                return;
+            }
+
+            const reviews = loadReviews();
+            const review = reviews.find(r => r.id === reviewId);
+
+            if (review) {
+                if (!review.responses) {
+                    review.responses = [];
+                }
+
+                review.responses.push({
+                    text: responseText,
+                    date: new Date().toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                    })
+                });
+
+                saveReviews(reviews);
+                displayReviews();
+                document.getElementById(`response-text-${reviewId}`).value = '';
+                toggleResponseForm(reviewId);
+            }
+        }
+
+        function updateRatingStats() {
+            const reviews = loadReviews();
+            
+            if (reviews.length === 0) {
+                document.getElementById('totalReviews').textContent = '0';
+                document.getElementById('averageRating').textContent = '0.0';
+                return;
+            }
+
+            const totalRating = reviews.reduce((sum, r) => sum + r.rating, 0);
+            const avgRating = (totalRating / reviews.length).toFixed(1);
+            document.getElementById('averageRating').textContent = avgRating;
+            document.getElementById('totalReviews').textContent = reviews.length;
+
+            const fullStars = Math.floor(avgRating);
+            const hasHalfStar = avgRating % 1 >= 0.5;
+            let starDisplay = '★'.repeat(fullStars);
+            if (hasHalfStar && fullStars < 5) {
+                starDisplay += '☆';
+            }
+            document.getElementById('starDisplay').textContent = starDisplay;
+
+            const ratingCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+            reviews.forEach(r => ratingCounts[r.rating]++);
+
+            for (let i = 1; i <= 5; i++) {
+                const count = ratingCounts[i];
+                const percentage = (count / reviews.length) * 100;
+                document.getElementById(`bar${i}`).style.width = percentage + '%';
+                document.getElementById(`count${i}`).textContent = count;
+            }
+        }
+
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        // FAQ Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.closest('.faq-item');
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // Contact Form Submission
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            alert(`Thank you, ${name}! We've received your message and will get back to you within 24 hours.`);
+            this.reset();
+        });
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            displayBlogPosts();
+            displayReviews();
+            updateRatingStats();
+        });
+    </script>
+</body>
 </html>
