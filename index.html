@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NUMETRIC - Accounting & Bookkeeping Services for Australian CPAs</title>
+    <title>NUMETRIC - Offshore Accounting & Bookkeeping Solutions for CPA Firms Worldwide</title>
     <style>
         * {
             margin: 0;
@@ -22,6 +22,7 @@
             --bg-light: #f9fafb;
             --bg-white: #ffffff;
             --success: #10b981;
+            --error: #ef4444;
         }
 
         html {
@@ -34,6 +35,144 @@
             background: var(--bg-white);
             line-height: 1.6;
             overflow-x: hidden;
+        }
+
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-modal.show {
+            display: flex;
+        }
+
+        .login-modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 400px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .login-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--accent-light);
+            padding-bottom: 1rem;
+        }
+
+        .login-modal h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(30, 58, 138, 0.3);
+        }
+
+        .login-error {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 0.75rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--error);
+            display: none;
+        }
+
+        .login-error.show {
+            display: block;
+        }
+
+        .login-info {
+            background: #dbeafe;
+            color: #0c2340;
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border-left: 4px solid var(--accent);
         }
 
         /* Header & Navigation */
@@ -99,7 +238,13 @@
             color: var(--accent);
         }
 
-        .cta-btn {
+        .nav-buttons {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .cta-btn, .login-link-btn, .logout-btn {
             background: var(--primary);
             color: white;
             padding: 0.75rem 1.5rem;
@@ -112,10 +257,48 @@
             font-size: 0.95rem;
         }
 
-        .cta-btn:hover {
+        .login-link-btn {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 0.6rem 1.2rem;
+        }
+
+        .login-link-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .cta-btn:hover, .logout-btn:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 8px 16px rgba(30, 58, 138, 0.2);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
         }
 
         /* Hero Section */
@@ -221,32 +404,6 @@
         .btn-secondary:hover {
             background: white;
             color: var(--primary);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Section Styling */
-        section {
-            padding: 5rem 2rem;
-        }
-
-        section h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            margin-bottom: 3rem;
-            max-width: 600px;
         }
 
         /* About Section */
@@ -386,14 +543,57 @@
             font-weight: bold;
         }
 
-        /* Why Choose Us */
-        .why-choose {
+        /* Countries Section */
+        .countries {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
         }
 
-        .why-choose h2 {
+        .countries h2 {
             color: white;
+        }
+
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .country-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .country-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .country-flag {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .country-card h4 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .country-card p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        /* Why Choose Us */
+        .why-choose {
+            background: white;
         }
 
         .why-grid {
@@ -404,27 +604,26 @@
         }
 
         .why-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--bg-light);
             padding: 2.5rem;
             border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
             transition: all 0.3s;
         }
 
         .why-card:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: white;
+            box-shadow: 0 8px 24px rgba(30, 58, 138, 0.1);
             transform: translateY(-5px);
         }
 
         .why-card h3 {
             font-size: 1.3rem;
             margin-bottom: 1rem;
-            color: var(--accent);
+            color: var(--primary);
         }
 
         .why-card p {
-            opacity: 0.95;
+            color: var(--text-light);
             line-height: 1.8;
         }
 
@@ -452,18 +651,48 @@
         .blog-form h3 {
             color: var(--primary);
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .form-group {
+        .blog-form.hidden {
+            display: none;
+        }
+
+        .login-prompt {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 2px solid #fbbf24;
+            text-align: center;
+        }
+
+        .login-prompt h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .login-prompt p {
+            color: var(--text-light);
             margin-bottom: 1.5rem;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--primary);
-            font-size: 0.95rem;
+        .login-prompt-btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login-prompt-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
         }
 
         .form-group input,
@@ -476,6 +705,7 @@
             font-size: 0.95rem;
             color: var(--text-dark);
             transition: border-color 0.3s;
+            margin-top: 0.5rem;
         }
 
         .form-group input:focus,
@@ -501,6 +731,7 @@
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s;
+            margin-top: 1rem;
         }
 
         .blog-submit-btn:hover {
@@ -1122,15 +1353,22 @@
             color: var(--text-dark);
         }
 
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
         .contact-form textarea {
             resize: vertical;
             min-height: 120px;
         }
 
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px var(--accent-light);
+        .contact-form .form-group label {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
         }
 
         .submit-btn {
@@ -1248,7 +1486,8 @@
             .services-grid,
             .values,
             .why-grid,
-            .blog-grid {
+            .blog-grid,
+            .countries-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1268,9 +1507,52 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .admin-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+        }
     </style>
 </head>
 <body>
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-modal-content">
+            <div class="login-modal-header">
+                <h2>🔐 Admin Login</h2>
+                <button class="close-modal" onclick="closeLoginModal()">×</button>
+            </div>
+            
+            <div class="login-error" id="loginError"></div>
+            
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <div class="login-info">
+                    📝 <strong>Demo Credentials:</strong><br>
+                    Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cca3bba2a9be8ca2b9a1a9b8bea5afe2afa3a1">[email&#160;protected]</a><br>
+                    Password: Admin@2024
+                </div>
+
+                <div class="form-group">
+                    <label for="loginEmail">Email Address *</label>
+                    <input type="email" id="loginEmail" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password *</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                </div>
+
+                <button type="submit" class="login-btn">Login to Admin Panel</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Header -->
     <header>
         <nav>
@@ -1296,23 +1578,27 @@
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="#countries">Global Reach</a></li>
                 <li><a href="#why-choose">Why Us</a></li>
                 <li><a href="#blog">Blog</a></li>
                 <li><a href="#reviews">Reviews</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Contact Our Team</button>
+            <div class="nav-buttons">
+                <button class="login-link-btn" id="loginBtn" onclick="openLoginModal()">Admin Login</button>
+                <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Started</button>
+            </div>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Take Control of Your Business — With Smarter Books</h1>
-            <p class="tagline">Professional Accounting & Bookkeeping for Australian CPAs & BAS Agents</p>
-            <p class="subtitle">Expert offshore accounting services that reduce costs, improve accuracy, and free up your team for higher-value client work.</p>
+            <h1>Global Accounting & Bookkeeping Solutions for CPA Firms Worldwide</h1>
+            <p class="tagline">Offshore expertise serving accounting professionals in the US, Canada, Australia, UK, and beyond</p>
+            <p class="subtitle">Significantly reduce your back-office costs while maintaining premium quality. We handle the accounting; you focus on client relationships and business growth.</p>
             <div class="hero-buttons">
-                <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Contact Our Team</button>
+                <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Started Today</button>
                 <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">Learn More</button>
             </div>
         </div>
@@ -1322,35 +1608,35 @@
     <section class="about" id="about">
         <div class="container">
             <h2>About NUMETRIC</h2>
-            <p class="section-subtitle">Expert accounting and bookkeeping solutions for Australian professional service firms</p>
+            <p class="section-subtitle">Trusted offshore accounting partner for accounting professionals globally</p>
             
             <div class="about-content">
                 <div>
                     <h3>Our Mission</h3>
-                    <p>To empower Australian CPA firms and BAS agents by providing world-class accounting and bookkeeping services, enabling them to focus on client relationships and strategic advisory work while we handle their back-office operations with exceptional quality and reliability.</p>
-                    <p>We believe in delivering superior results at significantly lower costs, without compromising compliance or accuracy. Our team combines deep technical expertise with thorough knowledge of Australian accounting standards and regulations.</p>
+                    <p>To empower accounting professionals worldwide by providing world-class, cost-effective back-office solutions. We help CPA firms, bookkeeping practices, and accounting consultants expand their service capacity and profitability without the burden of managing large onshore teams.</p>
+                    <p>Whether you're in New York, Toronto, Sydney, or London, we deliver the same level of accuracy, reliability, and compliance that your clients expect.</p>
                 </div>
                 <div class="about-box">
-                    <h4>🎯 Our Vision</h4>
-                    <p>To become the trusted offshore accounting partner for forward-thinking Australian professional service firms, recognized for reliability, expertise, and exceptional value delivery.</p>
+                    <h4>🌍 Global Expertise</h4>
+                    <p>We serve accounting professionals across multiple countries, with deep knowledge of different regulatory environments, tax codes, and compliance requirements. Local expertise, global standards.</p>
                 </div>
             </div>
 
             <div class="values">
                 <div class="value-item">
                     <div class="value-icon">✓</div>
-                    <h4>Accuracy First</h4>
-                    <p>Every transaction, every entry, every report reviewed with precision and full compliance with Australian standards.</p>
+                    <h4>Quality First</h4>
+                    <p>Every transaction, every entry, every report is reviewed with meticulous attention to detail and adherence to local standards.</p>
                 </div>
                 <div class="value-item">
                     <div class="value-icon">⚡</div>
                     <h4>Speed & Efficiency</h4>
-                    <p>Fast turnaround times without sacrificing quality. Your clients get results when they need them.</p>
+                    <p>Fast turnaround times without compromising quality. Your clients get results when they need them, every time.</p>
                 </div>
                 <div class="value-item">
-                    <div class="value-icon">🔒</div>
-                    <h4>Compliance Focused</h4>
-                    <p>Full compliance with Australian Accounting Standards, ATO requirements, and BAS lodgement rules.</p>
+                    <div class="value-icon">💰</div>
+                    <h4>Cost Savings</h4>
+                    <p>Significantly reduce operational costs while receiving premium quality service. Improve your firm's profitability immediately.</p>
                 </div>
             </div>
         </div>
@@ -1360,80 +1646,125 @@
     <section class="services" id="services">
         <div class="container">
             <h2>Our Services</h2>
-            <p class="section-subtitle">Comprehensive accounting solutions tailored to your clients' needs</p>
+            <p class="section-subtitle">Comprehensive accounting solutions for firms of all sizes</p>
             
             <div class="services-grid">
                 <div class="service-card">
                     <h3>📊 Monthly Bookkeeping & Accounting</h3>
-                    <p>Complete monthly accounting support including journal entries, account reconciliation, financial statement preparation, and comprehensive reporting.</p>
+                    <p>Complete accounting support including journal entries, account reconciliation, financial statement preparation, and comprehensive reporting tailored to your jurisdiction.</p>
                     <ul class="service-features">
                         <li>General ledger management</li>
                         <li>Account reconciliation</li>
-                        <li>Monthly financial statements</li>
-                        <li>Working capital analysis</li>
+                        <li>Financial statements preparation</li>
+                        <li>Monthly/quarterly/annual closing</li>
                         <li>Audit trail documentation</li>
                     </ul>
                 </div>
 
                 <div class="service-card">
                     <h3>💼 Payroll Processing</h3>
-                    <p>End-to-end payroll services compliant with Australian employment regulations, PAYG requirements, and superannuation obligations.</p>
+                    <p>End-to-end payroll services compliant with employment laws, tax withholding requirements, and benefit obligations in your country.</p>
                     <ul class="service-features">
-                        <li>Weekly/fortnightly/monthly payroll</li>
-                        <li>PAYG withholding calculations</li>
-                        <li>Superannuation processing</li>
-                        <li>Leave accrual tracking</li>
-                        <li>ATO compliance reporting</li>
+                        <li>Weekly/bi-weekly/monthly payroll</li>
+                        <li>Tax withholding calculations</li>
+                        <li>Benefit administration</li>
+                        <li>Leave/vacation tracking</li>
+                        <li>Statutory reporting</li>
                     </ul>
                 </div>
 
                 <div class="service-card">
                     <h3>📈 Financial Statements & Reporting</h3>
-                    <p>Professional financial statements prepared in compliance with Australian Accounting Standards for management, lenders, or regulatory purposes.</p>
+                    <p>Professional financial statements prepared in compliance with local accounting standards for management, lenders, or regulatory purposes.</p>
                     <ul class="service-features">
                         <li>Balance sheet preparation</li>
                         <li>Income statement compilation</li>
                         <li>Cash flow statements</li>
-                        <li>Management reports</li>
-                        <li>Financial analysis & insights</li>
+                        <li>Notes to financial statements</li>
+                        <li>Management/analytical reports</li>
                     </ul>
                 </div>
 
                 <div class="service-card">
                     <h3>🔍 Account Reconciliation</h3>
-                    <p>Detailed account reconciliation ensuring accuracy and identifying discrepancies for all asset, liability, and equity accounts.</p>
+                    <p>Detailed account reconciliation ensuring accuracy and identifying discrepancies across all asset, liability, and equity accounts.</p>
                     <ul class="service-features">
                         <li>Bank reconciliation</li>
                         <li>Credit card matching</li>
                         <li>Vendor statement reconciliation</li>
-                        <li>Fixed asset tracking</li>
-                        <li>Discrepancy resolution</li>
+                        <li>Balance sheet account reviews</li>
+                        <li>Discrepancy investigation</li>
                     </ul>
                 </div>
 
                 <div class="service-card">
-                    <h3>⚙️ Ancillary Services</h3>
-                    <p>Additional support services to keep your operations running smoothly, from data entry to ad-hoc accounting tasks.</p>
+                    <h3>⚙️ Tax Compliance Support</h3>
+                    <p>Specialized support for tax filing, documentation, and compliance based on your country's requirements and standards.</p>
                     <ul class="service-features">
-                        <li>Invoice processing</li>
-                        <li>Data entry & conversion</li>
-                        <li>Ad-hoc accounting tasks</li>
-                        <li>Spreadsheet management</li>
-                        <li>Custom reporting</li>
+                        <li>Tax documentation preparation</li>
+                        <li>Compliance checklists</li>
+                        <li>Record organization</li>
+                        <li>Deduction optimization</li>
+                        <li>Audit support preparation</li>
                     </ul>
                 </div>
 
                 <div class="service-card">
-                    <h3>🎓 Xero Integration & Support</h3>
-                    <p>Expert Xero setup, configuration, training, and ongoing support. We're Xero L1 & L2 certified for complete accounting software mastery.</p>
+                    <h3>🎓 Accounting Software Support</h3>
+                    <p>Expert support for your accounting software including setup, configuration, and ongoing optimization for maximum efficiency.</p>
                     <ul class="service-features">
-                        <li>Xero setup & configuration</li>
+                        <li>Software setup & configuration</li>
                         <li>Chart of accounts optimization</li>
-                        <li>Automation & workflows</li>
-                        <li>Staff training & support</li>
-                        <li>Regular system optimization</li>
+                        <li>Workflow automation</li>
+                        <li>User support & training</li>
+                        <li>System optimization</li>
                     </ul>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countries Section -->
+    <section class="countries" id="countries">
+        <div class="container">
+            <h2>Global Reach, Local Expertise</h2>
+            <p class="section-subtitle">We serve accounting professionals in major markets worldwide</p>
+            
+            <div class="countries-grid">
+                <div class="country-card">
+                    <div class="country-flag">🇺🇸</div>
+                    <h4>US</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">United States</p>
+                    <p>GAAP, Federal & State Tax Compliance, 1099/W2 Processing</p>
+                </div>
+
+                <div class="country-card">
+                    <div class="country-flag">🇨🇦</div>
+                    <h4>CA</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Canada</p>
+                    <p>IFRS/ASPE, GST/PST, Provincial Tax, T4/T1 Filing</p>
+                </div>
+
+                <div class="country-card">
+                    <div class="country-flag">🇬🇧</div>
+                    <h4>GB</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">United Kingdom</p>
+                    <p>FRS Standards, Corporation Tax, PAYE, VAT Compliance</p>
+                </div>
+
+                <div class="country-card">
+                    <div class="country-flag">🇦🇺</div>
+                    <h4>AU</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Australia</p>
+                    <p>AASB Standards, Income Tax, BAS, Superannuation Compliance</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="color: white; font-size: 1.1rem; opacity: 0.9;">
+                    <strong>Not seeing your country?</strong> We work with accounting professionals globally.<br>
+                    Contact us to discuss your specific needs.
+                </p>
             </div>
         </div>
     </section>
@@ -1442,37 +1773,37 @@
     <section class="why-choose" id="why-choose">
         <div class="container">
             <h2>Why Choose NUMETRIC?</h2>
-            <p class="section-subtitle">Trusted by Australian accounting professionals for quality, reliability, and value</p>
+            <p class="section-subtitle">The strategic advantage for forward-thinking accounting firms</p>
             
             <div class="why-grid">
                 <div class="why-card">
-                    <h3>💰 Cost Savings</h3>
-                    <p>Significantly reduce back-office costs without compromising quality. Offshore expertise at a fraction of local pricing improves your margins.</p>
+                    <h3>💰 Significant Cost Savings</h3>
+                    <p>Reduce back-office costs by 40-60% compared to onshore staffing while maintaining premium quality. Improve your firm's profitability immediately.</p>
                 </div>
 
                 <div class="why-card">
-                    <h3>✨ Quality & Accuracy</h3>
-                    <p>Xero L1 & L2 certified professional with extensive accounting expertise. Every transaction reviewed with meticulous attention to detail.</p>
+                    <h3>✨ Premium Quality</h3>
+                    <p>Certified accountants with extensive expertise. Every transaction reviewed with meticulous attention to detail and full compliance.</p>
                 </div>
 
                 <div class="why-card">
                     <h3>⚡ Fast Turnaround</h3>
-                    <p>Quick delivery of accounting services without delays. Our efficient processes ensure your clients' reporting needs are met on schedule.</p>
+                    <p>Quick delivery without delays. Our efficient processes ensure your clients get timely reports and filings, meeting all regulatory deadlines.</p>
                 </div>
 
                 <div class="why-card">
                     <h3>📋 Compliance Assured</h3>
-                    <p>Deep expertise in Australian Accounting Standards, ATO requirements, and BAS obligations. Regulatory compliance built into every process.</p>
+                    <p>Deep expertise in multiple regulatory environments. We stay current with changes in your jurisdiction's standards and requirements.</p>
                 </div>
 
                 <div class="why-card">
-                    <h3>👥 Dedicated Support</h3>
-                    <p>Your dedicated account liaison ensures continuity, understands your clients' needs, and provides personalized service that exceeds expectations.</p>
+                    <h3>👥 Dedicated Relationship</h3>
+                    <p>Your dedicated team understands your clients' needs and maintains continuity. Personalized service that exceeds expectations.</p>
                 </div>
 
                 <div class="why-card">
-                    <h3>🔒 Data Security</h3>
-                    <p>Enterprise-grade security protocols protect all financial data. Complete confidentiality and secure document handling as standard.</p>
+                    <h3>🔒 Enterprise-Grade Security</h3>
+                    <p>Bank-level encryption, secure data handling, and strict confidentiality. Your clients' financial information is protected.</p>
                 </div>
             </div>
         </div>
@@ -1481,41 +1812,22 @@
     <!-- Blog Section -->
     <section class="blog" id="blog">
         <div class="container">
-            <h2>Blog & Articles</h2>
-            <p class="section-subtitle">Stay updated with accounting insights, tips, and industry trends</p>
+            <h2>Blog & Industry Insights</h2>
+            <p class="section-subtitle">Accounting tips, industry trends, and best practices for firms worldwide</p>
             
             <div class="blog-header">
                 <div>
                     <h3 style="margin-bottom: 1rem;">Latest Articles</h3>
                     <div class="blog-grid" id="blogGrid">
                         <div class="no-blogs">
-                            <p>No articles yet. Check back soon for accounting insights and tips!</p>
+                            <p>No articles yet. Check back soon for accounting insights and industry analysis!</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="blog-form">
-                    <h3>📝 Add New Article</h3>
-                    <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem;">Share your accounting knowledge and insights with your audience.</p>
-                    
-                    <form id="blogForm" onsubmit="submitBlogPost(event)">
-                        <div class="form-group">
-                            <label for="blogTitle">Article Title *</label>
-                            <input type="text" id="blogTitle" name="title" required placeholder="e.g., 5 Tips for Better Bookkeeping">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="blogExcerpt">Summary/Excerpt *</label>
-                            <textarea id="blogExcerpt" name="excerpt" required placeholder="Brief summary of your article (shown in list)..."></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="blogContent">Full Article Content *</label>
-                            <textarea id="blogContent" name="content" required placeholder="Write your complete article here..."></textarea>
-                        </div>
-
-                        <button type="submit" class="blog-submit-btn">Publish Article</button>
-                    </form>
+                <!-- Blog Form or Login Prompt -->
+                <div id="blogFormContainer">
+                    <!-- This will be populated by JavaScript -->
                 </div>
             </div>
         </div>
@@ -1524,29 +1836,29 @@
     <!-- Process Section -->
     <section class="process">
         <div class="container">
-            <h2>How We Work</h2>
+            <h2>How We Work Together</h2>
             <p class="section-subtitle">A streamlined process designed for your success</p>
             
             <div class="process-timeline">
                 <div class="process-step">
                     <div class="step-number">1</div>
                     <h4>Discovery</h4>
-                    <p>We understand your requirements, client base, and specific accounting needs.</p>
+                    <p>We understand your firm's needs, client base, services, and specific requirements.</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">2</div>
-                    <h4>Setup</h4>
-                    <p>Configure systems, establish processes, and prepare for seamless knowledge transfer.</p>
+                    <h4>Onboarding</h4>
+                    <p>Seamless transition with documentation review, process setup, and team training.</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">3</div>
                     <h4>Execution</h4>
-                    <p>Deliver consistent, accurate accounting services with regular communication.</p>
+                    <p>Consistent, accurate service delivery with regular communication and quality checks.</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">4</div>
                     <h4>Growth</h4>
-                    <p>Scale services with your business, expanding capabilities as needs evolve.</p>
+                    <p>Scale services with your firm, expanding capabilities as your business evolves.</p>
                 </div>
             </div>
         </div>
@@ -1556,7 +1868,7 @@
     <section class="reviews" id="reviews">
         <div class="reviews-container container">
             <h2 style="margin-bottom: 1rem;">Client Reviews & Testimonials</h2>
-            <p class="section-subtitle">Real feedback from accounting professionals we've worked with</p>
+            <p class="section-subtitle">Real feedback from accounting professionals we partner with</p>
             
             <div class="reviews-header">
                 <!-- Rating Stats -->
@@ -1610,8 +1922,8 @@
 
                 <!-- Review Form -->
                 <div class="review-form-section">
-                    <h3>📝 Write a Review</h3>
-                    <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem;">Share your experience with NUMETRIC. Your feedback helps us improve and helps other accounting professionals make informed decisions.</p>
+                    <h3>📝 Share Your Experience</h3>
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem;">Have you worked with NUMETRIC? Share your feedback. Your review helps other accounting professionals make informed decisions.</p>
                     
                     <div class="success-message" id="successMessage">
                         ✓ Thank you! Your review has been posted successfully.
@@ -1624,8 +1936,8 @@
                                 <input type="text" id="reviewName" name="name" required placeholder="e.g., John Smith">
                             </div>
                             <div class="form-group">
-                                <label for="reviewCompany">Company Name *</label>
-                                <input type="text" id="reviewCompany" name="company" required placeholder="e.g., ABC CPA Services">
+                                <label for="reviewCompany">Firm/Company Name *</label>
+                                <input type="text" id="reviewCompany" name="company" required placeholder="e.g., Smith & Associates CPA">
                             </div>
                         </div>
 
@@ -1643,7 +1955,7 @@
 
                         <div class="form-group full">
                             <label for="reviewText">Your Review *</label>
-                            <textarea id="reviewText" name="review" required placeholder="Share your experience with NUMETRIC. What did you appreciate most? How has our service helped your firm?"></textarea>
+                            <textarea id="reviewText" name="review" required placeholder="Share your experience with NUMETRIC. What services did you use? How did we help your firm?"></textarea>
                         </div>
 
                         <button type="submit" class="review-submit-btn">Submit Review</button>
@@ -1672,71 +1984,71 @@
             <div class="faq-container">
                 <div class="faq-item">
                     <div class="faq-question">
-                        <span>Is my data secure with an offshore provider?</span>
+                        <span>Is my clients' data secure with an offshore provider?</span>
                         <span class="faq-icon">▼</span>
                     </div>
                     <div class="faq-answer">
-                        Yes, absolutely. We implement enterprise-grade security protocols, encrypted data transfers, secure file handling, and strict confidentiality agreements. Your clients' financial information is protected with the same rigor as any local provider. We understand the sensitivity of accounting data and treat it with utmost care.
+                        Yes, absolutely. We implement enterprise-grade security protocols, encrypted data transfers, secure file handling, and strict confidentiality agreements. Your clients' financial information is protected with the same rigor as any onshore provider. We understand the critical importance of data security in the accounting industry.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <span>How do you ensure compliance with Australian standards?</span>
+                        <span>How do you ensure compliance with different country requirements?</span>
                         <span class="faq-icon">▼</span>
                     </div>
                     <div class="faq-answer">
-                        We maintain deep expertise in Australian Accounting Standards, ATO requirements, BAS lodgement rules, and superannuation regulations. Our processes are built around these standards, and we stay current with regulatory changes. Every report and entry is reviewed for compliance.
+                        We maintain expertise in the accounting standards, tax requirements, and regulatory rules of the countries we serve. Our processes are built around these standards, and we stay current with regulatory changes. Every report and entry is reviewed for compliance specific to your jurisdiction.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <span>What's your typical turnaround time for accounting services?</span>
+                        <span>What's your typical turnaround time?</span>
                         <span class="faq-icon">▼</span>
                     </div>
                     <div class="faq-answer">
-                        Turnaround times depend on the service, but we aim for quick delivery without compromising quality. Monthly accounting: typically 5-7 business days. Payroll: within 2-3 business days. Financial statements: 7-10 business days. We can discuss specific timelines based on your needs.
+                        Turnaround times depend on the service. Monthly accounting: typically 5-7 business days. Payroll: within 2-3 business days. Financial statements: 7-10 business days. We can discuss specific timelines based on your needs and your clients' requirements.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <span>Can you handle multiple clients or all my back-office work?</span>
+                        <span>Can you handle multiple clients and full back-office work?</span>
                         <span class="faq-icon">▼</span>
                     </div>
                     <div class="faq-answer">
-                        Yes! We can support a single client or manage your entire back-office portfolio. We scale with your growth and can handle multiple clients simultaneously with dedicated account management for each relationship.
+                        Yes! We can support a single client or manage your entire back-office portfolio. We scale with your firm's growth and can handle multiple clients simultaneously with dedicated account management for each relationship.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <span>How do we integrate with our existing systems?</span>
+                        <span>How do I integrate NUMETRIC with my existing systems?</span>
                         <span class="faq-icon">▼</span>
                     </div>
                     <div class="faq-answer">
-                        We work with the systems you use, particularly Xero where we're L1 & L2 certified. We can also work with other accounting software and will establish secure, efficient data transfer methods and regular communication protocols.
+                        We work with the systems you use, supporting all major accounting software platforms. We establish secure, efficient data transfer methods and maintain regular communication protocols to ensure smooth integration with your existing workflows.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <span>What's the cost structure?</span>
+                        <span>What's the cost structure and pricing model?</span>
                         <span class="faq-icon">▼</span>
                     </div>
                     <div class="faq-answer">
-                        We offer flexible pricing based on service complexity and volume. We'll work with you to understand your needs and provide transparent quotes. Most clients see significant cost savings compared to local outsourcing while receiving premium quality service.
+                        We offer flexible pricing based on service complexity and volume. We'll work with you to understand your specific needs and provide transparent quotes. Most firms see cost savings of 40-60% compared to local staffing while receiving premium quality service.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <span>How do you handle client onboarding?</span>
+                        <span>How does the onboarding process work?</span>
                         <span class="faq-icon">▼</span>
                     </div>
                     <div class="faq-answer">
-                        We provide a structured onboarding process: initial discovery, system setup, detailed documentation review, knowledge transfer, and a ramp-up period with close oversight. We ensure you're completely comfortable before full handoff.
+                        We provide a structured onboarding: initial discovery meeting, system setup and configuration, detailed documentation review, knowledge transfer sessions, and a ramp-up period with close oversight. We ensure you're completely comfortable before full handoff.
                     </div>
                 </div>
             </div>
@@ -1747,7 +2059,7 @@
     <section class="contact" id="contact">
         <div class="container">
             <h2>Get in Touch</h2>
-            <p class="section-subtitle">Ready to transform your back-office operations?</p>
+            <p class="section-subtitle">Ready to transform your firm's back-office operations?</p>
             
             <div class="contact-wrapper">
                 <div class="contact-info">
@@ -1757,15 +2069,15 @@
                         <div class="contact-icon">✉️</div>
                         <div class="contact-text">
                             <h4>Email</h4>
-                            <p><a href="mailto:info@numetricinc.com" style="color: white; text-decoration: none;">info@numetricinc.com</a></p>
+                            <p><a href="/cdn-cgi/l/email-protection#84edeae2ebc4eaf1e9e1f0f6ede7aae7ebe9" style="color: white; text-decoration: none;"><span class="__cf_email__" data-cfemail="86efe8e0e9c6e8f3ebe3f2f4efe5a8e5e9eb">[email&#160;protected]</span></a></p>
                         </div>
                     </div>
 
                     <div class="contact-item">
-                        <div class="contact-icon">📍</div>
+                        <div class="contact-icon">🌍</div>
                         <div class="contact-text">
-                            <h4>Location</h4>
-                            <p>Nellore, Andhra Pradesh<br>India</p>
+                            <h4>Global Service</h4>
+                            <p>We serve accounting professionals in the US, Canada, UK, Australia, and beyond. Available for meetings across all time zones.</p>
                         </div>
                     </div>
 
@@ -1773,7 +2085,7 @@
                         <div class="contact-icon">⏰</div>
                         <div class="contact-text">
                             <h4>Response Time</h4>
-                            <p>We typically respond within 24 hours and are available for meetings across time zones.</p>
+                            <p>We typically respond within 24 hours and offer flexible meeting times to accommodate your schedule.</p>
                         </div>
                     </div>
                 </div>
@@ -1790,8 +2102,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="company">Company Name</label>
+                        <label for="company">Firm/Company Name</label>
                         <input type="text" id="company" name="company" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">Your Country</label>
+                        <input type="text" id="country" name="country" placeholder="e.g., United States, Canada, Australia">
                     </div>
 
                     <div class="form-group">
@@ -1829,7 +2146,7 @@
                     NUMETRIC
                 </div>
             </div>
-            <p>Professional accounting & bookkeeping services for Australian CPA firms and BAS agents.</p>
+            <p>Global offshore accounting & bookkeeping solutions for CPA firms and accounting professionals worldwide.</p>
         </div>
 
         <!-- Social Media Links -->
@@ -1842,6 +2159,7 @@
         <div class="footer-links">
             <a href="#about">About</a>
             <a href="#services">Services</a>
+            <a href="#countries">Global Reach</a>
             <a href="#why-choose">Why Us</a>
             <a href="#blog">Blog</a>
             <a href="#reviews">Reviews</a>
@@ -1850,14 +2168,106 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2024-2026 NUMETRIC. All rights reserved. | Accounting Services for Australian Professionals</p>
+            <p>&copy; 2024-2026 NUMETRIC. All rights reserved. | Global Accounting Services for CPA Firms Worldwide</p>
         </div>
     </footer>
 
-    <script>
-        // ========== BLOG FUNCTIONALITY ==========
-        let currentlyEditingReviewId = null;
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // ========== AUTHENTICATION STATE ==========
+        let isLoggedIn = localStorage.getItem('numetricAdminLoggedIn') === 'true';
+        let adminEmail = localStorage.getItem('numetricAdminEmail') || '';
 
+        // Demo credentials
+        const DEMO_CREDENTIALS = {
+            email: 'owner@numetric.com',
+            password: 'Admin@2024'
+        };
+
+        // ========== LOGIN FUNCTIONS ==========
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('show');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('show');
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginError').textContent = '';
+            document.getElementById('loginError').classList.remove('show');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const errorDiv = document.getElementById('loginError');
+
+            if (email === DEMO_CREDENTIALS.email && password === DEMO_CREDENTIALS.password) {
+                isLoggedIn = true;
+                adminEmail = email;
+                localStorage.setItem('numetricAdminLoggedIn', 'true');
+                localStorage.setItem('numetricAdminEmail', email);
+                
+                closeLoginModal();
+                updateUIForAuthentication();
+                alert('✅ Welcome! You are now logged in as Admin.');
+            } else {
+                errorDiv.textContent = '❌ Invalid email or password. Try: owner@numetric.com / Admin@2024';
+                errorDiv.classList.add('show');
+            }
+        }
+
+        function handleLogout() {
+            isLoggedIn = false;
+            adminEmail = '';
+            localStorage.setItem('numetricAdminLoggedIn', 'false');
+            localStorage.removeItem('numetricAdminEmail');
+            updateUIForAuthentication();
+            alert('You have been logged out.');
+        }
+
+        function updateUIForAuthentication() {
+            const formContainer = document.getElementById('blogFormContainer');
+            const loginBtn = document.getElementById('loginBtn');
+
+            if (isLoggedIn) {
+                formContainer.innerHTML = `
+                    <div class="blog-form">
+                        <h3>📝 Add New Article <span class="admin-badge">ADMIN</span></h3>
+                        <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem;">Publish articles to share accounting insights with your audience.</p>
+                        
+                        <form id="blogForm" onsubmit="submitBlogPost(event)">
+                            <div class="form-group">
+                                <label for="blogTitle">Article Title *</label>
+                                <input type="text" id="blogTitle" name="title" required placeholder="e.g., Tax Planning Tips for SMB Owners">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="blogExcerpt">Summary/Excerpt *</label>
+                                <textarea id="blogExcerpt" name="excerpt" required placeholder="Brief summary of your article..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="blogContent">Full Article Content *</label>
+                                <textarea id="blogContent" name="content" required placeholder="Write your complete article here..."></textarea>
+                            </div>
+
+                            <button type="submit" class="blog-submit-btn">Publish Article</button>
+                            <button type="button" class="blog-submit-btn" style="background: #ef4444; margin-top: 0.5rem;" onclick="handleLogout()">Logout</button>
+                        </form>
+                    </div>
+                `;
+                loginBtn.textContent = 'Admin Panel';
+                loginBtn.style.display = 'none';
+            } else {
+                formContainer.innerHTML = ``;
+                loginBtn.textContent = 'Admin Login';
+                loginBtn.style.display = 'block';
+            }
+        }
+
+        // ========== BLOG FUNCTIONALITY ==========
         function loadBlogPosts() {
             const stored = localStorage.getItem('numetricBlog');
             return stored ? JSON.parse(stored) : [];
@@ -1875,6 +2285,7 @@
                 title: document.getElementById('blogTitle').value,
                 excerpt: document.getElementById('blogExcerpt').value,
                 content: document.getElementById('blogContent').value,
+                author: adminEmail,
                 date: new Date().toLocaleDateString('en-US', { 
                     year: 'numeric', 
                     month: 'long', 
@@ -1888,6 +2299,7 @@
 
             document.getElementById('blogForm').reset();
             displayBlogPosts();
+            alert('✅ Article published successfully!');
         }
 
         function displayBlogPosts() {
@@ -1897,7 +2309,7 @@
             if (posts.length === 0) {
                 grid.innerHTML = `
                     <div class="no-blogs">
-                        <p>No articles yet. Check back soon for accounting insights and tips!</p>
+                        <p>No articles yet. Check back soon for accounting insights and industry analysis!</p>
                     </div>
                 `;
                 return;
@@ -2021,7 +2433,7 @@
                     <p class="review-text">"${escapeHtml(review.text)}"</p>
                     <div class="review-date">${review.date}</div>
                     
-                    ${review.responses && review.responses.length > 0 ? `
+                    ${review.responses && review.responses.length > 0 && isLoggedIn ? `
                         <div class="review-responses">
                             <strong style="color: var(--primary); font-size: 0.9rem;">Response from NUMETRIC:</strong>
                             ${review.responses.map(resp => `
@@ -2033,16 +2445,18 @@
                         </div>
                     ` : ''}
 
-                    <button class="toggle-response-btn" onclick="toggleResponseForm(${review.id})">
-                        ${review.responses && review.responses.length > 0 ? 'Add Another Response' : 'Respond to Review'}
-                    </button>
-                    <div id="response-form-${review.id}" class="response-form" style="display: none;">
-                        <textarea id="response-text-${review.id}" placeholder="Write your response to this review..."></textarea>
-                        <div class="response-form-buttons">
-                            <button class="response-btn response-btn-submit" onclick="submitResponse(${review.id})">Post Response</button>
-                            <button class="response-btn response-btn-cancel" onclick="toggleResponseForm(${review.id})">Cancel</button>
+                    ${isLoggedIn ? `
+                        <button class="toggle-response-btn" onclick="toggleResponseForm(${review.id})">
+                            ${review.responses && review.responses.length > 0 ? 'Add Another Response' : 'Respond to Review'}
+                        </button>
+                        <div id="response-form-${review.id}" class="response-form" style="display: none;">
+                            <textarea id="response-text-${review.id}" placeholder="Write your response..."></textarea>
+                            <div class="response-form-buttons">
+                                <button class="response-btn response-btn-submit" onclick="submitResponse(${review.id})">Post Response</button>
+                                <button class="response-btn response-btn-cancel" onclick="toggleResponseForm(${review.id})">Cancel</button>
+                            </div>
                         </div>
-                    </div>
+                    ` : ''}
                 </div>
             `).join('');
         }
@@ -2147,12 +2561,7 @@
             this.reset();
         });
 
-        // Initialize on page load
-        window.addEventListener('DOMContentLoaded', function() {
-            displayBlogPosts();
-            displayReviews();
-            updateRatingStats();
-        });
-    </script>
-</body>
-</html>
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('loginModal');
+            if (event
