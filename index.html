@@ -37,6 +37,19 @@
             overflow-x: hidden;
         }
 
+        /* --- FLAG IMAGE STYLING --- */
+        .country-flag-img {
+            width: 70px;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         /* Login Modal */
         .login-modal {
             display: none;
@@ -1521,7 +1534,6 @@
     </style>
 </head>
 <body>
-    <!-- Login Modal -->
     <div class="login-modal" id="loginModal">
         <div class="login-modal-content">
             <div class="login-modal-header">
@@ -1534,7 +1546,7 @@
             <form class="login-form" onsubmit="handleLogin(event)">
                 <div class="login-info">
                     📝 <strong>Demo Credentials:</strong><br>
-                    Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cca3bba2a9be8ca2b9a1a9b8bea5afe2afa3a1">[email&#160;protected]</a><br>
+                    Email: owner@numetric.com<br>
                     Password: Admin@2024
                 </div>
 
@@ -1553,7 +1565,6 @@
         </div>
     </div>
 
-    <!-- Header -->
     <header>
         <nav>
             <a href="#" class="logo">
@@ -1591,7 +1602,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>Global Accounting & Bookkeeping Solutions for CPA Firms Worldwide</h1>
@@ -1604,7 +1614,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section class="about" id="about">
         <div class="container">
             <h2>About NUMETRIC</h2>
@@ -1642,7 +1651,6 @@
         </div>
     </section>
 
-    <!-- Services Section -->
     <section class="services" id="services">
         <div class="container">
             <h2>Our Services</h2>
@@ -1724,7 +1732,6 @@
         </div>
     </section>
 
-    <!-- Countries Section -->
     <section class="countries" id="countries">
         <div class="container">
             <h2>Global Reach, Local Expertise</h2>
@@ -1732,30 +1739,26 @@
             
             <div class="countries-grid">
                 <div class="country-card">
-                    <div class="country-flag">🇺🇸</div>
-                    <h4>US</h4>
-                    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">United States</p>
+                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg" alt="United States Flag" class="country-flag-img">
+                    <h4>United States</h4>
                     <p>GAAP, Federal & State Tax Compliance, 1099/W2 Processing</p>
                 </div>
 
                 <div class="country-card">
-                    <div class="country-flag">🇨🇦</div>
-                    <h4>CA</h4>
-                    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Canada</p>
+                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/CA.svg" alt="Canada Flag" class="country-flag-img">
+                    <h4>Canada</h4>
                     <p>IFRS/ASPE, GST/PST, Provincial Tax, T4/T1 Filing</p>
                 </div>
 
                 <div class="country-card">
-                    <div class="country-flag">🇬🇧</div>
-                    <h4>GB</h4>
-                    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">United Kingdom</p>
+                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg" alt="United Kingdom Flag" class="country-flag-img">
+                    <h4>United Kingdom</h4>
                     <p>FRS Standards, Corporation Tax, PAYE, VAT Compliance</p>
                 </div>
 
                 <div class="country-card">
-                    <div class="country-flag">🇦🇺</div>
-                    <h4>AU</h4>
-                    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Australia</p>
+                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/AU.svg" alt="Australia Flag" class="country-flag-img">
+                    <h4>Australia</h4>
                     <p>AASB Standards, Income Tax, BAS, Superannuation Compliance</p>
                 </div>
             </div>
@@ -1769,7 +1772,6 @@
         </div>
     </section>
 
-    <!-- Why Choose Us -->
     <section class="why-choose" id="why-choose">
         <div class="container">
             <h2>Why Choose NUMETRIC?</h2>
@@ -1809,7 +1811,6 @@
         </div>
     </section>
 
-    <!-- Blog Section -->
     <section class="blog" id="blog">
         <div class="container">
             <h2>Blog & Industry Insights</h2>
@@ -1825,15 +1826,12 @@
                     </div>
                 </div>
 
-                <!-- Blog Form or Login Prompt -->
                 <div id="blogFormContainer">
-                    <!-- This will be populated by JavaScript -->
-                </div>
+                    </div>
             </div>
         </div>
     </section>
 
-    <!-- Process Section -->
     <section class="process">
         <div class="container">
             <h2>How We Work Together</h2>
@@ -1864,14 +1862,12 @@
         </div>
     </section>
 
-    <!-- Reviews Section -->
     <section class="reviews" id="reviews">
         <div class="reviews-container container">
             <h2 style="margin-bottom: 1rem;">Client Reviews & Testimonials</h2>
             <p class="section-subtitle">Real feedback from accounting professionals we partner with</p>
             
             <div class="reviews-header">
-                <!-- Rating Stats -->
                 <div class="reviews-stats">
                     <div class="rating-display">
                         <div class="rating-large" id="averageRating">4.8</div>
@@ -1920,7 +1916,6 @@
                     </div>
                 </div>
 
-                <!-- Review Form -->
                 <div class="review-form-section">
                     <h3>📝 Share Your Experience</h3>
                     <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem;">Have you worked with NUMETRIC? Share your feedback. Your review helps other accounting professionals make informed decisions.</p>
@@ -1963,7 +1958,6 @@
                 </div>
             </div>
 
-            <!-- Reviews Display -->
             <div class="reviews-list">
                 <h3 class="reviews-list-title">Recent Reviews</h3>
                 <div class="reviews-grid" id="reviewsGrid">
@@ -1975,7 +1969,6 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
     <section class="faq" id="faq">
         <div class="container">
             <h2>Frequently Asked Questions</h2>
@@ -2055,7 +2048,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
             <h2>Get in Touch</h2>
@@ -2069,7 +2061,7 @@
                         <div class="contact-icon">✉️</div>
                         <div class="contact-text">
                             <h4>Email</h4>
-                            <p><a href="/cdn-cgi/l/email-protection#84edeae2ebc4eaf1e9e1f0f6ede7aae7ebe9" style="color: white; text-decoration: none;"><span class="__cf_email__" data-cfemail="86efe8e0e9c6e8f3ebe3f2f4efe5a8e5e9eb">[email&#160;protected]</span></a></p>
+                            <p>owner@numetric.com</p>
                         </div>
                     </div>
 
@@ -2122,446 +2114,8 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div style="margin-bottom: 1.5rem;">
                 <div class="logo" style="justify-content: center; color: white; margin-bottom: 1rem;">
-                    <div class="logo-icon" style="width: 40px; height: 40px;">
-                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="barGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <circle cx="100" cy="100" r="95" fill="none" stroke="white" stroke-width="2"/>
-                            <rect x="65" y="120" width="12" height="30" fill="white" rx="2"/>
-                            <rect x="85" y="105" width="12" height="45" fill="url(#barGradient2)" rx="2"/>
-                            <rect x="105" y="85" width="12" height="65" fill="white" rx="2"/>
-                            <rect x="125" y="70" width="12" height="80" fill="url(#barGradient2)" rx="2"/>
-                            <path d="M 60 100 L 75 115 L 95 85" stroke="#10b981" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    NUMETRIC
-                </div>
-            </div>
-            <p>Global offshore accounting & bookkeeping solutions for CPA firms and accounting professionals worldwide.</p>
-        </div>
-
-        <!-- Social Media Links -->
-        <div class="social-links">
-            <a href="https://www.linkedin.com/company/numetricinc/" target="_blank" class="social-link" title="LinkedIn">
-                <span>in</span>
-            </a>
-        </div>
-
-        <div class="footer-links">
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#countries">Global Reach</a>
-            <a href="#why-choose">Why Us</a>
-            <a href="#blog">Blog</a>
-            <a href="#reviews">Reviews</a>
-            <a href="#faq">FAQ</a>
-            <a href="#contact">Contact</a>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2024-2026 NUMETRIC. All rights reserved. | Global Accounting Services for CPA Firms Worldwide</p>
-        </div>
-    </footer>
-
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // ========== AUTHENTICATION STATE ==========
-        let isLoggedIn = localStorage.getItem('numetricAdminLoggedIn') === 'true';
-        let adminEmail = localStorage.getItem('numetricAdminEmail') || '';
-
-        // Demo credentials
-        const DEMO_CREDENTIALS = {
-            email: 'owner@numetric.com',
-            password: 'Admin@2024'
-        };
-
-        // ========== LOGIN FUNCTIONS ==========
-        function openLoginModal() {
-            document.getElementById('loginModal').classList.add('show');
-        }
-
-        function closeLoginModal() {
-            document.getElementById('loginModal').classList.remove('show');
-            document.getElementById('loginEmail').value = '';
-            document.getElementById('loginPassword').value = '';
-            document.getElementById('loginError').textContent = '';
-            document.getElementById('loginError').classList.remove('show');
-        }
-
-        function handleLogin(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            const errorDiv = document.getElementById('loginError');
-
-            if (email === DEMO_CREDENTIALS.email && password === DEMO_CREDENTIALS.password) {
-                isLoggedIn = true;
-                adminEmail = email;
-                localStorage.setItem('numetricAdminLoggedIn', 'true');
-                localStorage.setItem('numetricAdminEmail', email);
-                
-                closeLoginModal();
-                updateUIForAuthentication();
-                alert('✅ Welcome! You are now logged in as Admin.');
-            } else {
-                errorDiv.textContent = '❌ Invalid email or password. Try: owner@numetric.com / Admin@2024';
-                errorDiv.classList.add('show');
-            }
-        }
-
-        function handleLogout() {
-            isLoggedIn = false;
-            adminEmail = '';
-            localStorage.setItem('numetricAdminLoggedIn', 'false');
-            localStorage.removeItem('numetricAdminEmail');
-            updateUIForAuthentication();
-            alert('You have been logged out.');
-        }
-
-        function updateUIForAuthentication() {
-            const formContainer = document.getElementById('blogFormContainer');
-            const loginBtn = document.getElementById('loginBtn');
-
-            if (isLoggedIn) {
-                formContainer.innerHTML = `
-                    <div class="blog-form">
-                        <h3>📝 Add New Article <span class="admin-badge">ADMIN</span></h3>
-                        <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem;">Publish articles to share accounting insights with your audience.</p>
-                        
-                        <form id="blogForm" onsubmit="submitBlogPost(event)">
-                            <div class="form-group">
-                                <label for="blogTitle">Article Title *</label>
-                                <input type="text" id="blogTitle" name="title" required placeholder="e.g., Tax Planning Tips for SMB Owners">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="blogExcerpt">Summary/Excerpt *</label>
-                                <textarea id="blogExcerpt" name="excerpt" required placeholder="Brief summary of your article..."></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="blogContent">Full Article Content *</label>
-                                <textarea id="blogContent" name="content" required placeholder="Write your complete article here..."></textarea>
-                            </div>
-
-                            <button type="submit" class="blog-submit-btn">Publish Article</button>
-                            <button type="button" class="blog-submit-btn" style="background: #ef4444; margin-top: 0.5rem;" onclick="handleLogout()">Logout</button>
-                        </form>
-                    </div>
-                `;
-                loginBtn.textContent = 'Admin Panel';
-                loginBtn.style.display = 'none';
-            } else {
-                formContainer.innerHTML = ``;
-                loginBtn.textContent = 'Admin Login';
-                loginBtn.style.display = 'block';
-            }
-        }
-
-        // ========== BLOG FUNCTIONALITY ==========
-        function loadBlogPosts() {
-            const stored = localStorage.getItem('numetricBlog');
-            return stored ? JSON.parse(stored) : [];
-        }
-
-        function saveBlogPosts(posts) {
-            localStorage.setItem('numetricBlog', JSON.stringify(posts));
-        }
-
-        function submitBlogPost(event) {
-            event.preventDefault();
-
-            const post = {
-                id: Date.now(),
-                title: document.getElementById('blogTitle').value,
-                excerpt: document.getElementById('blogExcerpt').value,
-                content: document.getElementById('blogContent').value,
-                author: adminEmail,
-                date: new Date().toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                })
-            };
-
-            const posts = loadBlogPosts();
-            posts.unshift(post);
-            saveBlogPosts(posts);
-
-            document.getElementById('blogForm').reset();
-            displayBlogPosts();
-            alert('✅ Article published successfully!');
-        }
-
-        function displayBlogPosts() {
-            const posts = loadBlogPosts();
-            const grid = document.getElementById('blogGrid');
-
-            if (posts.length === 0) {
-                grid.innerHTML = `
-                    <div class="no-blogs">
-                        <p>No articles yet. Check back soon for accounting insights and industry analysis!</p>
-                    </div>
-                `;
-                return;
-            }
-
-            grid.innerHTML = posts.map(post => `
-                <div class="blog-card">
-                    <div class="blog-card-header">
-                        <div class="blog-card-title">${escapeHtml(post.title)}</div>
-                        <div class="blog-card-date">${post.date}</div>
-                    </div>
-                    <div class="blog-card-content">
-                        <p class="blog-card-excerpt">${escapeHtml(post.excerpt)}</p>
-                        <details style="color: var(--accent); cursor: pointer; font-weight: 600;">
-                            <summary>Read Full Article</summary>
-                            <div style="margin-top: 1rem; color: var(--text-light); font-weight: normal;">
-                                ${escapeHtml(post.content).replace(/\n/g, '<br>')}
-                            </div>
-                        </details>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // ========== REVIEWS FUNCTIONALITY ==========
-        let selectedRating = 0;
-
-        document.querySelectorAll('.star').forEach(star => {
-            star.addEventListener('click', function() {
-                selectedRating = this.dataset.value;
-                document.getElementById('reviewRating').value = selectedRating;
-                updateStarDisplay();
-            });
-
-            star.addEventListener('mouseover', function() {
-                const hoverValue = this.dataset.value;
-                document.querySelectorAll('.star').forEach(s => {
-                    s.classList.toggle('active', s.dataset.value <= hoverValue);
-                });
-            });
-        });
-
-        document.getElementById('starRating').addEventListener('mouseleave', updateStarDisplay);
-
-        function updateStarDisplay() {
-            document.querySelectorAll('.star').forEach(s => {
-                s.classList.toggle('active', s.dataset.value <= selectedRating);
-            });
-        }
-
-        function loadReviews() {
-            const stored = localStorage.getItem('numetricReviews');
-            return stored ? JSON.parse(stored) : [];
-        }
-
-        function saveReviews(reviews) {
-            localStorage.setItem('numetricReviews', JSON.stringify(reviews));
-        }
-
-        function submitReview(event) {
-            event.preventDefault();
-
-            const rating = parseInt(document.getElementById('reviewRating').value);
-            if (rating === 0) {
-                alert('Please select a rating');
-                return;
-            }
-
-            const review = {
-                id: Date.now(),
-                name: document.getElementById('reviewName').value,
-                company: document.getElementById('reviewCompany').value,
-                rating: rating,
-                text: document.getElementById('reviewText').value,
-                date: new Date().toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'short', 
-                    day: 'numeric' 
-                }),
-                responses: []
-            };
-
-            const reviews = loadReviews();
-            reviews.unshift(review);
-            saveReviews(reviews);
-
-            const successMsg = document.getElementById('successMessage');
-            successMsg.classList.add('show');
-            setTimeout(() => successMsg.classList.remove('show'), 3000);
-
-            document.getElementById('reviewForm').reset();
-            selectedRating = 0;
-            updateStarDisplay();
-
-            displayReviews();
-            updateRatingStats();
-        }
-
-        function displayReviews() {
-            const reviews = loadReviews();
-            const grid = document.getElementById('reviewsGrid');
-
-            if (reviews.length === 0) {
-                grid.innerHTML = `
-                    <div class="no-reviews">
-                        <p>No reviews yet. Be the first to share your experience!</p>
-                    </div>
-                `;
-                return;
-            }
-
-            grid.innerHTML = reviews.map(review => `
-                <div class="review-card">
-                    <div class="review-card-header">
-                        <div class="review-author">
-                            <div class="review-author-name">${escapeHtml(review.name)}</div>
-                            <div class="review-author-company">${escapeHtml(review.company)}</div>
-                        </div>
-                        <div class="review-rating">${'★'.repeat(review.rating)}</div>
-                    </div>
-                    <p class="review-text">"${escapeHtml(review.text)}"</p>
-                    <div class="review-date">${review.date}</div>
-                    
-                    ${review.responses && review.responses.length > 0 && isLoggedIn ? `
-                        <div class="review-responses">
-                            <strong style="color: var(--primary); font-size: 0.9rem;">Response from NUMETRIC:</strong>
-                            ${review.responses.map(resp => `
-                                <div class="response-item">
-                                    <div class="response-text">${escapeHtml(resp.text)}</div>
-                                    <div class="response-date">${resp.date}</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    ` : ''}
-
-                    ${isLoggedIn ? `
-                        <button class="toggle-response-btn" onclick="toggleResponseForm(${review.id})">
-                            ${review.responses && review.responses.length > 0 ? 'Add Another Response' : 'Respond to Review'}
-                        </button>
-                        <div id="response-form-${review.id}" class="response-form" style="display: none;">
-                            <textarea id="response-text-${review.id}" placeholder="Write your response..."></textarea>
-                            <div class="response-form-buttons">
-                                <button class="response-btn response-btn-submit" onclick="submitResponse(${review.id})">Post Response</button>
-                                <button class="response-btn response-btn-cancel" onclick="toggleResponseForm(${review.id})">Cancel</button>
-                            </div>
-                        </div>
-                    ` : ''}
-                </div>
-            `).join('');
-        }
-
-        function toggleResponseForm(reviewId) {
-            const form = document.getElementById(`response-form-${reviewId}`);
-            form.style.display = form.style.display === 'none' ? 'block' : 'none';
-            if (form.style.display === 'block') {
-                document.getElementById(`response-text-${reviewId}`).focus();
-            }
-        }
-
-        function submitResponse(reviewId) {
-            const responseText = document.getElementById(`response-text-${reviewId}`).value;
-            
-            if (!responseText.trim()) {
-                alert('Please write a response');
-                return;
-            }
-
-            const reviews = loadReviews();
-            const review = reviews.find(r => r.id === reviewId);
-
-            if (review) {
-                if (!review.responses) {
-                    review.responses = [];
-                }
-
-                review.responses.push({
-                    text: responseText,
-                    date: new Date().toLocaleDateString('en-US', { 
-                        year: 'numeric', 
-                        month: 'short', 
-                        day: 'numeric' 
-                    })
-                });
-
-                saveReviews(reviews);
-                displayReviews();
-                document.getElementById(`response-text-${reviewId}`).value = '';
-                toggleResponseForm(reviewId);
-            }
-        }
-
-        function updateRatingStats() {
-            const reviews = loadReviews();
-            
-            if (reviews.length === 0) {
-                document.getElementById('totalReviews').textContent = '0';
-                document.getElementById('averageRating').textContent = '0.0';
-                return;
-            }
-
-            const totalRating = reviews.reduce((sum, r) => sum + r.rating, 0);
-            const avgRating = (totalRating / reviews.length).toFixed(1);
-            document.getElementById('averageRating').textContent = avgRating;
-            document.getElementById('totalReviews').textContent = reviews.length;
-
-            const fullStars = Math.floor(avgRating);
-            const hasHalfStar = avgRating % 1 >= 0.5;
-            let starDisplay = '★'.repeat(fullStars);
-            if (hasHalfStar && fullStars < 5) {
-                starDisplay += '☆';
-            }
-            document.getElementById('starDisplay').textContent = starDisplay;
-
-            const ratingCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-            reviews.forEach(r => ratingCounts[r.rating]++);
-
-            for (let i = 1; i <= 5; i++) {
-                const count = ratingCounts[i];
-                const percentage = (count / reviews.length) * 100;
-                document.getElementById(`bar${i}`).style.width = percentage + '%';
-                document.getElementById(`count${i}`).textContent = count;
-            }
-        }
-
-        function escapeHtml(text) {
-            const map = {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#039;'
-            };
-            return text.replace(/[&<>"']/g, m => map[m]);
-        }
-
-        // FAQ Functionality
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', function() {
-                const faqItem = this.closest('.faq-item');
-                faqItem.classList.toggle('active');
-            });
-        });
-
-        // Contact Form Submission
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            alert(`Thank you, ${name}! We've received your message and will get back to you within 24 hours.`);
-            this.reset();
-        });
-
-        // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
-            const modal = document.getElementById('loginModal');
-            if (event
+                    <div class="logo-icon" style="width: 40px; height:
