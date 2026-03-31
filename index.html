@@ -23,11 +23,10 @@
             --bg-white: #ffffff;
             --success: #10b981;
             --error: #ef4444;
+            --xero-blue: #13b5ea;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
@@ -39,163 +38,73 @@
 
         /* --- FLAG IMAGE STYLING --- */
         .country-flag-img {
-            width: 70px;
+            width: 60px;
             height: auto;
             border-radius: 4px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             display: block;
             margin-left: auto;
             margin-right: auto;
         }
 
-        /* Login Modal */
-        .login-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
+        /* --- TECH STACK & PARTNER SECTION --- */
+        .tech-stack {
+            background: var(--bg-white);
+            padding: 5rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #eee;
         }
 
-        .login-modal.show {
-            display: flex;
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .login-modal-content {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            width: 90%;
-            max-width: 400px;
-            animation: slideIn 0.3s ease;
+        .tech-card {
+            background: var(--bg-light);
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
         }
 
-        @keyframes slideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .login-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--accent-light);
-            padding-bottom: 1rem;
-        }
-
-        .login-modal h2 {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin: 0;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: var(--text-light);
-            transition: color 0.3s;
-        }
-
-        .close-modal:hover {
-            color: var(--primary);
-        }
-
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .form-group input {
-            padding: 0.75rem 1rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus {
-            outline: none;
+        .tech-card:hover {
+            transform: translateY(-5px);
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-light);
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        .login-btn {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        .tech-logo {
+            height: 60px;
+            width: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .partner-badge {
+            display: inline-block;
+            background: var(--primary);
             color: white;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 6px;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
             font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(30, 58, 138, 0.3);
-        }
-
-        .login-error {
-            background: #fee2e2;
-            color: #991b1b;
-            padding: 0.75rem;
-            border-radius: 6px;
-            border-left: 4px solid var(--error);
-            display: none;
-        }
-
-        .login-error.show {
-            display: block;
-        }
-
-        .login-info {
-            background: #dbeafe;
-            color: #0c2340;
-            padding: 0.75rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            border-left: 4px solid var(--accent);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* Header & Navigation */
         header {
             position: sticky;
             top: 0;
-            background: var(--bg-white);
+            background: white;
             border-bottom: 1px solid #e5e7eb;
             z-index: 100;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         nav {
@@ -208,1525 +117,114 @@
         }
 
         .logo {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 800;
             color: var(--primary);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            letter-spacing: -0.5px;
-        }
-
-        .logo-icon {
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .logo-icon svg {
-            width: 100%;
-            height: 100%;
+            gap: 0.5rem;
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
             list-style: none;
-            align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 500;
-            transition: color 0.3s;
             font-size: 0.95rem;
         }
 
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
-        }
-
-        .cta-btn, .login-link-btn, .logout-btn {
+        .cta-btn {
             background: var(--primary);
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 0.95rem;
-        }
-
-        .login-link-btn {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            padding: 0.6rem 1.2rem;
-        }
-
-        .login-link-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .cta-btn:hover, .logout-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(30, 58, 138, 0.2);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Section Styling */
-        section {
-            padding: 5rem 2rem;
-        }
-
-        section h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            margin-bottom: 3rem;
-            max-width: 600px;
         }
 
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 6rem 2rem;
+            padding: 7rem 2rem;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 400px;
-            height: 400px;
-            background: rgba(6, 182, 212, 0.1);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
+        .hero h1 { font-size: 3.2rem; margin-bottom: 1.5rem; line-height: 1.1; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2.5rem; opacity: 0.9; }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(20px); }
-        }
-
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            letter-spacing: -1px;
-        }
-
-        .hero .tagline {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            opacity: 0.95;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 600;
-        }
-
-        .hero .subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: var(--primary);
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn-primary:hover {
-            background: #06d6e0;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 24px rgba(6, 182, 212, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            padding: 1rem 2rem;
-            border: 2px solid white;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: var(--primary);
-        }
-
-        /* About Section */
-        .about {
-            background: var(--bg-light);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            margin-bottom: 3rem;
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text p {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            font-size: 1.05rem;
-            line-height: 1.8;
-        }
-
-        .about-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            border-left: 4px solid var(--accent);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .about-box h4 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .about-box p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        .values {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .value-item {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-        }
-
-        .value-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .value-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .value-item h4 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .value-item p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        /* Services Section */
-        .services {
-            background: white;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .service-card {
-            background: var(--bg-light);
-            padding: 2.5rem;
-            border-radius: 10px;
-            border-top: 4px solid var(--accent);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .service-card:hover {
-            background: white;
-            box-shadow: 0 8px 24px rgba(30, 58, 138, 0.1);
-            transform: translateY(-5px);
-        }
-
-        .service-card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .service-card p {
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-
-        .service-features {
-            list-style: none;
-        }
-
-        .service-features li {
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .service-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--success);
-            font-weight: bold;
-        }
+        /* General Section Styling */
+        section h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 3rem; text-align: center; }
 
         /* Countries Section */
-        .countries {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-        }
-
-        .countries h2 {
-            color: white;
-        }
-
+        .countries { background: var(--secondary); color: white; padding: 5rem 2rem; }
+        .countries h2 { color: white; }
         .countries-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-
-        .country-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s;
-        }
-
-        .country-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-5px);
-        }
-
-        .country-flag {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .country-card h4 {
-            color: white;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .country-card p {
-            opacity: 0.9;
-            font-size: 0.95rem;
-        }
-
-        /* Why Choose Us */
-        .why-choose {
-            background: white;
-        }
-
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .why-card {
-            background: var(--bg-light);
-            padding: 2.5rem;
-            border-radius: 10px;
-            transition: all 0.3s;
-        }
-
-        .why-card:hover {
-            background: white;
-            box-shadow: 0 8px 24px rgba(30, 58, 138, 0.1);
-            transform: translateY(-5px);
-        }
-
-        .why-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .why-card p {
-            color: var(--text-light);
-            line-height: 1.8;
-        }
-
-        /* Blog Section */
-        .blog {
-            background: var(--bg-light);
-        }
-
-        .blog-header {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            align-items: flex-start;
-        }
-
-        .blog-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            border: 2px solid var(--accent-light);
-        }
-
-        .blog-form h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .blog-form.hidden {
-            display: none;
-        }
-
-        .login-prompt {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            border: 2px solid #fbbf24;
-            text-align: center;
-        }
-
-        .login-prompt h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .login-prompt p {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-        }
-
-        .login-prompt-btn {
-            background: var(--primary);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 6px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .login-prompt-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 6px;
-            font-family: inherit;
-            font-size: 0.95rem;
-            color: var(--text-dark);
-            transition: border-color 0.3s;
-            margin-top: 0.5rem;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-light);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .blog-submit-btn {
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 1rem;
-            border: none;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 1rem;
-        }
-
-        .blog-submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(30, 58, 138, 0.3);
-        }
-
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-
-        .blog-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
-        }
-
-        .blog-card:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            transform: translateY(-5px);
-        }
-
-        .blog-card-header {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            padding: 2rem;
-            color: white;
-            min-height: 100px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        .blog-card-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .blog-card-date {
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
-
-        .blog-card-content {
-            padding: 1.5rem;
-        }
-
-        .blog-card-excerpt {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .blog-card-author {
-            color: var(--text-light);
-            font-size: 0.85rem;
-            font-style: italic;
-        }
-
-        .no-blogs {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-light);
-            background: white;
-            border-radius: 10px;
-            border: 2px dashed #e5e7eb;
-        }
-
-        /* Reviews Section */
-        .reviews {
-            background: white;
-        }
-
-        .reviews-container {
             max-width: 1200px;
             margin: 0 auto;
         }
+        .country-card { text-align: center; background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; }
 
-        .reviews-header {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-bottom: 3rem;
-            align-items: center;
-        }
-
-        .reviews-stats {
-            background: var(--bg-light);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .rating-display {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .rating-large {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--primary);
-        }
-
-        .rating-info {
-            flex: 1;
-        }
-
-        .rating-stars {
-            color: #fbbf24;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: 2px;
-        }
-
-        .rating-count {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        .rating-bars {
-            margin-top: 2rem;
-        }
-
-        .rating-bar {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .rating-bar-label {
-            width: 50px;
-            color: var(--text-light);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .rating-bar-progress {
-            flex: 1;
-            height: 8px;
-            background: #e5e7eb;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .rating-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--primary));
-            border-radius: 4px;
-            transition: width 0.3s ease;
-        }
-
-        .rating-bar-count {
-            width: 40px;
-            text-align: right;
-            color: var(--text-light);
-            font-size: 0.85rem;
-        }
-
-        /* Review Form */
-        .review-form-section {
-            background: var(--bg-light);
-            padding: 2.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .review-form-section h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-row.full {
-            grid-template-columns: 1fr;
-        }
-
-        .star-rating {
-            display: flex;
-            gap: 0.5rem;
-            font-size: 1.8rem;
-            cursor: pointer;
-        }
-
-        .star {
-            color: #d1d5db;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-
-        .star:hover,
-        .star.active {
-            color: #fbbf24;
-            transform: scale(1.1);
-        }
-
-        .review-submit-btn {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-            margin-top: 1rem;
-        }
-
-        .review-submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(30, 58, 138, 0.3);
-        }
-
-        .reviews-list {
-            margin-top: 3rem;
-        }
-
-        .reviews-list-title {
-            font-size: 1.3rem;
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .review-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 4px solid var(--accent);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
-        }
-
-        .review-card:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            transform: translateY(-3px);
-        }
-
-        .review-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .review-author {
-            flex: 1;
-        }
-
-        .review-author-name {
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.2rem;
-        }
-
-        .review-author-company {
-            color: var(--text-light);
-            font-size: 0.85rem;
-        }
-
-        .review-rating {
-            color: #fbbf24;
-            font-size: 1rem;
-            white-space: nowrap;
-        }
-
-        .review-text {
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-        }
-
-        .review-date {
-            color: #d1d5db;
-            font-size: 0.8rem;
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-
-        /* Response Section */
-        .review-responses {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .response-item {
-            background: var(--accent-light);
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-            border-left: 3px solid var(--accent);
-        }
-
-        .response-header {
-            font-weight: 600;
-            color: var(--primary);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .response-badge {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 3px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-left: 0.5rem;
-        }
-
-        .response-text {
-            color: var(--text-dark);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .response-date {
-            color: var(--text-light);
-            font-size: 0.75rem;
-            margin-top: 0.5rem;
-        }
-
-        .response-form {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: white;
-            border-radius: 6px;
-            border: 1px dashed var(--accent);
-        }
-
-        .response-form textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 6px;
-            font-family: inherit;
-            font-size: 0.9rem;
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .response-form-buttons {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 0.75rem;
-        }
-
-        .response-btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .response-btn-submit {
-            background: var(--primary);
-            color: white;
-        }
-
-        .response-btn-submit:hover {
-            background: var(--primary-dark);
-        }
-
-        .response-btn-cancel {
-            background: #e5e7eb;
-            color: var(--text-dark);
-        }
-
-        .response-btn-cancel:hover {
-            background: #d1d5db;
-        }
-
-        .toggle-response-btn {
-            background: transparent;
-            color: var(--accent);
-            padding: 0;
-            border: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            margin-top: 1rem;
-        }
-
-        .toggle-response-btn:hover {
-            color: var(--primary);
-            text-decoration: underline;
-        }
-
-        .no-reviews {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-light);
-            background: white;
-            border-radius: 10px;
-            border: 2px dashed #e5e7eb;
-        }
-
-        .success-message {
-            background: #d1fae5;
-            color: #065f46;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid var(--success);
-            display: none;
-        }
-
-        .success-message.show {
-            display: block;
-        }
-
-        /* Process Section */
-        .process {
-            background: white;
-        }
-
-        .process-timeline {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-            position: relative;
-        }
-
-        .process-timeline::before {
-            content: '';
-            position: absolute;
-            top: 40px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
-            z-index: 0;
-        }
-
-        .process-step {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-        }
-
-        .step-number {
-            width: 80px;
-            height: 80px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: bold;
-            margin: 0 auto 1.5rem;
-            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
-        }
-
-        .process-step h4 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .process-step p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        /* FAQ Section */
-        .faq {
-            background: var(--bg-light);
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 3rem auto 0;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid #e5e7eb;
-            padding: 1.5rem 0;
-            background: white;
-            margin-bottom: 1rem;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .faq-item:last-child {
-            border-bottom: none;
-        }
-
-        .faq-question {
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--primary);
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        .faq-question:hover {
-            color: var(--accent);
-        }
-
-        .faq-icon {
-            font-size: 1.5rem;
-            transition: transform 0.3s;
-        }
-
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            display: none;
-            margin-top: 1rem;
-            color: var(--text-light);
-            line-height: 1.8;
-        }
-
-        .faq-item.active .faq-answer {
-            display: block;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-        }
-
-        .contact h2 {
-            color: white;
-        }
-
-        .contact-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-top: 3rem;
-            align-items: center;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .contact-item {
-            display: flex;
-            gap: 1.5rem;
-            align-items: flex-start;
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .contact-text h4 {
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-text p {
-            opacity: 0.9;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            padding: 0.75rem 1rem;
-            border: none;
-            border-radius: 6px;
-            font-family: inherit;
-            font-size: 0.95rem;
-            background: white;
-            color: var(--text-dark);
-        }
-
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px var(--accent-light);
-        }
-
-        .contact-form textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .contact-form .form-group label {
-            color: white;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .submit-btn {
-            background: var(--accent);
-            color: var(--primary);
-            padding: 1rem;
-            border: none;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 1rem;
-        }
-
-        .submit-btn:hover {
-            background: #06d6e0;
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--secondary);
-            color: white;
-            padding: 3rem 2rem 1.5rem;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            margin-bottom: 2rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 1.3rem;
-        }
-
-        .social-link:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
-            opacity: 0.8;
-        }
-
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                gap: 1rem;
-                display: none;
-            }
-
-            nav {
-                flex-wrap: wrap;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero .tagline {
-                font-size: 1.1rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-            }
-
-            .about-content,
-            .contact-wrapper,
-            .reviews-header,
-            .blog-header {
-                grid-template-columns: 1fr;
-            }
-
-            .services-grid,
-            .values,
-            .why-grid,
-            .blog-grid,
-            .countries-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .process-timeline {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .process-timeline::before {
-                display: none;
-            }
-
-            section h2 {
-                font-size: 2rem;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .admin-badge {
-            display: inline-block;
-            background: var(--success);
-            color: white;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-left: 0.5rem;
+            .nav-links { display: none; }
+            .tech-grid, .countries-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
-    <div class="login-modal" id="loginModal">
-        <div class="login-modal-content">
-            <div class="login-modal-header">
-                <h2>🔐 Admin Login</h2>
-                <button class="close-modal" onclick="closeLoginModal()">×</button>
-            </div>
-            
-            <div class="login-error" id="loginError"></div>
-            
-            <form class="login-form" onsubmit="handleLogin(event)">
-                <div class="login-info">
-                    📝 <strong>Demo Credentials:</strong><br>
-                    Email: owner@numetric.com<br>
-                    Password: Admin@2024
-                </div>
-
-                <div class="form-group">
-                    <label for="loginEmail">Email Address *</label>
-                    <input type="email" id="loginEmail" required placeholder="your@email.com">
-                </div>
-
-                <div class="form-group">
-                    <label for="loginPassword">Password *</label>
-                    <input type="password" id="loginPassword" required placeholder="••••••••">
-                </div>
-
-                <button type="submit" class="login-btn">Login to Admin Panel</button>
-            </form>
-        </div>
-    </div>
 
     <header>
         <nav>
-            <a href="#" class="logo">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="barGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <circle cx="100" cy="100" r="95" fill="none" stroke="#1e3a8a" stroke-width="2"/>
-                        <rect x="65" y="120" width="12" height="30" fill="#1e3a8a" rx="2"/>
-                        <rect x="85" y="105" width="12" height="45" fill="url(#barGradient)" rx="2"/>
-                        <rect x="105" y="85" width="12" height="65" fill="#1e3a8a" rx="2"/>
-                        <rect x="125" y="70" width="12" height="80" fill="url(#barGradient)" rx="2"/>
-                        <path d="M 60 100 L 75 115 L 95 85" stroke="#10b981" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                NUMETRIC
-            </a>
+            <a href="#" class="logo">NUMETRIC</a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
+                <li><a href="#tech">Our Tech</a></li>
                 <li><a href="#countries">Global Reach</a></li>
-                <li><a href="#why-choose">Why Us</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#reviews">Reviews</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="nav-buttons">
-                <button class="login-link-btn" id="loginBtn" onclick="openLoginModal()">Admin Login</button>
-                <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Started</button>
-            </div>
+            <a href="#contact" class="cta-btn">Get Started</a>
         </nav>
     </header>
 
     <section class="hero">
-        <div class="hero-content">
-            <h1>Global Accounting & Bookkeeping Solutions for CPA Firms Worldwide</h1>
-            <p class="tagline">Offshore expertise serving accounting professionals in the US, Canada, Australia, UK, and beyond</p>
-            <p class="subtitle">Significantly reduce your back-office costs while maintaining premium quality. We handle the accounting; you focus on client relationships and business growth.</p>
-            <div class="hero-buttons">
-                <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Started Today</button>
-                <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">Learn More</button>
+        <div class="container">
+            <h1>Expert Offshore Support for Global CPA Firms</h1>
+            <p>Premium Bookkeeping & Accounting powered by Certified Xero Experts.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <a href="#contact" style="background: var(--accent); color: var(--primary); padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 700;">Discuss Your Firm's Needs</a>
             </div>
         </div>
     </section>
 
-    <section class="about" id="about">
+    <section class="tech-stack" id="tech">
         <div class="container">
-            <h2>About NUMETRIC</h2>
-            <p class="section-subtitle">Trusted offshore accounting partner for accounting professionals globally</p>
+            <h2>Powered by Industry-Leading Tech</h2>
+            <p class="section-subtitle" style="margin-bottom: 3rem; margin-top: -2rem;">We combine certified expertise with cutting-edge tools to deliver absolute accuracy.</p>
             
-            <div class="about-content">
-                <div>
-                    <h3>Our Mission</h3>
-                    <p>To empower accounting professionals worldwide by providing world-class, cost-effective back-office solutions. We help CPA firms, bookkeeping practices, and accounting consultants expand their service capacity and profitability without the burden of managing large onshore teams.</p>
-                    <p>Whether you're in New York, Toronto, Sydney, or London, we deliver the same level of accuracy, reliability, and compliance that your clients expect.</p>
-                </div>
-                <div class="about-box">
-                    <h4>🌍 Global Expertise</h4>
-                    <p>We serve accounting professionals across multiple countries, with deep knowledge of different regulatory environments, tax codes, and compliance requirements. Local expertise, global standards.</p>
-                </div>
-            </div>
-
-            <div class="values">
-                <div class="value-item">
-                    <div class="value-icon">✓</div>
-                    <h4>Quality First</h4>
-                    <p>Every transaction, every entry, every report is reviewed with meticulous attention to detail and adherence to local standards.</p>
-                </div>
-                <div class="value-item">
-                    <div class="value-icon">⚡</div>
-                    <h4>Speed & Efficiency</h4>
-                    <p>Fast turnaround times without compromising quality. Your clients get results when they need them, every time.</p>
-                </div>
-                <div class="value-item">
-                    <div class="value-icon">💰</div>
-                    <h4>Cost Savings</h4>
-                    <p>Significantly reduce operational costs while receiving premium quality service. Improve your firm's profitability immediately.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="services" id="services">
-        <div class="container">
-            <h2>Our Services</h2>
-            <p class="section-subtitle">Comprehensive accounting solutions for firms of all sizes</p>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>📊 Monthly Bookkeeping & Accounting</h3>
-                    <p>Complete accounting support including journal entries, account reconciliation, financial statement preparation, and comprehensive reporting tailored to your jurisdiction.</p>
-                    <ul class="service-features">
-                        <li>General ledger management</li>
-                        <li>Account reconciliation</li>
-                        <li>Financial statements preparation</li>
-                        <li>Monthly/quarterly/annual closing</li>
-                        <li>Audit trail documentation</li>
-                    </ul>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <span class="partner-badge" style="background: var(--xero-blue);">Certified Partner</span>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9f/Xero_software_logo.svg/1200px-Xero_software_logo.svg.png" alt="Xero Logo" class="tech-logo">
+                    <h3>Xero Certified Experts</h3>
+                    <p style="color: var(--text-light); font-size: 0.95rem;">As an official Xero Partner, NUMETRIC provides seamless cloud accounting setups, daily bank reconciliations, and real-time financial reporting for your clients.</p>
                 </div>
 
-                <div class="service-card">
-                    <h3>💼 Payroll Processing</h3>
-                    <p>End-to-end payroll services compliant with employment laws, tax withholding requirements, and benefit obligations in your country.</p>
-                    <ul class="service-features">
-                        <li>Weekly/bi-weekly/monthly payroll</li>
-                        <li>Tax withholding calculations</li>
-                        <li>Benefit administration</li>
-                        <li>Leave/vacation tracking</li>
-                        <li>Statutory reporting</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <h3>📈 Financial Statements & Reporting</h3>
-                    <p>Professional financial statements prepared in compliance with local accounting standards for management, lenders, or regulatory purposes.</p>
-                    <ul class="service-features">
-                        <li>Balance sheet preparation</li>
-                        <li>Income statement compilation</li>
-                        <li>Cash flow statements</li>
-                        <li>Notes to financial statements</li>
-                        <li>Management/analytical reports</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <h3>🔍 Account Reconciliation</h3>
-                    <p>Detailed account reconciliation ensuring accuracy and identifying discrepancies across all asset, liability, and equity accounts.</p>
-                    <ul class="service-features">
-                        <li>Bank reconciliation</li>
-                        <li>Credit card matching</li>
-                        <li>Vendor statement reconciliation</li>
-                        <li>Balance sheet account reviews</li>
-                        <li>Discrepancy investigation</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <h3>⚙️ Tax Compliance Support</h3>
-                    <p>Specialized support for tax filing, documentation, and compliance based on your country's requirements and standards.</p>
-                    <ul class="service-features">
-                        <li>Tax documentation preparation</li>
-                        <li>Compliance checklists</li>
-                        <li>Record organization</li>
-                        <li>Deduction optimization</li>
-                        <li>Audit support preparation</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <h3>🎓 Accounting Software Support</h3>
-                    <p>Expert support for your accounting software including setup, configuration, and ongoing optimization for maximum efficiency.</p>
-                    <ul class="service-features">
-                        <li>Software setup & configuration</li>
-                        <li>Chart of accounts optimization</li>
-                        <li>Workflow automation</li>
-                        <li>User support & training</li>
-                        <li>System optimization</li>
-                    </ul>
+                <div class="tech-card">
+                    <span class="partner-badge" style="background: #2563eb;">Preferred Integration</span>
+                    <img src="https://i.ibb.co/LzdS8mQJ/timeki-logo.png" alt="Timeki Logo" class="tech-logo">
+                    <h3>Time Tracking via Timeki</h3>
+                    <p style="color: var(--text-light); font-size: 0.95rem;">We ensure 100% billable transparency using Timeki. Every task is tracked and documented, giving your firm full visibility into our productivity.</p>
                 </div>
             </div>
         </div>
@@ -1734,388 +232,37 @@
 
     <section class="countries" id="countries">
         <div class="container">
-            <h2>Global Reach, Local Expertise</h2>
-            <p class="section-subtitle">We serve accounting professionals in major markets worldwide</p>
-            
+            <h2>Local Expertise, Global Standards</h2>
             <div class="countries-grid">
                 <div class="country-card">
-                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg" alt="United States Flag" class="country-flag-img">
-                    <h4>United States</h4>
-                    <p>GAAP, Federal & State Tax Compliance, 1099/W2 Processing</p>
+                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg" alt="USA" class="country-flag-img">
+                    <h4>USA</h4>
+                    <p style="font-size: 0.85rem; opacity: 0.8;">GAAP & Federal Tax</p>
                 </div>
-
                 <div class="country-card">
-                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/CA.svg" alt="Canada Flag" class="country-flag-img">
+                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/CA.svg" alt="Canada" class="country-flag-img">
                     <h4>Canada</h4>
-                    <p>IFRS/ASPE, GST/PST, Provincial Tax, T4/T1 Filing</p>
+                    <p style="font-size: 0.85rem; opacity: 0.8;">ASPE & GST/HST</p>
                 </div>
-
                 <div class="country-card">
-                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg" alt="United Kingdom Flag" class="country-flag-img">
-                    <h4>United Kingdom</h4>
-                    <p>FRS Standards, Corporation Tax, PAYE, VAT Compliance</p>
+                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg" alt="UK" class="country-flag-img">
+                    <h4>UK</h4>
+                    <p style="font-size: 0.85rem; opacity: 0.8;">FRS & VAT Compliance</p>
                 </div>
-
                 <div class="country-card">
-                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/AU.svg" alt="Australia Flag" class="country-flag-img">
+                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/AU.svg" alt="Australia" class="country-flag-img">
                     <h4>Australia</h4>
-                    <p>AASB Standards, Income Tax, BAS, Superannuation Compliance</p>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 3rem;">
-                <p style="color: white; font-size: 1.1rem; opacity: 0.9;">
-                    <strong>Not seeing your country?</strong> We work with accounting professionals globally.<br>
-                    Contact us to discuss your specific needs.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section class="why-choose" id="why-choose">
-        <div class="container">
-            <h2>Why Choose NUMETRIC?</h2>
-            <p class="section-subtitle">The strategic advantage for forward-thinking accounting firms</p>
-            
-            <div class="why-grid">
-                <div class="why-card">
-                    <h3>💰 Significant Cost Savings</h3>
-                    <p>Reduce back-office costs by 40-60% compared to onshore staffing while maintaining premium quality. Improve your firm's profitability immediately.</p>
-                </div>
-
-                <div class="why-card">
-                    <h3>✨ Premium Quality</h3>
-                    <p>Certified accountants with extensive expertise. Every transaction reviewed with meticulous attention to detail and full compliance.</p>
-                </div>
-
-                <div class="why-card">
-                    <h3>⚡ Fast Turnaround</h3>
-                    <p>Quick delivery without delays. Our efficient processes ensure your clients get timely reports and filings, meeting all regulatory deadlines.</p>
-                </div>
-
-                <div class="why-card">
-                    <h3>📋 Compliance Assured</h3>
-                    <p>Deep expertise in multiple regulatory environments. We stay current with changes in your jurisdiction's standards and requirements.</p>
-                </div>
-
-                <div class="why-card">
-                    <h3>👥 Dedicated Relationship</h3>
-                    <p>Your dedicated team understands your clients' needs and maintains continuity. Personalized service that exceeds expectations.</p>
-                </div>
-
-                <div class="why-card">
-                    <h3>🔒 Enterprise-Grade Security</h3>
-                    <p>Bank-level encryption, secure data handling, and strict confidentiality. Your clients' financial information is protected.</p>
+                    <p style="font-size: 0.85rem; opacity: 0.8;">AASB & BAS Support</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="blog" id="blog">
-        <div class="container">
-            <h2>Blog & Industry Insights</h2>
-            <p class="section-subtitle">Accounting tips, industry trends, and best practices for firms worldwide</p>
-            
-            <div class="blog-header">
-                <div>
-                    <h3 style="margin-bottom: 1rem;">Latest Articles</h3>
-                    <div class="blog-grid" id="blogGrid">
-                        <div class="no-blogs">
-                            <p>No articles yet. Check back soon for accounting insights and industry analysis!</p>
-                        </div>
-                    </div>
-                </div>
+    <footer style="background: #111; color: white; padding: 4rem 2rem; text-align: center;">
+        <div class="logo" style="justify-content: center; color: white; margin-bottom: 1rem;">NUMETRIC</div>
+        <p style="opacity: 0.6; font-size: 0.9rem;">&copy; 2026 NUMETRIC. All rights reserved.</p>
+        <p style="opacity: 0.6; font-size: 0.8rem; margin-top: 0.5rem;">A Certified Xero Partner Firm</p>
+    </footer>
 
-                <div id="blogFormContainer">
-                    </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="process">
-        <div class="container">
-            <h2>How We Work Together</h2>
-            <p class="section-subtitle">A streamlined process designed for your success</p>
-            
-            <div class="process-timeline">
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <h4>Discovery</h4>
-                    <p>We understand your firm's needs, client base, services, and specific requirements.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <h4>Onboarding</h4>
-                    <p>Seamless transition with documentation review, process setup, and team training.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <h4>Execution</h4>
-                    <p>Consistent, accurate service delivery with regular communication and quality checks.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">4</div>
-                    <h4>Growth</h4>
-                    <p>Scale services with your firm, expanding capabilities as your business evolves.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="reviews" id="reviews">
-        <div class="reviews-container container">
-            <h2 style="margin-bottom: 1rem;">Client Reviews & Testimonials</h2>
-            <p class="section-subtitle">Real feedback from accounting professionals we partner with</p>
-            
-            <div class="reviews-header">
-                <div class="reviews-stats">
-                    <div class="rating-display">
-                        <div class="rating-large" id="averageRating">4.8</div>
-                        <div class="rating-info">
-                            <div class="rating-stars" id="starDisplay">★★★★★</div>
-                            <div class="rating-count"><span id="totalReviews">0</span> reviews</div>
-                        </div>
-                    </div>
-                    
-                    <div class="rating-bars">
-                        <div class="rating-bar">
-                            <div class="rating-bar-label">5 ★</div>
-                            <div class="rating-bar-progress">
-                                <div class="rating-bar-fill" id="bar5" style="width: 80%;"></div>
-                            </div>
-                            <div class="rating-bar-count" id="count5">0</div>
-                        </div>
-                        <div class="rating-bar">
-                            <div class="rating-bar-label">4 ★</div>
-                            <div class="rating-bar-progress">
-                                <div class="rating-bar-fill" id="bar4" style="width: 20%;"></div>
-                            </div>
-                            <div class="rating-bar-count" id="count4">0</div>
-                        </div>
-                        <div class="rating-bar">
-                            <div class="rating-bar-label">3 ★</div>
-                            <div class="rating-bar-progress">
-                                <div class="rating-bar-fill" id="bar3" style="width: 0%;"></div>
-                            </div>
-                            <div class="rating-bar-count" id="count3">0</div>
-                        </div>
-                        <div class="rating-bar">
-                            <div class="rating-bar-label">2 ★</div>
-                            <div class="rating-bar-progress">
-                                <div class="rating-bar-fill" id="bar2" style="width: 0%;"></div>
-                            </div>
-                            <div class="rating-bar-count" id="count2">0</div>
-                        </div>
-                        <div class="rating-bar">
-                            <div class="rating-bar-label">1 ★</div>
-                            <div class="rating-bar-progress">
-                                <div class="rating-bar-fill" id="bar1" style="width: 0%;"></div>
-                            </div>
-                            <div class="rating-bar-count" id="count1">0</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="review-form-section">
-                    <h3>📝 Share Your Experience</h3>
-                    <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem;">Have you worked with NUMETRIC? Share your feedback. Your review helps other accounting professionals make informed decisions.</p>
-                    
-                    <div class="success-message" id="successMessage">
-                        ✓ Thank you! Your review has been posted successfully.
-                    </div>
-
-                    <form id="reviewForm" onsubmit="submitReview(event)">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="reviewName">Your Name *</label>
-                                <input type="text" id="reviewName" name="name" required placeholder="e.g., John Smith">
-                            </div>
-                            <div class="form-group">
-                                <label for="reviewCompany">Firm/Company Name *</label>
-                                <input type="text" id="reviewCompany" name="company" required placeholder="e.g., Smith & Associates CPA">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Rating *</label>
-                            <div class="star-rating" id="starRating">
-                                <span class="star" data-value="1">★</span>
-                                <span class="star" data-value="2">★</span>
-                                <span class="star" data-value="3">★</span>
-                                <span class="star" data-value="4">★</span>
-                                <span class="star" data-value="5">★</span>
-                            </div>
-                            <input type="hidden" id="reviewRating" name="rating" value="0" required>
-                        </div>
-
-                        <div class="form-group full">
-                            <label for="reviewText">Your Review *</label>
-                            <textarea id="reviewText" name="review" required placeholder="Share your experience with NUMETRIC. What services did you use? How did we help your firm?"></textarea>
-                        </div>
-
-                        <button type="submit" class="review-submit-btn">Submit Review</button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="reviews-list">
-                <h3 class="reviews-list-title">Recent Reviews</h3>
-                <div class="reviews-grid" id="reviewsGrid">
-                    <div class="no-reviews">
-                        <p>No reviews yet. Be the first to share your experience!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="faq" id="faq">
-        <div class="container">
-            <h2>Frequently Asked Questions</h2>
-            <p class="section-subtitle">Common questions about our services and process</p>
-            
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Is my clients' data secure with an offshore provider?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes, absolutely. We implement enterprise-grade security protocols, encrypted data transfers, secure file handling, and strict confidentiality agreements. Your clients' financial information is protected with the same rigor as any onshore provider. We understand the critical importance of data security in the accounting industry.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How do you ensure compliance with different country requirements?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        We maintain expertise in the accounting standards, tax requirements, and regulatory rules of the countries we serve. Our processes are built around these standards, and we stay current with regulatory changes. Every report and entry is reviewed for compliance specific to your jurisdiction.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What's your typical turnaround time?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Turnaround times depend on the service. Monthly accounting: typically 5-7 business days. Payroll: within 2-3 business days. Financial statements: 7-10 business days. We can discuss specific timelines based on your needs and your clients' requirements.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Can you handle multiple clients and full back-office work?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes! We can support a single client or manage your entire back-office portfolio. We scale with your firm's growth and can handle multiple clients simultaneously with dedicated account management for each relationship.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How do I integrate NUMETRIC with my existing systems?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        We work with the systems you use, supporting all major accounting software platforms. We establish secure, efficient data transfer methods and maintain regular communication protocols to ensure smooth integration with your existing workflows.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What's the cost structure and pricing model?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        We offer flexible pricing based on service complexity and volume. We'll work with you to understand your specific needs and provide transparent quotes. Most firms see cost savings of 40-60% compared to local staffing while receiving premium quality service.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How does the onboarding process work?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        We provide a structured onboarding: initial discovery meeting, system setup and configuration, detailed documentation review, knowledge transfer sessions, and a ramp-up period with close oversight. We ensure you're completely comfortable before full handoff.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2>Get in Touch</h2>
-            <p class="section-subtitle">Ready to transform your firm's back-office operations?</p>
-            
-            <div class="contact-wrapper">
-                <div class="contact-info">
-                    <h3 style="margin-top: 0;">Contact Information</h3>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">✉️</div>
-                        <div class="contact-text">
-                            <h4>Email</h4>
-                            <p>info@numetricinc.com</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">🌍</div>
-                        <div class="contact-text">
-                            <h4>Global Service</h4>
-                            <p>We serve accounting professionals in the US, Canada, UK, Australia, and beyond. Available for meetings across all time zones.</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">⏰</div>
-                        <div class="contact-text">
-                            <h4>Response Time</h4>
-                            <p>We typically respond within 24 hours and offer flexible meeting times to accommodate your schedule.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <form class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="company">Firm/Company Name</label>
-                        <input type="text" id="company" name="company" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="country">Your Country</label>
-                        <input type="text" id="country" name="country" placeholder="e.g., United States, Canada, Australia">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <div style="margin-bottom: 1.5rem;">
-                <div class="logo" style="justify-content: center; color: white; margin-bottom: 1rem;">
-                    <div class="logo-icon" style="width: 40px; height:
+</body>
+</html>
