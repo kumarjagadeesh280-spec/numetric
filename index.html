@@ -556,6 +556,121 @@
             font-weight: bold;
         }
 
+        /* Integrations Section */
+        .integrations {
+            background: white;
+            position: relative;
+        }
+
+        .integrations-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .integration-card {
+            background: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-top: 4px solid var(--accent);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .integration-card:hover {
+            background: white;
+            box-shadow: 0 12px 32px rgba(30, 58, 138, 0.15);
+            transform: translateY(-8px);
+        }
+
+        .integration-card.xero-partner {
+            border-top: 4px solid #10b981;
+        }
+
+        .integration-logo-box {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .integration-logo-box.xero-box {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .integration-logo {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+        }
+
+        .xero-logo {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -2px;
+        }
+
+        .xero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .integration-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .integration-badge-text {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .integration-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .integration-features {
+            list-style: none;
+        }
+
+        .integration-features li {
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .integration-features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
         /* Countries Section */
         .countries {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
@@ -1186,6 +1301,110 @@
             display: block;
         }
 
+        /* Enhanced FAQ Styling */
+        .faq {
+            background: linear-gradient(135deg, var(--bg-light) 0%, white 100%);
+            position: relative;
+        }
+
+        .faq::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent), var(--primary), var(--accent));
+        }
+
+        .faq h2 {
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            position: relative;
+        }
+
+        .faq-container::before {
+            content: '';
+            position: absolute;
+            top: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            border-radius: 2px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1.5rem 0;
+            background: white;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-left-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.1);
+        }
+
+        .faq-item.active {
+            border-left-color: var(--primary);
+            background: var(--accent-light);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 1rem;
+        }
+
+        .faq-question:hover {
+            color: var(--accent);
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+            color: var(--accent);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            display: none;
+            margin-top: 1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
         /* Process Section */
         .process {
             background: white;
@@ -1239,64 +1458,6 @@
         .process-step p {
             color: var(--text-light);
             font-size: 0.95rem;
-        }
-
-        /* FAQ Section */
-        .faq {
-            background: var(--bg-light);
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 3rem auto 0;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid #e5e7eb;
-            padding: 1.5rem 0;
-            background: white;
-            margin-bottom: 1rem;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .faq-item:last-child {
-            border-bottom: none;
-        }
-
-        .faq-question {
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--primary);
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        .faq-question:hover {
-            color: var(--accent);
-        }
-
-        .faq-icon {
-            font-size: 1.5rem;
-            transition: transform 0.3s;
-        }
-
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            display: none;
-            margin-top: 1rem;
-            color: var(--text-light);
-            line-height: 1.8;
-        }
-
-        .faq-item.active .faq-answer {
-            display: block;
         }
 
         /* Contact Section */
@@ -1492,7 +1653,8 @@
             .about-content,
             .contact-wrapper,
             .reviews-header,
-            .blog-header {
+            .blog-header,
+            .integrations-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1518,6 +1680,15 @@
 
             .form-row {
                 grid-template-columns: 1fr;
+            }
+
+            .integration-logo-box {
+                width: 80px;
+                height: 80px;
+            }
+
+            .xero-logo {
+                font-size: 2.5rem;
             }
         }
 
@@ -1546,7 +1717,7 @@
             <form class="login-form" onsubmit="handleLogin(event)">
                 <div class="login-info">
                     📝 <strong>Demo Credentials:</strong><br>
-                    Email: info@numetricinc.com<br>
+                    Email: owner@numetric.com<br>
                     Password: Admin@2024
                 </div>
 
@@ -1589,6 +1760,7 @@
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="#integrations">Integrations</a></li>
                 <li><a href="#countries">Global Reach</a></li>
                 <li><a href="#why-choose">Why Us</a></li>
                 <li><a href="#blog">Blog</a></li>
@@ -1728,6 +1900,57 @@
                         <li>System optimization</li>
                     </ul>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="integrations" id="integrations">
+        <div class="container">
+            <h2>Integrations & Partnerships</h2>
+            <p class="section-subtitle">Seamless workflow integration with the tools you already use</p>
+            
+            <div class="integrations-grid">
+                <div class="integration-card">
+                    <div class="integration-logo-box">
+                        <img src="timekit-logo.png" alt="Timeki Logo" class="integration-logo">
+                    </div>
+                    <h3>Timeki Integration</h3>
+                    <p class="integration-badge-text">⏱️ Time Tracking & Billable Hours Management</p>
+                    <p>Seamlessly integrate Timeki time tracking with our accounting workflows. Capture precise billable hours, project-based time allocation, and convert time logs directly into invoice-ready data for your clients.</p>
+                    <ul class="integration-features">
+                        <li>Precise billable hours tracking</li>
+                        <li>Project-based time allocation</li>
+                        <li>Team productivity monitoring</li>
+                        <li>Invoice-ready time data</li>
+                        <li>Cost accounting integration</li>
+                    </ul>
+                </div>
+
+                <div class="integration-card xero-partner">
+                    <div class="integration-logo-box xero-box">
+                        <div class="xero-logo">X</div>
+                    </div>
+                    <div class="xero-badge">
+                        ✓ CERTIFIED XERO PARTNER
+                    </div>
+                    <h3>Xero Expertise</h3>
+                    <p class="integration-badge-text">🎯 Full Xero Integration & Support</p>
+                    <p>As a certified Xero Partner (L1, L2 certified), we provide comprehensive accounting services fully integrated with your Xero workspace. Streamlined data flow, real-time reporting, and complete sync across all your accounts.</p>
+                    <ul class="integration-features">
+                        <li>Xero L1, L2 certification</li>
+                        <li>Real-time account synchronization</li>
+                        <li>Automated reconciliation</li>
+                        <li>Compliance reporting</li>
+                        <li>Custom integrations & automation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="background: var(--accent-light); padding: 2rem; border-radius: 10px; margin-top: 3rem; text-align: center; border-left: 4px solid var(--accent);">
+                <h4 style="color: var(--primary); margin-bottom: 1rem;">Why These Integrations Matter</h4>
+                <p style="color: var(--text-dark); margin-bottom: 0; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    With Timeki and Xero integrated into our workflow, we capture precise billable hours from your team's time logs and seamlessly convert them into invoice-ready data. Real-time synchronization ensures your accounting stays accurate and your clients are billed correctly for every minute of work.
+                </p>
             </div>
         </div>
     </section>
@@ -2149,6 +2372,7 @@
         <div class="footer-links">
             <a href="#about">About</a>
             <a href="#services">Services</a>
+            <a href="#integrations">Integrations</a>
             <a href="#countries">Global Reach</a>
             <a href="#why-choose">Why Us</a>
             <a href="#blog">Blog</a>
@@ -2569,85 +2793,3 @@
     </script>
 </body>
 </html>
-<style>
-    .integrations {
-        background: var(--bg-light);
-        padding: 5rem 2rem;
-    }
-
-    .integration-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2.5rem;
-        margin-top: 2rem;
-    }
-
-    .integration-card {
-        background: white;
-        padding: 2.5rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-        transition: transform 0.3s ease;
-    }
-
-    .integration-card:hover {
-        transform: scale(1.02);
-    }
-
-    .integration-logo {
-        width: 100px;
-        height: 100px;
-        object-fit: contain;
-        flex-shrink: 0;
-    }
-
-    .integration-text h3 {
-        color: var(--primary);
-        margin-bottom: 0.5rem;
-    }
-
-    .xero-badge {
-        display: inline-block;
-        background: #13b5ea;
-        color: white;
-        padding: 0.2rem 0.6rem;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-    }
-
-    @media (max-width: 768px) {
-        .integration-grid { grid-template-columns: 1fr; }
-        .integration-card { flex-direction: column; text-align: center; }
-    }
-</style>
-
-<section class="integrations" id="integrations">
-    <div class="container">
-        <h2>Seamless Tech Integration</h2>
-        <p class="section-subtitle">We leverage world-class technology to ensure transparency, accuracy, and real-time collaboration.</p>
-        
-        <div class="integration-grid">
-            <div class="integration-card">
-                <img src="WhatsApp_Image_2026-03-31_at_11.13.54-removebg-preview.png" alt="Timeki Logo" class="integration-logo">
-                <div class="integration-text">
-                    <h3>Timeki Productivity</h3>
-                    <p>We use <strong>Timeki</strong> for precise time tracking and project management. This ensures total transparency in billing and allows you to monitor the progress of your offshore team in real-time.</p>
-                </div>
-            </div>
-
-            <div class="integration-card">
-                <img src="https://upload.wikimedia.org/wikipedia/en/9/9f/Xero_software_logo.svg" alt="Xero Logo" class="integration-logo">
-                <div class="integration-text">
-                    <span class="xero-badge">CERTIFIED PARTNER</span>
-                    <h3>Xero Cloud Accounting</h3>
-                    <p>As a <strong>Certified Xero Partner</strong>, we specialize in cloud-based bookkeeping. We help you migrate, manage, and optimize your clients' data on Xero for a paperless, efficient office.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
