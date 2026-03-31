@@ -2569,3 +2569,85 @@
     </script>
 </body>
 </html>
+<style>
+    .integrations {
+        background: var(--bg-light);
+        padding: 5rem 2rem;
+    }
+
+    .integration-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+        margin-top: 2rem;
+    }
+
+    .integration-card {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        transition: transform 0.3s ease;
+    }
+
+    .integration-card:hover {
+        transform: scale(1.02);
+    }
+
+    .integration-logo {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    .integration-text h3 {
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .xero-badge {
+        display: inline-block;
+        background: #13b5ea;
+        color: white;
+        padding: 0.2rem 0.6rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .integration-grid { grid-template-columns: 1fr; }
+        .integration-card { flex-direction: column; text-align: center; }
+    }
+</style>
+
+<section class="integrations" id="integrations">
+    <div class="container">
+        <h2>Seamless Tech Integration</h2>
+        <p class="section-subtitle">We leverage world-class technology to ensure transparency, accuracy, and real-time collaboration.</p>
+        
+        <div class="integration-grid">
+            <div class="integration-card">
+                <img src="WhatsApp_Image_2026-03-31_at_11.13.54-removebg-preview.png" alt="Timeki Logo" class="integration-logo">
+                <div class="integration-text">
+                    <h3>Timeki Productivity</h3>
+                    <p>We use <strong>Timeki</strong> for precise time tracking and project management. This ensures total transparency in billing and allows you to monitor the progress of your offshore team in real-time.</p>
+                </div>
+            </div>
+
+            <div class="integration-card">
+                <img src="https://upload.wikimedia.org/wikipedia/en/9/9f/Xero_software_logo.svg" alt="Xero Logo" class="integration-logo">
+                <div class="integration-text">
+                    <span class="xero-badge">CERTIFIED PARTNER</span>
+                    <h3>Xero Cloud Accounting</h3>
+                    <p>As a <strong>Certified Xero Partner</strong>, we specialize in cloud-based bookkeeping. We help you migrate, manage, and optimize your clients' data on Xero for a paperless, efficient office.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
