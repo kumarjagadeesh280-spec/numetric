@@ -23,10 +23,11 @@
             --bg-white: #ffffff;
             --success: #10b981;
             --error: #ef4444;
-            --xero-blue: #13b5ea;
         }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
@@ -36,75 +37,200 @@
             overflow-x: hidden;
         }
 
-        /* --- FLAG IMAGE STYLING --- */
+        /* Flag Image Styling */
         .country-flag-img {
-            width: 60px;
+            width: 70px;
             height: auto;
             border-radius: 4px;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             display: block;
             margin-left: auto;
             margin-right: auto;
         }
 
-        /* --- TECH STACK & PARTNER SECTION --- */
-        .tech-stack {
-            background: var(--bg-white);
-            padding: 5rem 2rem;
+        /* --- TIMEKI INTEGRATION STYLING --- */
+        .partner-section {
+            background: var(--bg-light);
             text-align: center;
-            border-bottom: 1px solid #eee;
+            padding: 4rem 2rem;
+            border-top: 1px solid #e5e7eb;
         }
 
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            max-width: 900px;
+        .partner-container {
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .tech-card {
-            background: var(--bg-light);
-            padding: 3rem 2rem;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-        }
-
-        .tech-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
+        .partner-card {
             background: white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            display: inline-block;
+            max-width: 500px;
+            transition: transform 0.3s ease;
         }
 
-        .tech-logo {
-            height: 60px;
-            width: auto;
+        .partner-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .timeki-logo {
+            width: 120px;
+            height: auto;
             margin-bottom: 1.5rem;
         }
 
         .partner-badge {
             display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 0.3rem 1rem;
+            background: var(--accent-light);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 700;
             margin-bottom: 1rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+        }
+
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-modal.show {
+            display: flex;
+        }
+
+        .login-modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 400px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .login-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--accent-light);
+            padding-bottom: 1rem;
+        }
+
+        .login-modal h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover { color: var(--primary); }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(30, 58, 138, 0.3);
+        }
+
+        .login-error {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 0.75rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--error);
+            display: none;
+        }
+
+        .login-error.show { display: block; }
+
+        .login-info {
+            background: #dbeafe;
+            color: #0c2340;
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border-left: 4px solid var(--accent);
         }
 
         /* Header & Navigation */
         header {
             position: sticky;
             top: 0;
-            background: white;
+            background: var(--bg-white);
             border-bottom: 1px solid #e5e7eb;
             z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         nav {
@@ -117,114 +243,383 @@
         }
 
         .logo {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 800;
             color: var(--primary);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            letter-spacing: -0.5px;
         }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-icon svg { width: 100%; height: 100%; }
 
         .nav-links {
             display: flex;
             gap: 2rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 500;
+            transition: color 0.3s;
             font-size: 0.95rem;
         }
 
-        .cta-btn {
+        .nav-links a:hover { color: var(--accent); }
+
+        .nav-buttons {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .cta-btn, .login-link-btn {
             background: var(--primary);
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .login-link-btn {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 0.6rem 1.2rem;
+        }
+
+        .login-link-btn:hover { background: var(--primary); color: white; }
+
+        .cta-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(30, 58, 138, 0.2);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Styling */
+        section { padding: 5rem 2rem; }
+
+        section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
         }
 
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 7rem 2rem;
+            padding: 6rem 2rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero h1 { font-size: 3.2rem; margin-bottom: 1.5rem; line-height: 1.1; }
-        .hero p { font-size: 1.2rem; margin-bottom: 2.5rem; opacity: 0.9; }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: rgba(6, 182, 212, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
 
-        /* General Section Styling */
-        section h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 3rem; text-align: center; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.95;
+            font-weight: 600;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #06d6e0;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover { background: white; color: var(--primary); }
+
+        /* About Section */
+        .about { background: var(--bg-light); }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .values {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .value-item:hover { transform: translateY(-5px); }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: 10px;
+            border-top: 4px solid var(--accent);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            background: white;
+            box-shadow: 0 8px 24px rgba(30, 58, 138, 0.1);
+        }
 
         /* Countries Section */
-        .countries { background: var(--secondary); color: white; padding: 5rem 2rem; }
+        .countries {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
         .countries h2 { color: white; }
+
         .countries-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            gap: 1.5rem;
+            margin-top: 3rem;
         }
-        .country-card { text-align: center; background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; }
 
-        /* Responsive */
+        .country-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .tech-grid, .countries-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 2.2rem; }
+            .about-content, .services-grid, .values, .countries-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="login-modal" id="loginModal">
+        <div class="login-modal-content">
+            <div class="login-modal-header">
+                <h2>🔐 Admin Login</h2>
+                <button class="close-modal" onclick="closeLoginModal()">×</button>
+            </div>
+            <div class="login-error" id="loginError"></div>
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <div class="login-info">
+                    📝 <strong>Demo Credentials:</strong><br>
+                    Email: owner@numetric.com<br>
+                    Password: Admin@2024
+                </div>
+                <div class="form-group">
+                    <label for="loginEmail">Email Address *</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password *</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="login-btn">Login to Admin Panel</button>
+            </form>
+        </div>
+    </div>
 
     <header>
         <nav>
-            <a href="#" class="logo">NUMETRIC</a>
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="barGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="100" cy="100" r="95" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+                        <rect x="65" y="120" width="12" height="30" fill="#1e3a8a" rx="2"/>
+                        <rect x="85" y="105" width="12" height="45" fill="url(#barGradient)" rx="2"/>
+                        <rect x="105" y="85" width="12" height="65" fill="#1e3a8a" rx="2"/>
+                        <rect x="125" y="70" width="12" height="80" fill="url(#barGradient)" rx="2"/>
+                        <path d="M 60 100 L 75 115 L 95 85" stroke="#10b981" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                NUMETRIC
+            </a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#tech">Our Tech</a></li>
+                <li><a href="#services">Services</a></li>
                 <li><a href="#countries">Global Reach</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <a href="#contact" class="cta-btn">Get Started</a>
+            <div class="nav-buttons">
+                <button class="login-link-btn" id="loginBtn" onclick="openLoginModal()">Admin Login</button>
+                <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Started</button>
+            </div>
         </nav>
     </header>
 
     <section class="hero">
-        <div class="container">
-            <h1>Expert Offshore Support for Global CPA Firms</h1>
-            <p>Premium Bookkeeping & Accounting powered by Certified Xero Experts.</p>
-            <div style="display: flex; gap: 1rem; justify-content: center;">
-                <a href="#contact" style="background: var(--accent); color: var(--primary); padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 700;">Discuss Your Firm's Needs</a>
+        <div class="hero-content">
+            <h1>Global Accounting & Bookkeeping Solutions for CPA Firms Worldwide</h1>
+            <p class="tagline">Offshore expertise serving accounting professionals in the US, Canada, Australia, UK, and beyond</p>
+            <p class="subtitle">Significantly reduce your back-office costs while maintaining premium quality.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Started Today</button>
+                <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">Learn More</button>
             </div>
         </div>
     </section>
 
-    <section class="tech-stack" id="tech">
-        <div class="container">
-            <h2>Powered by Industry-Leading Tech</h2>
-            <p class="section-subtitle" style="margin-bottom: 3rem; margin-top: -2rem;">We combine certified expertise with cutting-edge tools to deliver absolute accuracy.</p>
+    <section class="partner-section">
+        <div class="partner-container">
+            <span class="partner-badge">Featured Integration</span>
+            <h2>Our Preferred Time-Tracking Partner</h2>
+            <p class="section-subtitle" style="margin-left: auto; margin-right: auto;">We leverage top-tier technology to ensure accuracy and transparency in every billable hour.</p>
             
-            <div class="tech-grid">
-                <div class="tech-card">
-                    <span class="partner-badge" style="background: var(--xero-blue);">Certified Partner</span>
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9f/Xero_software_logo.svg/1200px-Xero_software_logo.svg.png" alt="Xero Logo" class="tech-logo">
-                    <h3>Xero Certified Experts</h3>
-                    <p style="color: var(--text-light); font-size: 0.95rem;">As an official Xero Partner, NUMETRIC provides seamless cloud accounting setups, daily bank reconciliations, and real-time financial reporting for your clients.</p>
-                </div>
+            <div class="partner-card">
+                <img src="https://i.ibb.co/LzdS8mQJ/timeki-logo.png" alt="Timeki Logo" class="timeki-logo">
+                <h3>Efficiency Redefined with Timeki</h3>
+                <p style="color: var(--text-light); font-size: 0.95rem;">NUMETRIC utilizes Timeki for precise time management and project tracking, providing our clients with real-time insights into resource allocation and offshore productivity.</p>
+            </div>
+        </div>
+    </section>
 
-                <div class="tech-card">
-                    <span class="partner-badge" style="background: #2563eb;">Preferred Integration</span>
-                    <img src="https://i.ibb.co/LzdS8mQJ/timeki-logo.png" alt="Timeki Logo" class="tech-logo">
-                    <h3>Time Tracking via Timeki</h3>
-                    <p style="color: var(--text-light); font-size: 0.95rem;">We ensure 100% billable transparency using Timeki. Every task is tracked and documented, giving your firm full visibility into our productivity.</p>
+    <section class="about" id="about">
+        <div class="container">
+            <h2>About NUMETRIC</h2>
+            <div class="about-content">
+                <div>
+                    <h3>Our Mission</h3>
+                    <p>To empower accounting professionals worldwide by providing world-class, cost-effective back-office solutions. We help CPA firms and bookkeeping practices expand their capacity.</p>
+                </div>
+                <div class="about-box">
+                    <h4>🌍 Global Expertise</h4>
+                    <p>We serve accounting professionals across multiple countries, with deep knowledge of different regulatory environments.</p>
                 </div>
             </div>
         </div>
@@ -232,37 +627,42 @@
 
     <section class="countries" id="countries">
         <div class="container">
-            <h2>Local Expertise, Global Standards</h2>
+            <h2>Global Reach, Local Expertise</h2>
             <div class="countries-grid">
                 <div class="country-card">
-                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg" alt="USA" class="country-flag-img">
-                    <h4>USA</h4>
-                    <p style="font-size: 0.85rem; opacity: 0.8;">GAAP & Federal Tax</p>
+                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg" alt="USA Flag" class="country-flag-img">
+                    <h4>United States</h4>
                 </div>
                 <div class="country-card">
-                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/CA.svg" alt="Canada" class="country-flag-img">
+                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/CA.svg" alt="Canada Flag" class="country-flag-img">
                     <h4>Canada</h4>
-                    <p style="font-size: 0.85rem; opacity: 0.8;">ASPE & GST/HST</p>
                 </div>
                 <div class="country-card">
-                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg" alt="UK" class="country-flag-img">
-                    <h4>UK</h4>
-                    <p style="font-size: 0.85rem; opacity: 0.8;">FRS & VAT Compliance</p>
+                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg" alt="UK Flag" class="country-flag-img">
+                    <h4>United Kingdom</h4>
                 </div>
                 <div class="country-card">
-                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/AU.svg" alt="Australia" class="country-flag-img">
+                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/AU.svg" alt="Australia Flag" class="country-flag-img">
                     <h4>Australia</h4>
-                    <p style="font-size: 0.85rem; opacity: 0.8;">AASB & BAS Support</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer style="background: #111; color: white; padding: 4rem 2rem; text-align: center;">
+    <footer style="background: var(--secondary); color: white; padding: 3rem; text-align: center;">
         <div class="logo" style="justify-content: center; color: white; margin-bottom: 1rem;">NUMETRIC</div>
-        <p style="opacity: 0.6; font-size: 0.9rem;">&copy; 2026 NUMETRIC. All rights reserved.</p>
-        <p style="opacity: 0.6; font-size: 0.8rem; margin-top: 0.5rem;">A Certified Xero Partner Firm</p>
+        <p>&copy; 2026 NUMETRIC. All rights reserved. | Powered by Timeki Integration</p>
     </footer>
 
+    <script>
+        // Auth Logic
+        function openLoginModal() { document.getElementById('loginModal').classList.add('show'); }
+        function closeLoginModal() { document.getElementById('loginModal').classList.remove('show'); }
+        function handleLogin(e) {
+            e.preventDefault();
+            alert('Admin login simulated for demo purposes.');
+            closeLoginModal();
+        }
+    </script>
 </body>
 </html>
