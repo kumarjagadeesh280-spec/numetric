@@ -23,6 +23,7 @@
             --bg-white: #ffffff;
             --success: #10b981;
             --error: #ef4444;
+            --xero-blue: #13b5ea;
         }
 
         html {
@@ -37,7 +38,7 @@
             overflow-x: hidden;
         }
 
-        /* Flag Image Styling */
+        /* --- FLAG IMAGE STYLING --- */
         .country-flag-img {
             width: 70px;
             height: auto;
@@ -50,49 +51,53 @@
             margin-right: auto;
         }
 
-        /* --- TIMEKI INTEGRATION STYLING --- */
-        .partner-section {
-            background: var(--bg-light);
+        /* --- TECH STACK INTEGRATION STYLING --- */
+        .tech-stack {
+            background: var(--bg-white);
+            padding: 5rem 2rem;
             text-align: center;
-            padding: 4rem 2rem;
             border-top: 1px solid #e5e7eb;
         }
 
-        .partner-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
 
-        .partner-card {
-            background: white;
-            padding: 2.5rem;
+        .tech-card {
+            background: var(--bg-light);
+            padding: 3rem 2rem;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            display: inline-block;
-            max-width: 500px;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
         }
 
-        .partner-card:hover {
+        .tech-card:hover {
             transform: translateY(-5px);
+            border-color: var(--accent);
+            background: white;
         }
 
-        .timeki-logo {
-            width: 120px;
-            height: auto;
+        .tech-logo {
+            height: 70px;
+            width: auto;
             margin-bottom: 1.5rem;
+            object-fit: contain;
         }
 
-        .partner-badge {
+        .tech-badge {
             display: inline-block;
-            background: var(--accent-light);
-            color: var(--primary);
-            padding: 0.3rem 0.8rem;
+            color: white;
+            padding: 0.3rem 1rem;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             margin-bottom: 1rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* Login Modal */
@@ -124,8 +129,14 @@
         }
 
         @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .login-modal-header {
@@ -152,7 +163,9 @@
             transition: color 0.3s;
         }
 
-        .close-modal:hover { color: var(--primary); }
+        .close-modal:hover {
+            color: var(--primary);
+        }
 
         .login-form {
             display: flex;
@@ -212,7 +225,9 @@
             display: none;
         }
 
-        .login-error.show { display: block; }
+        .login-error.show {
+            display: block;
+        }
 
         .login-info {
             background: #dbeafe;
@@ -234,435 +249,4 @@
         }
 
         nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            letter-spacing: -0.5px;
-        }
-
-        .logo-icon {
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .logo-icon svg { width: 100%; height: 100%; }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .nav-links a:hover { color: var(--accent); }
-
-        .nav-buttons {
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
-        }
-
-        .cta-btn, .login-link-btn {
-            background: var(--primary);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 0.95rem;
-        }
-
-        .login-link-btn {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            padding: 0.6rem 1.2rem;
-        }
-
-        .login-link-btn:hover { background: var(--primary); color: white; }
-
-        .cta-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(30, 58, 138, 0.2);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Section Styling */
-        section { padding: 5rem 2rem; }
-
-        section h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            margin-bottom: 3rem;
-            max-width: 600px;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 6rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 400px;
-            height: 400px;
-            background: rgba(6, 182, 212, 0.1);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(20px); }
-        }
-
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            letter-spacing: -1px;
-        }
-
-        .hero .tagline {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            opacity: 0.95;
-            font-weight: 600;
-        }
-
-        .hero .subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: var(--primary);
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-            background: #06d6e0;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 24px rgba(6, 182, 212, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            padding: 1rem 2rem;
-            border: 2px solid white;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .btn-secondary:hover { background: white; color: var(--primary); }
-
-        /* About Section */
-        .about { background: var(--bg-light); }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            border-left: 4px solid var(--accent);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .values {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .value-item {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-        }
-
-        .value-item:hover { transform: translateY(-5px); }
-
-        /* Services Section */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2.5rem;
-        }
-
-        .service-card {
-            background: var(--bg-light);
-            padding: 2.5rem;
-            border-radius: 10px;
-            border-top: 4px solid var(--accent);
-            transition: all 0.3s;
-        }
-
-        .service-card:hover {
-            background: white;
-            box-shadow: 0 8px 24px rgba(30, 58, 138, 0.1);
-        }
-
-        /* Countries Section */
-        .countries {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-        }
-
-        .countries h2 { color: white; }
-
-        .countries-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-
-        .country-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 2.2rem; }
-            .about-content, .services-grid, .values, .countries-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="login-modal" id="loginModal">
-        <div class="login-modal-content">
-            <div class="login-modal-header">
-                <h2>🔐 Admin Login</h2>
-                <button class="close-modal" onclick="closeLoginModal()">×</button>
-            </div>
-            <div class="login-error" id="loginError"></div>
-            <form class="login-form" onsubmit="handleLogin(event)">
-                <div class="login-info">
-                    📝 <strong>Demo Credentials:</strong><br>
-                    Email: owner@numetric.com<br>
-                    Password: Admin@2024
-                </div>
-                <div class="form-group">
-                    <label for="loginEmail">Email Address *</label>
-                    <input type="email" id="loginEmail" required>
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">Password *</label>
-                    <input type="password" id="loginPassword" required>
-                </div>
-                <button type="submit" class="login-btn">Login to Admin Panel</button>
-            </form>
-        </div>
-    </div>
-
-    <header>
-        <nav>
-            <a href="#" class="logo">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="barGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <circle cx="100" cy="100" r="95" fill="none" stroke="#1e3a8a" stroke-width="2"/>
-                        <rect x="65" y="120" width="12" height="30" fill="#1e3a8a" rx="2"/>
-                        <rect x="85" y="105" width="12" height="45" fill="url(#barGradient)" rx="2"/>
-                        <rect x="105" y="85" width="12" height="65" fill="#1e3a8a" rx="2"/>
-                        <rect x="125" y="70" width="12" height="80" fill="url(#barGradient)" rx="2"/>
-                        <path d="M 60 100 L 75 115 L 95 85" stroke="#10b981" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                NUMETRIC
-            </a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#countries">Global Reach</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="nav-buttons">
-                <button class="login-link-btn" id="loginBtn" onclick="openLoginModal()">Admin Login</button>
-                <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Started</button>
-            </div>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Global Accounting & Bookkeeping Solutions for CPA Firms Worldwide</h1>
-            <p class="tagline">Offshore expertise serving accounting professionals in the US, Canada, Australia, UK, and beyond</p>
-            <p class="subtitle">Significantly reduce your back-office costs while maintaining premium quality.</p>
-            <div class="hero-buttons">
-                <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Started Today</button>
-                <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">Learn More</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="partner-section">
-        <div class="partner-container">
-            <span class="partner-badge">Featured Integration</span>
-            <h2>Our Preferred Time-Tracking Partner</h2>
-            <p class="section-subtitle" style="margin-left: auto; margin-right: auto;">We leverage top-tier technology to ensure accuracy and transparency in every billable hour.</p>
-            
-            <div class="partner-card">
-                <img src="https://i.ibb.co/LzdS8mQJ/timeki-logo.png" alt="Timeki Logo" class="timeki-logo">
-                <h3>Efficiency Redefined with Timeki</h3>
-                <p style="color: var(--text-light); font-size: 0.95rem;">NUMETRIC utilizes Timeki for precise time management and project tracking, providing our clients with real-time insights into resource allocation and offshore productivity.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="about" id="about">
-        <div class="container">
-            <h2>About NUMETRIC</h2>
-            <div class="about-content">
-                <div>
-                    <h3>Our Mission</h3>
-                    <p>To empower accounting professionals worldwide by providing world-class, cost-effective back-office solutions. We help CPA firms and bookkeeping practices expand their capacity.</p>
-                </div>
-                <div class="about-box">
-                    <h4>🌍 Global Expertise</h4>
-                    <p>We serve accounting professionals across multiple countries, with deep knowledge of different regulatory environments.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="countries" id="countries">
-        <div class="container">
-            <h2>Global Reach, Local Expertise</h2>
-            <div class="countries-grid">
-                <div class="country-card">
-                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg" alt="USA Flag" class="country-flag-img">
-                    <h4>United States</h4>
-                </div>
-                <div class="country-card">
-                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/CA.svg" alt="Canada Flag" class="country-flag-img">
-                    <h4>Canada</h4>
-                </div>
-                <div class="country-card">
-                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg" alt="UK Flag" class="country-flag-img">
-                    <h4>United Kingdom</h4>
-                </div>
-                <div class="country-card">
-                    <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/AU.svg" alt="Australia Flag" class="country-flag-img">
-                    <h4>Australia</h4>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer style="background: var(--secondary); color: white; padding: 3rem; text-align: center;">
-        <div class="logo" style="justify-content: center; color: white; margin-bottom: 1rem;">NUMETRIC</div>
-        <p>&copy; 2026 NUMETRIC. All rights reserved. | Powered by Timeki Integration</p>
-    </footer>
-
-    <script>
-        // Auth Logic
-        function openLoginModal() { document.getElementById('loginModal').classList.add('show'); }
-        function closeLoginModal() { document.getElementById('loginModal').classList.remove('show'); }
-        function handleLogin(e) {
-            e.preventDefault();
-            alert('Admin login simulated for demo purposes.');
-            closeLoginModal();
-        }
-    </script>
-</body>
-</html>
+            max-
