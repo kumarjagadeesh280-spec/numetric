@@ -15,6 +15,9 @@
 .dropdown {
     position: relative;
     display: inline-block;
+    /* We add padding here to create an invisible bridge */
+    padding-bottom: 15px; 
+    margin-bottom: -15px;
 }
 
 .dropdown-content {
@@ -24,9 +27,14 @@
     min-width: 220px;
     box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
     z-index: 1000;
-    border-radius: 8px;
-    margin-top: 5px;
-    border-top: 3px solid var(--accent); /* Adds a nice color bar on top */
+    border-radius: 0 0 8px 8px;
+    
+    /* We set margin-top to 0 to remove the 'dead zone' gap */
+    margin-top: 0;
+    top: 100%;
+    left: 0;
+    
+    border-top: 3px solid var(--accent);
     overflow: hidden;
 }
 
