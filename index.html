@@ -2905,6 +2905,11 @@
             updateRatingStats();
         };
 
+function toggleMobileMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.classList.toggle('mobile-active');
+}
+        
         // Close modal when clicking outside
         window.onclick = function(event) {
             const modal = document.getElementById('loginModal');
