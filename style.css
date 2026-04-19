@@ -456,47 +456,32 @@ footer {
 }
 
 /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block !important; /* Show the ☰ icon on mobile */
-                font-size: 2rem;
-                background: none;
-                border: none;
-                color: var(--primary);
-                cursor: pointer;
-            }
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block !important; /* Show the ☰ icon on mobile */
+        font-size: 2rem;
+        background: none;
+        border: none;
+        color: var(--primary-color);
+        cursor: pointer;
+    }
 
-            .nav-links {
-                display: none; /* Hide links initially on mobile */
-                flex-direction: column;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: white;
-                padding: 2rem;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-                z-index: 1000;
-            }
+    .nav-links {
+        display: none; /* Hide links initially on mobile */
+        flex-direction: column;
+        position: absolute;
+        top: 80px; /* Matched to header height */
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 2rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
 
-            /* This shows the menu when the button is clicked */
-            .nav-links.mobile-active {
-                display: flex !important;
-            }
-
-            .nav-buttons {
-                display: none; /* Hide extra buttons on small screens */
-            }
-        }
-
-        @media (min-width: 769px) {
-            .mobile-menu-btn {
-                display: none; /* Hide ☰ icon on desktop */
-            }
-        }
-
-    .nav-links.active {
-        transform: translateY(0);
+    /* This shows the menu when the button is clicked */
+    .nav-links.mobile-active {
+        display: flex !important;
     }
 
     .nav-links li {
@@ -510,8 +495,8 @@ footer {
         width: 100%;
     }
 
-    .mobile-menu-btn {
-        display: block;
+    .nav-buttons {
+        display: none; /* Hide extra buttons on small screens */
     }
 
     .hero h1 {
@@ -535,10 +520,11 @@ footer {
     .image-placeholder {
         height: 300px;
     }
+} /* This closing brace now correctly wraps all mobile styles */
 
-    .footer-content {
-        flex-direction: column;
-        gap: 1.5rem;
-        text-align: center;
+/* Desktop-only adjustment */
+@media (min-width: 769px) {
+    .mobile-menu-btn {
+        display: none; /* Hide ☰ icon on desktop */
     }
 }
