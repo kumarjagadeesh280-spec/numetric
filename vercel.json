@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/erp",
+      "destination": "https://inventory-tool-eight.vercel.app"
+    },
+    {
+      "source": "/erp/:path*",
+      "destination": "https://inventory-tool-eight.vercel.app/:path*"
+    }
+  ]
+}
