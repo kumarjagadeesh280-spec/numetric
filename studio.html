@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Studio — NUMETRIC</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body data-page="studio">
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header data-site-header></header>
+
+<main id="main">
+<section class="section">
+    <div class="container">
+
+        <div class="section-head">
+            <span class="eyebrow">Content Studio</span>
+            <div class="rule"></div>
+            <h2 class="section-title">Write, Preview, Publish</h2>
+            <p class="section-lead">Compose posts here, preview them live on the site, then export the
+                JSON and commit it. No backend, no database.</p>
+        </div>
+
+        <div class="callout">
+            <strong>How publishing works.</strong> This is a static site, so the browser cannot write to a
+            file on the server. Drafts you save stay in <em>this browser only</em> — useful for previewing,
+            invisible to everyone else. To publish for real:
+            <ol>
+                <li>Write the post and <strong>Save draft</strong>.</li>
+                <li>Open the <strong>Export</strong> panel and click <code>Download blogs.json</code>.</li>
+                <li>Replace <code>data/blogs.json</code> in the repo with that file and commit.</li>
+                <li>Once deployed, use <strong>Clear local drafts</strong> — the post is now live for everyone.</li>
+            </ol>
+        </div>
+
+        <div class="tabs" role="tablist">
+            <button class="tab active" data-tab="posts" role="tab">Posts</button>
+            <button class="tab" data-tab="reviews" role="tab">Reviews</button>
+            <button class="tab" data-tab="export" role="tab">Export</button>
+        </div>
+
+        <!-- ── POSTS ─────────────────────────────────────────────────── -->
+        <div data-panel="posts">
+            <div class="studio-shell">
+                <div class="panel">
+                    <h3 id="editorTitle">New Article</h3>
+                    <p class="panel-sub">Body supports lightweight Markdown — see the hint below.</p>
+                    <div class="toast" id="postToast"></div>
+
+                    <form id="postForm">
+                        <div class="field">
+                            <label for="pTitle">Title *</label>
+                            <input id="pTitle" required placeholder="e.g. A Month-End Close Checklist That Holds Up">
+                        </div>
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="pSlug">URL slug *</label>
+                                <input id="pSlug" required placeholder="month-end-close-checklist">
+                                <div class="hint">Published at <code>/blog/<span id="slugPreview">…</span></code></div>
+                            </div>
+                            <div class="field">
+                                <label for="pDate">Publish date *</label>
+                                <input id="pDate" type="date" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="pAuthor">Author</label>
+                                <input id="pAuthor" placeholder="NUMETRIC Team">
+                            </div>
+                            <div class="field">
+                                <label for="pTags">Tags</label>
+                                <input id="pTags" placeholder="Bookkeeping, Compliance">
+                                <div class="hint">Comma separated. These drive the blog filters.</div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="pCover">Cover image URL</label>
+                            <input id="pCover" placeholder="/assets/my-cover.jpg — optional">
+                            <div class="hint">Leave empty to use the generated monogram cover.</div>
+                        </div>
+                        <div class="field">
+                            <label for="pExcerpt">Summary *</label>
+                            <textarea id="pExcerpt" required style="min-height:90px"
+                                placeholder="One or two sentences shown on the blog index."></textarea>
+                        </div>
+                        <div class="field">
+                            <label for="pContent">Article body *</label>
+                            <textarea id="pContent" required style="min-height:320px"
+                                placeholder="Write the article…"></textarea>
+                            <div class="hint">
+                                <code>## Heading</code> · <code>### Sub-heading</code> ·
+                                <code>**bold**</code> · <code>*italic*</code> · <code>`code`</code> ·
+                                <code>- bullet</code> · <code>1. numbered</code> ·
+                                <code>&gt; quote</code> · <code>---</code> rule ·
+                                <code>[text](https://url)</code>
+                            </div>
+                        </div>
+                        <div class="flex-wrap-gap">
+                            <button type="submit" class="btn btn-navy">Save draft</button>
+                            <button type="button" class="btn btn-ghost" id="resetBtn">Clear form</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="panel">
+                    <h3>Live preview</h3>
+                    <p class="panel-sub">Exactly how the body will render on the article page.</p>
+                    <div class="prose" id="preview"
+                         style="max-width:none;font-size:.98rem;border-top:1px solid var(--line);padding-top:1.25rem">
+                        <p style="color:var(--muted)">Start typing to see the preview.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel" style="margin-top:1.75rem">
+                <h3>Local drafts</h3>
+                <p class="panel-sub">Saved in this browser only. Export and commit to publish.</p>
+                <div id="draftList"></div>
+            </div>
+        </div>
+
+        <!-- ── REVIEWS ───────────────────────────────────────────────── -->
+        <div data-panel="reviews" hidden>
+            <div class="panel">
+                <h3>Submitted reviews awaiting publication</h3>
+                <p class="panel-sub">Reviews left through the site form are held in this browser until you
+                    export them into <code>data/reviews.json</code> and commit.</p>
+                <div id="reviewList"></div>
+            </div>
+        </div>
+
+        <!-- ── EXPORT ────────────────────────────────────────────────── -->
+        <div data-panel="export" hidden>
+            <div class="panel">
+                <h3>Export <code>data/blogs.json</code></h3>
+                <p class="panel-sub">Published posts plus your local drafts, merged. Drafts sharing a slug
+                    with a published post replace it.</p>
+                <div class="flex-wrap-gap" style="margin-bottom:1rem">
+                    <button class="btn btn-gold btn-sm" id="dlPosts">⬇ Download blogs.json</button>
+                    <button class="btn btn-ghost btn-sm" id="copyPosts">Copy to clipboard</button>
+                    <button class="btn btn-ghost btn-sm" id="clearPosts">Clear local drafts</button>
+                </div>
+                <textarea class="code-out" id="postsOut" readonly></textarea>
+            </div>
+
+            <div class="panel" style="margin-top:1.75rem">
+                <h3>Export <code>data/reviews.json</code></h3>
+                <p class="panel-sub">Published reviews plus locally submitted ones.</p>
+                <div class="flex-wrap-gap" style="margin-bottom:1rem">
+                    <button class="btn btn-gold btn-sm" id="dlReviews">⬇ Download reviews.json</button>
+                    <button class="btn btn-ghost btn-sm" id="copyReviews">Copy to clipboard</button>
+                    <button class="btn btn-ghost btn-sm" id="clearReviews">Clear local reviews</button>
+                </div>
+                <textarea class="code-out" id="reviewsOut" readonly style="min-height:200px"></textarea>
+            </div>
+        </div>
+
+    </div>
+</section>
+</main>
+
+<footer data-site-footer></footer>
+
+<script src="/assets/site.js"></script>
+<script>
+NM.ready(async () => {
+    const { esc } = NM;
+    const $ = (id) => document.getElementById(id);
+    const KEY = NM.KEYS.posts;
+
+    /* Published sets are fetched raw (not via NM.getPosts) so the export can
+       cleanly separate "already committed" from "local draft".            */
+    const fetchRaw = async (path) => {
+        try {
+            const r = await fetch(path, { cache: 'no-cache' });
+            return r.ok ? await r.json() : [];
+        } catch { return []; }
+    };
+    let publishedPosts = await fetchRaw('/data/blogs.json');
+    let publishedReviews = await fetchRaw('/data/reviews.json');
+
+    /* ── Tabs ──────────────────────────────────────────────────────── */
+    document.querySelector('.tabs').addEventListener('click', (e) => {
+        const tab = e.target.closest('.tab');
+        if (!tab) return;
+        document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t === tab));
+        document.querySelectorAll('[data-panel]').forEach(p =>
+            p.hidden = p.dataset.panel !== tab.dataset.tab);
+        if (tab.dataset.tab === 'export') refreshExports();
+    });
+
+    /* ── Editor ────────────────────────────────────────────────────── */
+    let editingSlug = null;
+    let slugTouched = false;
+
+    $('pDate').value = new Date().toISOString().slice(0, 10);
+    $('pAuthor').value = 'NUMETRIC Team';
+
+    $('pSlug').addEventListener('input', () => { slugTouched = true; syncSlugPreview(); });
+    $('pTitle').addEventListener('input', () => {
+        if (!slugTouched) { $('pSlug').value = NM.slugify($('pTitle').value); syncSlugPreview(); }
+    });
+    function syncSlugPreview() { $('slugPreview').textContent = $('pSlug').value || '…'; }
+
+    const renderPreview = () => {
+        const body = $('pContent').value;
+        $('preview').innerHTML = body.trim()
+            ? NM.toHtml(body)
+            : '<p style="color:var(--muted)">Start typing to see the preview.</p>';
+    };
+    $('pContent').addEventListener('input', renderPreview);
+
+    function loadIntoForm(p) {
+        editingSlug = p.slug;
+        slugTouched = true;
+        $('editorTitle').textContent = 'Editing: ' + p.title;
+        $('pTitle').value = p.title; $('pSlug').value = p.slug;
+        $('pDate').value = p.date; $('pAuthor').value = p.author || '';
+        $('pTags').value = (p.tags || []).join(', '); $('pCover').value = p.cover || '';
+        $('pExcerpt').value = p.excerpt || ''; $('pContent').value = p.content || '';
+        syncSlugPreview(); renderPreview();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetForm() {
+        editingSlug = null; slugTouched = false;
+        $('postForm').reset();
+        $('editorTitle').textContent = 'New Article';
+        $('pDate').value = new Date().toISOString().slice(0, 10);
+        $('pAuthor').value = 'NUMETRIC Team';
+        syncSlugPreview(); renderPreview();
+    }
+    $('resetBtn').addEventListener('click', resetForm);
+
+    $('postForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const slug = NM.slugify($('pSlug').value || $('pTitle').value);
+        const post = {
+            slug,
+            title: $('pTitle').value.trim(),
+            excerpt: $('pExcerpt').value.trim(),
+            content: $('pContent').value,
+            author: $('pAuthor').value.trim() || 'NUMETRIC Team',
+            date: $('pDate').value,
+            tags: $('pTags').value.split(',').map(t => t.trim()).filter(Boolean),
+            cover: $('pCover').value.trim()
+        };
+
+        const drafts = NM.readLocal(KEY);
+        const idx = drafts.findIndex(d => d.slug === (editingSlug || slug));
+        if (idx >= 0) drafts[idx] = post; else drafts.unshift(post);
+        NM.writeLocal(KEY, drafts);
+
+        const toast = $('postToast');
+        toast.className = 'toast show';
+        toast.innerHTML = `✓ Draft saved. <a href="/blog/${esc(slug)}" style="text-decoration:underline">` +
+                          `Preview it →</a> &nbsp;·&nbsp; Export from the Export tab to publish.`;
+        resetForm();
+        renderDrafts();
+    });
+
+    /* ── Draft list ────────────────────────────────────────────────── */
+    function renderDrafts() {
+        const drafts = NM.readLocal(KEY);
+        $('draftList').innerHTML = drafts.length
+            ? drafts.map(d => `
+                <div class="draft-row">
+                    <div style="min-width:0">
+                        <div class="d-title">${esc(d.title)}</div>
+                        <div class="d-meta">/blog/${esc(d.slug)} · ${esc(NM.fmtDate(d.date))}</div>
+                    </div>
+                    <div class="flex-wrap-gap" style="gap:.4rem;flex-shrink:0">
+                        <a class="btn btn-ghost btn-sm" href="/blog/${esc(d.slug)}" target="_blank">View</a>
+                        <button class="btn btn-ghost btn-sm" data-edit="${esc(d.slug)}">Edit</button>
+                        <button class="icon-btn" data-del="${esc(d.slug)}" aria-label="Delete draft">✕</button>
+                    </div>
+                </div>`).join('')
+            : `<p style="font-size:var(--fs-sm);color:var(--muted)">No local drafts.
+                Published posts live in <code>data/blogs.json</code>.</p>`;
+    }
+
+    $('draftList').addEventListener('click', (e) => {
+        const edit = e.target.closest('[data-edit]');
+        const del = e.target.closest('[data-del]');
+        const drafts = NM.readLocal(KEY);
+        if (edit) {
+            const p = drafts.find(d => d.slug === edit.dataset.edit);
+            if (p) loadIntoForm(p);
+        }
+        if (del) {
+            NM.writeLocal(KEY, drafts.filter(d => d.slug !== del.dataset.del));
+            renderDrafts();
+        }
+    });
+
+    /* ── Review moderation ─────────────────────────────────────────── */
+    function renderReviews() {
+        const local = NM.readLocal(NM.KEYS.reviews);
+        $('reviewList').innerHTML = local.length
+            ? local.map(r => `
+                <div class="draft-row">
+                    <div style="min-width:0">
+                        <div class="d-title">${esc(r.name)} — ${esc(r.company)}
+                            <span style="color:var(--gold-500)">${'★'.repeat(r.rating)}</span></div>
+                        <div class="d-meta">${esc(r.text)}</div>
+                    </div>
+                    <button class="icon-btn" data-delrev="${r.id}" aria-label="Discard review">✕</button>
+                </div>`).join('')
+            : `<p style="font-size:var(--fs-sm);color:var(--muted)">Nothing awaiting publication.</p>`;
+    }
+    $('reviewList').addEventListener('click', (e) => {
+        const del = e.target.closest('[data-delrev]');
+        if (!del) return;
+        NM.writeLocal(NM.KEYS.reviews,
+            NM.readLocal(NM.KEYS.reviews).filter(r => String(r.id) !== del.dataset.delrev));
+        renderReviews();
+    });
+
+    /* ── Export ────────────────────────────────────────────────────── */
+    const mergedPosts = () => {
+        const bySlug = new Map();
+        publishedPosts.forEach(p => bySlug.set(p.slug, p));
+        NM.readLocal(KEY).forEach(p => bySlug.set(p.slug, p));
+        return [...bySlug.values()]
+            .sort((a, b) => (a.date < b.date ? 1 : -1));
+    };
+    const mergedReviews = () => [...NM.readLocal(NM.KEYS.reviews), ...publishedReviews];
+
+    function refreshExports() {
+        $('postsOut').value = JSON.stringify(mergedPosts(), null, 2);
+        $('reviewsOut').value = JSON.stringify(mergedReviews(), null, 2);
+    }
+
+    function download(name, text) {
+        const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+        const a = document.createElement('a');
+        a.href = url; a.download = name;
+        document.body.appendChild(a); a.click(); a.remove();
+        URL.revokeObjectURL(url);
+    }
+
+    $('dlPosts').addEventListener('click', () =>
+        download('blogs.json', JSON.stringify(mergedPosts(), null, 2) + '\n'));
+    $('dlReviews').addEventListener('click', () =>
+        download('reviews.json', JSON.stringify(mergedReviews(), null, 2) + '\n'));
+
+    const copyFrom = (el, btn) => {
+        el.select();
+        navigator.clipboard.writeText(el.value).then(() => {
+            const was = btn.textContent;
+            btn.textContent = '✓ Copied';
+            setTimeout(() => { btn.textContent = was; }, 1600);
+        });
+    };
+    $('copyPosts').addEventListener('click', (e) => copyFrom($('postsOut'), e.currentTarget));
+    $('copyReviews').addEventListener('click', (e) => copyFrom($('reviewsOut'), e.currentTarget));
+
+    $('clearPosts').addEventListener('click', () => {
+        NM.writeLocal(KEY, []); renderDrafts(); refreshExports();
+    });
+    $('clearReviews').addEventListener('click', () => {
+        NM.writeLocal(NM.KEYS.reviews, []); renderReviews(); refreshExports();
+    });
+
+    syncSlugPreview();
+    renderDrafts();
+    renderReviews();
+    refreshExports();
+});
+</script>
+</body>
+</html>

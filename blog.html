@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights &amp; Blog — NUMETRIC</title>
+<meta name="description" content="Practical writing on offshore accounting, month-end close, compliance across the US, Canada, UK and Australia, and getting more out of Xero.">
+<link rel="canonical" href="https://www.numetricinc.com/blog">
+<meta property="og:title" content="Insights &amp; Blog — NUMETRIC">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body data-page="blog">
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header data-site-header></header>
+
+<main id="main">
+
+<section class="article-hero">
+    <div class="container">
+        <span class="eyebrow">Industry Insights</span>
+        <h1>Accounting Notes, Written for Practitioners</h1>
+        <p class="hero-sub">Close processes, compliance across four jurisdictions, platform decisions,
+            and what actually changes when back-office work moves offshore.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="blog-toolbar">
+            <label class="search-field">
+                <span class="sr-only">Search articles</span>
+                <input id="q" type="search" placeholder="Search articles…" autocomplete="off">
+            </label>
+            <div class="filter-row" id="tagFilters"></div>
+        </div>
+
+        <p id="resultCount" style="font-size:var(--fs-xs);color:var(--muted);margin-bottom:1.25rem"></p>
+        <div class="grid grid-3" id="postList"></div>
+    </div>
+</section>
+
+</main>
+
+<footer data-site-footer></footer>
+
+<script src="/assets/site.js"></script>
+<script>
+NM.ready(async () => {
+    const posts = await NM.getPosts();
+    const listEl = document.getElementById('postList');
+    const countEl = document.getElementById('resultCount');
+    const qEl = document.getElementById('q');
+
+    /* Tag set derived from the posts themselves — no separate list to maintain. */
+    const tags = [...new Set(posts.flatMap(p => p.tags))].sort();
+    let activeTag = 'All';
+
+    document.getElementById('tagFilters').innerHTML = ['All', ...tags].map(t =>
+        `<button class="filter-chip ${t === 'All' ? 'active' : ''}" data-tag="${NM.esc(t)}">${NM.esc(t)}</button>`
+    ).join('');
+
+    function render() {
+        const q = qEl.value.trim().toLowerCase();
+        const matches = posts.filter(p => {
+            const byTag = activeTag === 'All' || p.tags.includes(activeTag);
+            const byText = !q ||
+                (p.title + ' ' + p.excerpt + ' ' + p.content + ' ' + p.tags.join(' '))
+                    .toLowerCase().includes(q);
+            return byTag && byText;
+        });
+
+        if (!matches.length) {
+            countEl.textContent = '';
+            listEl.innerHTML = posts.length
+                ? NM.emptyState('No matching articles',
+                    'Try a different search term or clear the active filter.')
+                : NM.emptyState('No articles published yet',
+                    'Posts added via the studio route and committed to data/blogs.json appear here.');
+        } else {
+            countEl.textContent =
+                `${matches.length} article${matches.length === 1 ? '' : 's'}` +
+                (activeTag === 'All' ? '' : ` in ${activeTag}`);
+            /* Feature the newest post only in the unfiltered default view. */
+            const feature = !q && activeTag === 'All';
+            listEl.innerHTML = matches
+                .map((p, i) => NM.postCard(p, { featured: feature && i === 0 }))
+                .join('');
+        }
+        NM.observeNew();
+    }
+
+    document.getElementById('tagFilters').addEventListener('click', (e) => {
+        const chip = e.target.closest('.filter-chip');
+        if (!chip) return;
+        activeTag = chip.dataset.tag;
+        document.querySelectorAll('.filter-chip')
+            .forEach(c => c.classList.toggle('active', c === chip));
+        render();
+    });
+
+    let t;
+    qEl.addEventListener('input', () => { clearTimeout(t); t = setTimeout(render, 140); });
+
+    render();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article — NUMETRIC</title>
+<meta name="description" content="An article from the NUMETRIC blog on accounting, bookkeeping and offshore delivery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body data-page="blog">
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header data-site-header></header>
+
+<main id="main">
+    <section class="article-hero" id="articleHero">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a> <span>/</span> <a href="/blog">Insights</a>
+            </nav>
+            <h1 id="postTitle">Loading…</h1>
+            <div class="post-meta" id="postMeta"></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <article class="prose" id="postBody"></article>
+
+            <div class="article-foot" id="articleFoot"></div>
+        </div>
+    </section>
+
+    <section class="section section-tint" id="relatedWrap" hidden>
+        <div class="container">
+            <div class="section-head" data-reveal>
+                <span class="eyebrow">Keep Reading</span>
+                <div class="rule"></div>
+                <h2 class="section-title">More Insights</h2>
+            </div>
+            <div class="grid grid-3" id="related"></div>
+        </div>
+    </section>
+</main>
+
+<footer data-site-footer></footer>
+
+<script src="/assets/site.js"></script>
+<script>
+NM.ready(async () => {
+    const { esc } = NM;
+
+    /* Slug comes from the pretty URL (/blog/<slug>, rewritten to this file)
+       and falls back to ?slug= so the page also works without the rewrite. */
+    const fromPath = location.pathname.replace(/\/+$/, '').split('/').pop();
+    const slug = new URLSearchParams(location.search).get('slug') ||
+                 (fromPath && fromPath !== 'blog' && fromPath !== 'post.html' ? fromPath : '');
+
+    const posts = await NM.getPosts();
+    const post = posts.find(p => p.slug === slug);
+
+    if (!post) {
+        document.getElementById('postTitle').textContent = 'Article not found';
+        document.getElementById('postMeta').innerHTML =
+            '<span>The link may be out of date, or the post has not been published yet.</span>';
+        document.getElementById('postBody').innerHTML =
+            '<p>We couldn’t find an article at this address.</p>';
+        document.getElementById('articleFoot').innerHTML =
+            '<a class="btn btn-navy" href="/blog">← Back to all articles</a>';
+        return;
+    }
+
+    document.title = post.title + ' — NUMETRIC';
+    document.querySelector('meta[name="description"]')
+            .setAttribute('content', post.excerpt || post.title);
+
+    document.getElementById('postTitle').textContent = post.title;
+    document.getElementById('postMeta').innerHTML = `
+        <span>${esc(post.author)}</span><span class="dot"></span>
+        <span>${esc(NM.fmtDate(post.date))}</span><span class="dot"></span>
+        <span>${esc(NM.readTime(post.content))}</span>
+        ${post.draft ? '<span class="tag tag-gold" style="margin-left:.5rem">Draft — visible only on this device</span>' : ''}`;
+
+    document.getElementById('postBody').innerHTML = NM.toHtml(post.content);
+
+    document.getElementById('articleFoot').innerHTML = `
+        <div class="flex-wrap-gap" style="gap:.5rem;margin-bottom:1.5rem">
+            ${post.tags.map(t => `<span class="tag tag-muted">${esc(t)}</span>`).join('')}
+        </div>
+        <div class="flex-wrap-gap">
+            <a class="btn btn-ghost" href="/blog">← All articles</a>
+            <a class="btn btn-gold" href="/#contact">Talk to our team</a>
+        </div>`;
+
+    /* Prefer posts sharing a tag; top up with the newest others. */
+    const others = posts.filter(p => p.slug !== post.slug);
+    const scored = others
+        .map(p => ({ p, score: p.tags.filter(t => post.tags.includes(t)).length }))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3)
+        .map(x => x.p);
+
+    if (scored.length) {
+        document.getElementById('relatedWrap').hidden = false;
+        document.getElementById('related').innerHTML = scored.map(p => NM.postCard(p)).join('');
+    }
+
+    NM.observeNew();
+});
+</script>
+</body>
+</html>

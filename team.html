@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team — NUMETRIC</title>
+<meta name="description" content="The people behind NUMETRIC — leadership, operating principles and the standards every engagement is held to.">
+<link rel="canonical" href="https://www.numetricinc.com/team">
+<meta property="og:title" content="Our Team — NUMETRIC">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body data-page="team">
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header data-site-header></header>
+
+<main id="main">
+
+<!-- ══ HERO ═══════════════════════════════════════════════════════════ -->
+<section class="team-hero">
+    <div class="container">
+        <span class="eyebrow">Our Team</span>
+        <h1 id="teamHeadline"></h1>
+        <p class="hero-sub" id="teamIntro"></p>
+        <div class="team-facts" id="teamFacts"></div>
+    </div>
+</section>
+
+<!-- ══ LEADERSHIP ═════════════════════════════════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <div class="section-head" data-reveal>
+            <span class="eyebrow">Leadership</span>
+            <div class="rule"></div>
+            <h2 class="section-title">Leadership Team</h2>
+            <p class="section-lead">Responsible for delivery standards, client relationships and
+                compliance across every market we serve.</p>
+        </div>
+        <div class="team-grid" id="teamGrid"></div>
+    </div>
+</section>
+
+<!-- ══ QUOTE ══════════════════════════════════════════════════════════ -->
+<section class="section section-tint">
+    <div class="container">
+        <blockquote class="team-quote" data-reveal id="teamQuote"></blockquote>
+    </div>
+</section>
+
+<!-- ══ PRINCIPLES ═════════════════════════════════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <div class="section-head center" data-reveal>
+            <span class="eyebrow">Operating Principles</span>
+            <div class="rule"></div>
+            <h2 class="section-title">How We Choose to Work</h2>
+            <p class="section-lead">The standards every engagement is held to — regardless of size,
+                jurisdiction or platform.</p>
+        </div>
+        <div class="grid grid-3" id="teamPrinciples"></div>
+    </div>
+</section>
+
+<!-- ══ CTA ════════════════════════════════════════════════════════════ -->
+<section class="section section-deep">
+    <div class="container text-center">
+        <div class="section-head center" data-reveal style="margin-bottom:2rem">
+            <span class="eyebrow">Get In Touch</span>
+            <div class="rule"></div>
+            <h2 class="section-title">Speak Directly With the People Who Deliver Your Work</h2>
+            <p class="section-lead">Every engagement begins with a conversation about your requirements,
+                your jurisdiction and the standards you work to.</p>
+        </div>
+        <div class="flex-wrap-gap justify-center" data-reveal>
+            <a class="btn btn-gold" href="/#contact">Start a Conversation</a>
+            <a class="btn btn-outline" href="/blog">Read Our Insights</a>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer data-site-footer></footer>
+
+<script src="/assets/site.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   TEAM PROFILE — EDIT THIS BLOCK ONLY.
+   The whole page renders from the object below, so adding a person never
+   means touching markup or CSS.
+
+   TO ADD SOMEONE: copy a `members` entry, fill it in, done. Order in the
+   array is the order on the page.
+
+   TODO for the site owner: replace every value marked `PLACEHOLDER`.
+   While any remain, an amber notice appears at the top of the page so
+   unfinished content cannot be published unnoticed.
+   ══════════════════════════════════════════════════════════════════════ */
+const TEAM = {
+    headline: 'The People Behind Your Engagement',
+
+    intro: 'NUMETRIC is led by qualified professionals with experience across US, Canadian, ' +
+           'UK and Australian accounting standards. Every engagement has a named owner ' +
+           'responsible for its delivery.',
+
+    facts: [
+        { num: '4',      label: 'Markets served across the US, Canada, UK and Australia' },
+        { num: 'Xero',   label: 'L1 & L2 certified partner practice' },
+        { num: '24h',    label: 'Response SLA on every client enquiry' }
+    ],
+
+    quote: {
+        text: 'Clients don’t outsource because it is cheaper. They outsource because it gives ' +
+              'them their attention back — and attention is the scarcest resource in any practice.',
+        by: 'PLACEHOLDER — attribute this quote'
+    },
+
+    members: [
+        {
+            name: 'PLACEHOLDER — CEO Name',
+            role: 'Chief Executive Officer',
+            badge: 'Leadership',
+            /* Drop a photo in /assets (e.g. /assets/ceo.jpg) and put the path here.
+               Leave empty to show the monogram treatment instead. */
+            photo: '',
+            bio: 'PLACEHOLDER — two or three sentences on background, the markets and ' +
+                 'standards they know best, and what they own day to day at NUMETRIC.',
+            focus: ['Practice Strategy', 'Client Partnerships', 'Global Compliance'],
+            links: [
+                { label: 'LinkedIn ↗', url: 'https://www.linkedin.com/company/numetricinc/' },
+                { label: 'Email',      url: 'mailto:info@numetricinc.com' }
+            ]
+        },
+        {
+            name: 'PLACEHOLDER — CFO Name',
+            role: 'Chief Financial Officer',
+            badge: 'Leadership',
+            photo: '',
+            bio: 'PLACEHOLDER — two or three sentences on qualifications, the reporting and ' +
+                 'controls they are responsible for, and the delivery standards they set.',
+            focus: ['Financial Reporting', 'Controls & Review', 'Payroll Operations'],
+            links: [
+                { label: 'LinkedIn ↗', url: 'https://www.linkedin.com/company/numetricinc/' },
+                { label: 'Email',      url: 'mailto:info@numetricinc.com' }
+            ]
+        }
+    ],
+
+    principles: [
+        { icon: '🎯', title: 'Precision Over Volume',
+          body: 'We would rather run fewer engagements properly than many of them ' +
+                'approximately. Every deliverable passes a defined review before it reaches a client.' },
+        { icon: '🔍', title: 'Visible Process',
+          body: 'You should never have to ask what stage a job is at. One system of record, ' +
+                'one status, shared by both teams.' },
+        { icon: '🤝', title: 'Continuity of People',
+          body: 'The same team stays with your firm. Institutional knowledge is the whole ' +
+                'point — rotating staff quietly destroys it.' },
+        { icon: '📚', title: 'Standards First',
+          body: 'GAAP, IFRS, FRS and AASB are not interchangeable. Jurisdictional depth sits ' +
+                'with the people, never assumed from the software.' },
+        { icon: '🔐', title: 'Confidentiality Without Exception',
+          body: 'Encrypted transfer, controlled access and strict confidentiality agreements ' +
+                'on every engagement, of every size.' },
+        { icon: '📈', title: 'Measured, Not Asserted',
+          body: 'Turnaround time, exception rate and partner hours recovered. If the numbers ' +
+                'aren’t moving, the arrangement isn’t working.' }
+    ]
+};
+
+NM.ready(() => {
+    const { esc } = NM;
+    const clean = (s) => String(s).replace(/PLACEHOLDER\s*—\s*/, '');
+    const initials = (name) =>
+        (clean(name).match(/\b[A-Za-z]/g) || ['N']).slice(0, 2).join('').toUpperCase();
+
+    document.getElementById('teamHeadline').textContent = TEAM.headline;
+    document.getElementById('teamIntro').textContent = TEAM.intro;
+
+    document.getElementById('teamFacts').innerHTML = TEAM.facts.map(f =>
+        `<div class="fact"><div class="fact-num">${esc(f.num)}</div>
+         <div class="fact-lbl">${esc(f.label)}</div></div>`).join('');
+
+    document.getElementById('teamQuote').innerHTML =
+        `“${esc(TEAM.quote.text)}”<cite>${esc(TEAM.quote.by)}</cite>`;
+
+    const memberCard = (m) => `
+        <article class="card card-hover member" data-reveal>
+            <div class="member-photo">
+                ${m.photo
+                    ? `<img src="${esc(m.photo)}" alt="Portrait of ${esc(clean(m.name))}" loading="lazy">`
+                    : `<span class="member-monogram">${esc(initials(m.name))}</span>`}
+                ${m.badge ? `<span class="member-badge">${esc(m.badge)}</span>` : ''}
+            </div>
+            <div class="member-body">
+                <h3 class="member-name">${esc(m.name)}</h3>
+                <div class="member-role">${esc(m.role)}</div>
+                <p class="member-bio">${esc(m.bio)}</p>
+                ${m.focus && m.focus.length ? `<div class="member-focus">${
+                    m.focus.map(f => `<span class="tag tag-muted">${esc(f)}</span>`).join('')
+                }</div>` : ''}
+                ${m.links && m.links.length ? `<div class="member-links">${
+                    m.links.map(l => `<a class="member-link" href="${esc(l.url)}"
+                        ${/^https?:/i.test(l.url) ? 'target="_blank" rel="noopener"' : ''}
+                        >${esc(l.label)}</a>`).join('')
+                }</div>` : ''}
+            </div>
+        </article>`;
+
+    document.getElementById('teamGrid').innerHTML = TEAM.members.map(memberCard).join('');
+
+    document.getElementById('teamPrinciples').innerHTML = TEAM.principles.map(p =>
+        `<article class="card card-hover card-accent" data-reveal>
+            <div class="icon-tile">${esc(p.icon)}</div>
+            <h3 style="font-size:var(--fs-h3);color:var(--navy-800);margin-bottom:.55rem">${esc(p.title)}</h3>
+            <p style="font-size:var(--fs-sm);color:var(--slate);line-height:1.7">${esc(p.body)}</p>
+        </article>`).join('');
+
+    /* Guard rail: make unfinished content impossible to miss. */
+    if (JSON.stringify(TEAM).includes('PLACEHOLDER')) {
+        const notice = document.createElement('div');
+        notice.style.cssText =
+            'background:#fef3c7;border-bottom:1px solid #fcd34d;color:#92400e;' +
+            'padding:.85rem 1.25rem;font-size:.85rem;font-weight:600;text-align:center';
+        notice.textContent =
+            'Editor note: this page still contains PLACEHOLDER content. ' +
+            'Edit the TEAM object at the bottom of team.html — this banner disappears once done.';
+        document.getElementById('main').prepend(notice);
+    }
+
+    NM.observeNew();
+});
+</script>
+</body>
+</html>
