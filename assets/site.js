@@ -30,9 +30,11 @@ const NAV = [
         { label: 'Markets We Serve',    to: '#countries' },
         { label: 'Why Choose Numetric', to: '#why' }
     ]},
-    /* Blog is deliberately top-level rather than buried in a dropdown —
-       it is the one destination visitors are expected to browse. */
-    { label: 'Blog',     to: '/blog', key: 'blog' },
+    { label: 'Resources', children: [
+        { label: 'Company Insights', to: '/blog', key: 'blog' },
+        { label: 'Client Reviews',   to: '#reviews' },
+        { label: 'FAQs',             to: '#faq' }
+    ]},
     { label: 'Our Team', to: '/team', key: 'team' },
     { label: 'About',    to: '#about' },
     { label: 'Contact',  to: '#contact' }
@@ -69,10 +71,16 @@ function buildHeader(active) {
             return `<li class="nav-item"><a class="nav-link" href="${href(item.to)}"
                 ${item.key === active ? 'aria-current="page"' : ''}>${item.label}</a></li>`;
         }
+        /* A dropdown parent shows the active underline when one of its
+           children is the current page, so /blog still reads as "you are
+           here" even though the link lives inside Resources. */
+        const inHere = item.children.some(c => c.key && c.key === active);
         return `<li class="nav-item">
-            <button class="nav-link" aria-haspopup="true">${item.label}<span class="caret">▼</span></button>
+            <button class="nav-link" aria-haspopup="true"
+                ${inHere ? 'aria-current="page"' : ''}>${item.label}<span class="caret">▼</span></button>
             <div class="dropdown">${item.children.map(c =>
-                `<a href="${href(c.to)}">${c.label}</a>`).join('')}</div>
+                `<a href="${href(c.to)}"${c.key === active ? ' aria-current="page"' : ''}>${c.label}</a>`
+            ).join('')}</div>
         </li>`;
     }).join('');
 
