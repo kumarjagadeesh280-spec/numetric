@@ -1,918 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NUMETRIC – Global Accounting & Bookkeeping Solutions</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --navy:      #0f2244;
-            --navy-mid:  #1a3a6e;
-            --navy-lite: #2c5aa0;
-            --gold:      #c8973a;
-            --gold-lite: #e8b96a;
-            --gold-pale: #fdf4e4;
-            --teal:      #0891b2;
-            --teal-lite: #e0f2fe;
-            --white:     #ffffff;
-            --off-white: #f8f9fb;
-            --slate:     #475569;
-            --muted:     #94a3b8;
-            --border:    #e2e8f0;
-            --success:   #059669;
-            --error:     #dc2626;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            color: #1e293b;
-            background: var(--white);
-            line-height: 1.65;
-            overflow-x: hidden;
-        }
-
-        /* ── UTILITY ─────────────────────────────── */
-        .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
-        .section-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 0.75rem;
-            display: block;
-        }
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 3.5vw, 2.75rem);
-            font-weight: 800;
-            color: var(--navy);
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-        .section-body {
-            font-size: 1.05rem;
-            color: var(--slate);
-            max-width: 600px;
-            margin-bottom: 3rem;
-        }
-        .tag {
-            display: inline-block;
-            background: var(--teal-lite);
-            color: var(--teal);
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.25rem 0.75rem;
-            border-radius: 100px;
-        }
-        .tag-gold {
-            background: var(--gold-pale);
-            color: var(--gold);
-        }
-        .divider {
-            width: 56px; height: 4px;
-            background: linear-gradient(90deg, var(--gold), var(--gold-lite));
-            border-radius: 2px;
-            margin-bottom: 1.5rem;
-        }
-
-        /* ── LOGIN MODAL ─────────────────────────── */
-        .modal-overlay {
-            display: none;
-            position: fixed; inset: 0;
-            background: rgba(10,20,40,0.65);
-            backdrop-filter: blur(4px);
-            z-index: 2000;
-            align-items: center; justify-content: center;
-        }
-        .modal-overlay.show { display: flex; }
-        .modal-box {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 2.5rem;
-            width: min(440px, 94vw);
-            box-shadow: 0 32px 64px rgba(0,0,0,0.25);
-            animation: modalIn 0.3s cubic-bezier(.34,1.56,.64,1);
-        }
-        @keyframes modalIn {
-            from { transform: translateY(-30px) scale(0.96); opacity: 0; }
-            to   { transform: translateY(0) scale(1); opacity: 1; }
-        }
-        .modal-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 1.75rem; padding-bottom: 1.25rem;
-            border-bottom: 1px solid var(--border);
-        }
-        .modal-header h2 { font-size: 1.4rem; color: var(--navy); font-family:'Playfair Display',serif; }
-        .modal-close {
-            background: none; border: none; font-size: 1.6rem; cursor: pointer;
-            color: var(--muted); line-height: 1; transition: color .2s;
-        }
-        .modal-close:hover { color: var(--navy); }
-        .modal-info {
-            background: var(--teal-lite);
-            border-left: 3px solid var(--teal);
-            padding: 0.85rem 1rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            color: #0c4a6e;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-        .form-group { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1.25rem; }
-        .form-group label { font-weight: 600; font-size: 0.9rem; color: var(--navy); }
-        .form-group input, .form-group textarea, .form-group select {
-            padding: 0.7rem 1rem; border: 1.5px solid var(--border);
-            border-radius: 8px; font-family: inherit; font-size: 0.95rem;
-            color: #1e293b; transition: border-color .2s, box-shadow .2s;
-            background: var(--off-white);
-        }
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none; border-color: var(--teal);
-            box-shadow: 0 0 0 3px rgba(8,145,178,.12);
-            background: var(--white);
-        }
-        .form-group textarea { resize: vertical; min-height: 110px; }
-        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-            padding: 0.75rem 1.75rem; border-radius: 8px; font-family: inherit;
-            font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: all .25s;
-            border: none; text-decoration: none; }
-        .btn-navy  { background: var(--navy); color: var(--white); }
-        .btn-navy:hover  { background: var(--navy-mid); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,34,68,.28); }
-        .btn-gold  { background: var(--gold); color: var(--white); }
-        .btn-gold:hover  { background: var(--gold-lite); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(200,151,58,.3); }
-        .btn-outline { background: transparent; border: 2px solid var(--white); color: var(--white); }
-        .btn-outline:hover { background: var(--white); color: var(--navy); }
-        .login-error {
-            background: #fee2e2; color: #991b1b; padding: 0.75rem 1rem;
-            border-radius: 6px; border-left: 3px solid var(--error);
-            margin-bottom: 1rem; font-size: 0.9rem; display: none;
-        }
-        .login-error.show { display: block; }
-
-        /* ── HEADER / NAV ────────────────────────── */
-        header {
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(255,255,255,0.97);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            transition: box-shadow .3s;
-        }
-        header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,.08); }
-        nav {
-            max-width: 1160px; margin: 0 auto;
-            padding: 0 2rem;
-            display: flex; align-items: center; justify-content: space-between;
-            height: 70px;
-        }
-        .logo {
-            display: flex; align-items: center; gap: 0.75rem;
-            text-decoration: none; flex-shrink: 0;
-        }
-        .logo-mark {
-            width: 44px; height: 44px; flex-shrink: 0;
-        }
-        .logo-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.45rem; font-weight: 800; color: var(--navy);
-            letter-spacing: -0.02em;
-        }
-        .nav-center {
-            display: flex; align-items: center; gap: 0.25rem;
-            list-style: none;
-        }
-        .nav-center > li > a, .nav-center > li > button {
-            display: flex; align-items: center; gap: 0.35rem;
-            padding: 0.5rem 0.9rem; border-radius: 6px;
-            font-size: 0.92rem; font-weight: 500; color: #334155;
-            text-decoration: none; cursor: pointer;
-            transition: color .2s, background .2s;
-            background: none; border: none; font-family: inherit;
-        }
-        .nav-center > li > a:hover,
-        .nav-center > li > button:hover { color: var(--navy); background: var(--off-white); }
-        .nav-center > li > a.active { color: var(--navy); font-weight: 700; }
-        /* Dropdown */
-        .dropdown { position: relative; }
-        .dropdown-menu {
-            display: none; position: absolute; top: calc(100% + 8px); left: 50%;
-            transform: translateX(-50%);
-            background: var(--white); min-width: 210px;
-            border-radius: 10px; border: 1px solid var(--border);
-            box-shadow: 0 12px 32px rgba(0,0,0,.12);
-            overflow: hidden; z-index: 200;
-        }
-        .dropdown:hover .dropdown-menu,
-        .dropdown:focus-within .dropdown-menu { display: block; }
-        .dropdown-menu a {
-            display: block; padding: 0.7rem 1.2rem;
-            font-size: 0.9rem; font-weight: 500; color: #334155;
-            text-decoration: none; border-bottom: 1px solid var(--border);
-            transition: background .15s, color .15s;
-        }
-        .dropdown-menu a:last-child { border-bottom: none; }
-        .dropdown-menu a:hover { background: var(--off-white); color: var(--navy); }
-        .dropdown-arrow { font-size: 0.65rem; opacity: 0.6; }
-        .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
-        .nav-actions .btn { padding: 0.55rem 1.25rem; font-size: 0.9rem; }
-        .btn-ghost { background: transparent; border: 1.5px solid var(--border); color: var(--navy); }
-        .btn-ghost:hover { border-color: var(--navy); background: var(--navy); color: var(--white); }
-
-        /* ── HAMBURGER ───────────────────────────── */
-        .hamburger {
-            display: none;
-            flex-direction: column; gap: 5px;
-            background: none; border: none; cursor: pointer;
-            padding: 8px; border-radius: 6px;
-            transition: background .2s;
-        }
-        .hamburger:hover { background: var(--off-white); }
-        .hamburger span {
-            display: block; width: 22px; height: 2px;
-            background: var(--navy); border-radius: 2px;
-            transition: all 0.3s ease;
-            transform-origin: center;
-        }
-        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-        /* Mobile nav drawer */
-        .mobile-nav {
-            display: none;
-            position: fixed; top: 70px; left: 0; right: 0; bottom: 0;
-            background: var(--white); z-index: 90;
-            overflow-y: auto; padding: 1.5rem 2rem 3rem;
-            border-top: 1px solid var(--border);
-            animation: slideDown .25s ease;
-        }
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .mobile-nav.open { display: block; }
-        .mobile-nav a {
-            display: block; padding: 0.85rem 0;
-            font-size: 1rem; font-weight: 500; color: #334155;
-            text-decoration: none; border-bottom: 1px solid var(--border);
-            transition: color .2s;
-        }
-        .mobile-nav a:hover { color: var(--navy); }
-        .mobile-nav-group { margin-bottom: 0.5rem; }
-        .mobile-nav-label {
-            font-size: 0.72rem; font-weight: 700; letter-spacing: .12em;
-            text-transform: uppercase; color: var(--gold);
-            padding: 1rem 0 0.25rem; display: block;
-        }
-        .mobile-nav-actions {
-            display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2rem;
-        }
-        .mobile-nav-actions .btn { width: 100%; justify-content: center; }
-
-        /* ── HERO ────────────────────────────────── */
-        .hero {
-            background: linear-gradient(135deg, var(--navy) 0%, #1a3060 60%, #0a1e45 100%);
-            position: relative; overflow: hidden;
-            padding: 7rem 2rem 6rem;
-            color: var(--white);
-        }
-        .hero-grid-bg {
-            position: absolute; inset: 0;
-            background-image:
-                linear-gradient(rgba(200,151,58,.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(200,151,58,.06) 1px, transparent 1px);
-            background-size: 48px 48px;
-        }
-        .hero-glow {
-            position: absolute; top: -150px; right: -100px;
-            width: 600px; height: 600px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(8,145,178,.18) 0%, transparent 70%);
-        }
-        .hero-glow2 {
-            position: absolute; bottom: -100px; left: -80px;
-            width: 400px; height: 400px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(200,151,58,.12) 0%, transparent 70%);
-        }
-        .hero-inner {
-            max-width: 1160px; margin: 0 auto;
-            position: relative; z-index: 2;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
-        }
-        .hero-badge {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            background: rgba(200,151,58,.15); border: 1px solid rgba(200,151,58,.35);
-            color: var(--gold-lite); font-size: 0.78rem; font-weight: 600;
-            letter-spacing: 0.1em; padding: 0.4rem 1rem; border-radius: 100px;
-            text-transform: uppercase; margin-bottom: 1.5rem;
-        }
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.3rem, 4.5vw, 3.4rem);
-            font-weight: 800; line-height: 1.15;
-            margin-bottom: 1.5rem; letter-spacing: -0.02em;
-        }
-        .hero h1 em { font-style: normal; color: var(--gold-lite); }
-        .hero-sub {
-            font-size: 1.05rem; opacity: .88;
-            line-height: 1.75; margin-bottom: 2.5rem;
-            max-width: 480px;
-        }
-        .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
-        /* Stats column */
-        .hero-stats {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
-        }
-        .stat-card {
-            background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.12);
-            backdrop-filter: blur(6px);
-            border-radius: 14px; padding: 1.75rem 1.5rem;
-            transition: background .3s, transform .3s;
-        }
-        .stat-card:hover { background: rgba(255,255,255,.12); transform: translateY(-4px); }
-        .stat-card.accent { background: rgba(200,151,58,.15); border-color: rgba(200,151,58,.3); }
-        .stat-num {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.4rem; font-weight: 800; color: var(--gold-lite);
-            line-height: 1;
-        }
-        .stat-label { font-size: 0.85rem; opacity: 0.8; margin-top: 0.35rem; }
-        .stat-icon { font-size: 1.6rem; margin-bottom: 0.75rem; }
-
-        /* ── TRUST BAR ───────────────────────────── */
-        .trust-bar {
-            background: var(--off-white); border-bottom: 1px solid var(--border);
-            padding: 1.25rem 2rem;
-        }
-        .trust-bar-inner {
-            max-width: 1160px; margin: 0 auto;
-            display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
-        }
-        .trust-label { font-size: 0.8rem; font-weight: 600; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
-        .trust-items { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; flex: 1; }
-        .trust-item {
-            display: flex; align-items: center; gap: 0.5rem;
-            font-size: 0.87rem; font-weight: 600; color: var(--slate);
-        }
-        .trust-item span.icon { font-size: 1.1rem; }
-
-        /* ── ABOUT ───────────────────────────────── */
-        .about { padding: 6rem 2rem; background: var(--white); }
-        .about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: center; }
-        .about-visual {
-            position: relative;
-        }
-        .about-card-main {
-            background: var(--navy);
-            border-radius: 18px;
-            padding: 2.5rem;
-            color: var(--white);
-            position: relative; overflow: hidden;
-        }
-        .about-card-main::before {
-            content: '';
-            position: absolute; top: -60px; right: -60px;
-            width: 200px; height: 200px; border-radius: 50%;
-            background: rgba(200,151,58,.15);
-        }
-        .about-card-main h3 { font-family:'Playfair Display',serif; font-size: 1.6rem; margin-bottom: 1rem; position: relative; }
-        .about-card-main p { opacity: .85; line-height: 1.75; position: relative; }
-        .about-floater {
-            position: absolute; bottom: -1.5rem; right: -1.5rem;
-            background: var(--gold);
-            border-radius: 14px; padding: 1.25rem 1.5rem;
-            color: var(--white); text-align: center;
-            box-shadow: 0 8px 24px rgba(200,151,58,.35);
-        }
-        .about-floater .big { font-family:'Playfair Display',serif; font-size: 2rem; font-weight: 800; line-height: 1; }
-        .about-floater .small { font-size: 0.75rem; opacity: .9; margin-top: 0.2rem; }
-        .values-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 2rem; }
-        .value-pill {
-            background: var(--off-white); border-radius: 12px; padding: 1.5rem;
-            border-left: 3px solid var(--gold);
-            transition: all .3s;
-        }
-        .value-pill:hover { background: var(--gold-pale); transform: translateY(-3px); }
-        .value-pill .v-icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
-        .value-pill h4 { font-size: 0.92rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; }
-        .value-pill p { font-size: 0.82rem; color: var(--slate); line-height: 1.6; }
-
-        /* ── SERVICES ────────────────────────────── */
-        .services { padding: 6rem 2rem; background: var(--off-white); }
-        .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-        .svc-card {
-            background: var(--white); border-radius: 14px; padding: 2rem;
-            border: 1px solid var(--border);
-            transition: all .3s; position: relative; overflow: hidden;
-        }
-        .svc-card::after {
-            content: '';
-            position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-            background: linear-gradient(90deg, var(--gold), var(--teal));
-            transform: scaleX(0); transition: transform .3s;
-            transform-origin: left;
-        }
-        .svc-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,.1); transform: translateY(-4px); border-color: transparent; }
-        .svc-card:hover::after { transform: scaleX(1); }
-        .svc-icon {
-            width: 48px; height: 48px; background: var(--gold-pale);
-            border-radius: 12px; display: flex; align-items: center;
-            justify-content: center; font-size: 1.4rem; margin-bottom: 1.25rem;
-        }
-        .svc-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 0.75rem; }
-        .svc-card p { font-size: 0.9rem; color: var(--slate); line-height: 1.7; margin-bottom: 1rem; }
-        .svc-list { list-style: none; }
-        .svc-list li {
-            font-size: 0.85rem; color: var(--slate); padding: 0.3rem 0 0.3rem 1.35rem;
-            position: relative; border-bottom: 1px solid var(--border);
-        }
-        .svc-list li:last-child { border-bottom: none; }
-        .svc-list li::before { content: '✓'; position: absolute; left: 0; color: var(--success); font-weight: 700; }
-
-        /* ── INTEGRATIONS ────────────────────────── */
-        .integrations { padding: 6rem 2rem; background: var(--white); }
-        .integrations-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        .intg-card {
-            border-radius: 16px; padding: 2.5rem;
-            border: 1px solid var(--border);
-            transition: all .3s; position: relative; overflow: hidden;
-        }
-        .intg-card.xero { background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-color: #a7f3d0; }
-        .intg-card.timeki { background: linear-gradient(135deg, var(--teal-lite), #e0f7fa); border-color: #b3e5fc; }
-        .intg-card:hover { box-shadow: 0 16px 40px rgba(0,0,0,.1); transform: translateY(-5px); }
-        .intg-logo-wrap {
-            width: 72px; height: 72px; border-radius: 16px;
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 1.5rem; font-size: 2rem; font-weight: 900;
-        }
-        .intg-logo-wrap.xero-wrap { background: #13b5ea; color: white; font-size: 2.4rem; }
-        .intg-logo-wrap.timeki-wrap { background: #0891b2; color: white; }
-        .intg-badge {
-            display: inline-flex; align-items: center; gap: 0.4rem;
-            background: #059669; color: white;
-            font-size: 0.72rem; font-weight: 800; letter-spacing: .06em;
-            padding: 0.3rem 0.8rem; border-radius: 100px; margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-        .intg-card h3 { font-family:'Playfair Display',serif; font-size: 1.5rem; color: var(--navy); margin-bottom: 0.5rem; }
-        .intg-sub { font-weight: 700; color: var(--teal); font-size: 0.9rem; margin-bottom: 1rem; }
-        .intg-card p { color: var(--slate); font-size: 0.92rem; line-height: 1.75; margin-bottom: 1.5rem; }
-        .intg-features { list-style: none; }
-        .intg-features li {
-            font-size: 0.9rem; color: var(--slate); padding: 0.4rem 0 0.4rem 1.5rem;
-            position: relative;
-        }
-        .intg-features li::before { content: '→'; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
-        .intg-note {
-            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
-            color: var(--white); border-radius: 14px; padding: 2.5rem;
-            margin-top: 2rem; text-align: center;
-        }
-        .intg-note h4 { font-family:'Playfair Display',serif; font-size: 1.4rem; margin-bottom: 0.75rem; }
-        .intg-note p { opacity: .85; max-width: 680px; margin: 0 auto; line-height: 1.75; }
-
-        /* ── COUNTRIES ───────────────────────────── */
-        .countries {
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, var(--navy) 0%, #1a3060 100%);
-            position: relative; overflow: hidden;
-        }
-        .countries::before {
-            content: '';
-            position: absolute; inset: 0;
-            background-image:
-                linear-gradient(rgba(200,151,58,.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(200,151,58,.05) 1px, transparent 1px);
-            background-size: 56px 56px;
-        }
-        .countries .section-title { color: var(--white); }
-        .countries .section-body { color: rgba(255,255,255,.75); margin-bottom: 3rem; }
-        .countries .section-label { color: var(--gold-lite); }
-        .countries-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; position: relative; }
-        .country-card {
-            background: rgba(255,255,255,.08);
-            border: 1px solid rgba(255,255,255,.15);
-            border-radius: 16px; padding: 2rem 1.5rem;
-            text-align: center; backdrop-filter: blur(8px);
-            transition: all .3s;
-        }
-        .country-card:hover { background: rgba(255,255,255,.15); transform: translateY(-6px); border-color: rgba(200,151,58,.4); }
-        .country-flag {
-            width: 64px; height: 44px; border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,.3);
-            margin: 0 auto 1.25rem; display: block; object-fit: cover;
-        }
-        .country-card h4 { color: var(--white); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .country-card p { color: rgba(255,255,255,.7); font-size: 0.83rem; line-height: 1.6; }
-        .countries-more {
-            text-align: center; margin-top: 2.5rem; position: relative;
-            color: rgba(255,255,255,.8); font-size: 1rem;
-        }
-        .countries-more strong { color: var(--gold-lite); }
-
-        /* ── WHY CHOOSE ──────────────────────────── */
-        .why { padding: 6rem 2rem; background: var(--white); }
-        .why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-        .why-card {
-            background: var(--off-white); border-radius: 14px; padding: 2rem;
-            border: 1px solid var(--border); transition: all .3s;
-        }
-        .why-card:hover { background: var(--white); box-shadow: 0 8px 24px rgba(0,0,0,.09); transform: translateY(-4px); }
-        .why-icon { font-size: 2rem; margin-bottom: 1rem; }
-        .why-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 0.6rem; }
-        .why-card p { font-size: 0.9rem; color: var(--slate); line-height: 1.7; }
-
-        /* ── PROCESS ─────────────────────────────── */
-        .process { padding: 6rem 2rem; background: var(--off-white); }
-        .process-track {
-            display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem;
-            position: relative; margin-top: 3rem;
-        }
-        .process-track::before {
-            content: '';
-            position: absolute; top: 40px; left: 10%; right: 10%; height: 2px;
-            background: linear-gradient(90deg, var(--gold), var(--teal));
-        }
-        .process-step { text-align: center; position: relative; z-index: 1; }
-        .step-circle {
-            width: 80px; height: 80px; border-radius: 50%;
-            background: var(--navy); color: var(--white);
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.75rem; font-weight: 800;
-            margin: 0 auto 1.5rem;
-            box-shadow: 0 6px 20px rgba(15,34,68,.25);
-            transition: all .3s;
-        }
-        .process-step:hover .step-circle { background: var(--gold); transform: scale(1.08); }
-        .process-step h4 { font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
-        .process-step p { font-size: 0.88rem; color: var(--slate); line-height: 1.65; }
-
-        /* ── BLOG ────────────────────────────────── */
-        .blog { padding: 6rem 2rem; background: var(--white); }
-        .blog-layout { display: grid; grid-template-columns: 1fr 380px; gap: 3rem; }
-        .blog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .blog-card {
-            background: var(--off-white); border-radius: 14px; overflow: hidden;
-            border: 1px solid var(--border); transition: all .3s;
-        }
-        .blog-card:hover { box-shadow: 0 10px 28px rgba(0,0,0,.1); transform: translateY(-4px); }
-        .blog-card-head {
-            background: linear-gradient(135deg, var(--navy), var(--navy-lite));
-            padding: 1.75rem; color: var(--white);
-        }
-        .blog-card-date { font-size: 0.78rem; opacity: .75; margin-bottom: 0.4rem; }
-        .blog-card-title { font-family:'Playfair Display',serif; font-size: 1.1rem; font-weight: 700; line-height: 1.3; }
-        .blog-card-body { padding: 1.25rem; }
-        .blog-card-excerpt { font-size: 0.88rem; color: var(--slate); line-height: 1.65; margin-bottom: 0.75rem; }
-        .blog-card-author { font-size: 0.8rem; color: var(--muted); font-style: italic; }
-        .no-content {
-            padding: 2.5rem; text-align: center; color: var(--muted);
-            background: var(--off-white); border-radius: 12px;
-            border: 2px dashed var(--border); grid-column: 1/-1;
-        }
-        /* Blog form */
-        .blog-sidebar {}
-        .blog-form-box {
-            background: var(--off-white); border-radius: 14px; padding: 2rem;
-            border: 1px solid var(--border); position: sticky; top: 90px;
-        }
-        .blog-form-box h3 { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem; }
-        .admin-tag {
-            background: var(--success); color: white;
-            font-size: 0.7rem; padding: 0.15rem 0.55rem; border-radius: 4px; font-weight: 700;
-        }
-        .blog-submit { width: 100%; }
-        .blog-logout { width: 100%; background: #fee2e2; color: #991b1b; border: none; border-radius: 8px; padding: 0.65rem; font-weight: 700; font-size: 0.9rem; cursor: pointer; margin-top: 0.5rem; transition: background .2s; }
-        .blog-logout:hover { background: #fecaca; }
-
-        /* ── REVIEWS ─────────────────────────────── */
-        .reviews { padding: 6rem 2rem; background: var(--off-white); }
-        .reviews-layout { display: grid; grid-template-columns: 340px 1fr; gap: 3rem; margin-bottom: 3rem; }
-        .reviews-stats-box { background: var(--white); border-radius: 16px; padding: 2rem; border: 1px solid var(--border); }
-        .avg-rating-display { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.75rem; }
-        .avg-num { font-family:'Playfair Display',serif; font-size: 3.5rem; font-weight: 800; color: var(--navy); line-height: 1; }
-        .avg-stars { color: #f59e0b; font-size: 1.3rem; letter-spacing: 2px; }
-        .avg-count { font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
-        .rating-bars { margin-top: 1rem; }
-        .r-bar-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
-        .r-bar-lbl { font-size: 0.82rem; font-weight: 600; color: var(--slate); width: 30px; }
-        .r-bar-track { flex: 1; height: 7px; background: var(--border); border-radius: 4px; overflow: hidden; }
-        .r-bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--teal)); border-radius: 4px; transition: width .4s; }
-        .r-bar-cnt { width: 24px; text-align: right; font-size: 0.82rem; color: var(--muted); }
-        /* Review form */
-        .review-form-box { background: var(--white); border-radius: 16px; padding: 2rem; border: 1px solid var(--border); }
-        .review-form-box h3 { font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
-        .review-form-box .sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.5rem; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .star-row { display: flex; gap: 0.4rem; font-size: 1.9rem; }
-        .star-btn { cursor: pointer; color: #d1d5db; transition: all .15s; line-height: 1; }
-        .star-btn:hover, .star-btn.lit { color: #f59e0b; transform: scale(1.15); }
-        .review-submit { width: 100%; margin-top: 0.5rem; }
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap: 1.25rem; }
-        .review-card {
-            background: var(--white); border-radius: 12px; padding: 1.5rem;
-            border-left: 3px solid var(--gold);
-            box-shadow: 0 2px 8px rgba(0,0,0,.05); transition: all .3s;
-        }
-        .review-card:hover { box-shadow: 0 8px 20px rgba(0,0,0,.1); transform: translateY(-3px); }
-        .review-card-top { display: flex; justify-content: space-between; margin-bottom: 0.75rem; }
-        .reviewer-name { font-weight: 700; color: var(--navy); font-size: 0.95rem; }
-        .reviewer-co { font-size: 0.82rem; color: var(--muted); }
-        .review-stars { color: #f59e0b; font-size: 0.95rem; }
-        .review-text { font-size: 0.9rem; color: var(--slate); line-height: 1.7; font-style: italic; margin-bottom: 0.6rem; }
-        .review-date { font-size: 0.78rem; color: var(--muted); }
-        .review-response { background: var(--teal-lite); border-radius: 8px; padding: 0.85rem 1rem; margin-top: 1rem; border-left: 2px solid var(--teal); }
-        .response-label { font-size: 0.75rem; font-weight: 700; color: var(--teal); margin-bottom: 0.3rem; }
-        .response-text-r { font-size: 0.85rem; color: var(--slate); line-height: 1.6; }
-        .response-date-r { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; }
-        .response-toggle { background: none; border: none; cursor: pointer; color: var(--teal); font-size: 0.85rem; font-weight: 600; padding: 0.5rem 0 0; font-family: inherit; transition: color .2s; display: block; }
-        .response-toggle:hover { color: var(--navy); }
-        .response-input-area { margin-top: 0.75rem; }
-        .response-input-area textarea { width: 100%; font-family: inherit; }
-        .response-btns { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
-        .resp-submit { background: var(--navy); color: white; border: none; border-radius: 6px; padding: 0.45rem 1rem; font-weight: 700; font-size: 0.82rem; cursor: pointer; transition: background .2s; }
-        .resp-submit:hover { background: var(--navy-mid); }
-        .resp-cancel { background: var(--border); color: var(--slate); border: none; border-radius: 6px; padding: 0.45rem 1rem; font-weight: 600; font-size: 0.82rem; cursor: pointer; }
-        .success-toast {
-            background: #d1fae5; color: #065f46; padding: 0.85rem 1rem;
-            border-radius: 8px; border-left: 3px solid var(--success);
-            margin-bottom: 1.25rem; font-size: 0.9rem; display: none;
-        }
-        .success-toast.show { display: block; }
-
-        /* ── FAQ ─────────────────────────────────── */
-        .faq { padding: 6rem 2rem; background: var(--white); }
-        .faq-wrap { max-width: 780px; margin: 0 auto; }
-        .faq-item {
-            border-radius: 10px; margin-bottom: 0.75rem;
-            border: 1px solid var(--border); overflow: hidden;
-            transition: border-color .2s;
-        }
-        .faq-item.open { border-color: var(--gold); }
-        .faq-q {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1.25rem 1.5rem; cursor: pointer;
-            font-weight: 600; color: var(--navy); font-size: 0.97rem;
-            gap: 1rem; transition: background .2s;
-        }
-        .faq-q:hover { background: var(--off-white); }
-        .faq-item.open .faq-q { background: var(--gold-pale); }
-        .faq-chevron {
-            width: 24px; height: 24px; border-radius: 50%;
-            background: var(--border); display: flex; align-items: center; justify-content: center;
-            font-size: 0.7rem; flex-shrink: 0; transition: all .3s;
-        }
-        .faq-item.open .faq-chevron { background: var(--gold); color: white; transform: rotate(180deg); }
-        .faq-a {
-            padding: 0 1.5rem; max-height: 0; overflow: hidden;
-            transition: max-height .35s ease, padding .25s;
-        }
-        .faq-item.open .faq-a { max-height: 300px; padding: 0 1.5rem 1.25rem; }
-        .faq-a p { color: var(--slate); line-height: 1.8; font-size: 0.93rem; }
-
-        /* ── CONTACT ─────────────────────────────── */
-        .contact {
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, var(--navy) 0%, #1a3060 100%);
-            position: relative; overflow: hidden;
-        }
-        .contact::before {
-            content: '';
-            position: absolute; inset: 0;
-            background-image:
-                linear-gradient(rgba(200,151,58,.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(200,151,58,.05) 1px, transparent 1px);
-            background-size: 48px 48px;
-        }
-        .contact .section-title { color: white; }
-        .contact .section-label { color: var(--gold-lite); }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start; position: relative; }
-        .contact-info-item { display: flex; gap: 1.25rem; align-items: flex-start; margin-bottom: 1.75rem; }
-        .ci-icon {
-            width: 48px; height: 48px; background: rgba(255,255,255,.1);
-            border-radius: 12px; display: flex; align-items: center;
-            justify-content: center; font-size: 1.3rem; flex-shrink: 0;
-        }
-        .ci-label { font-size: 0.78rem; font-weight: 700; color: var(--gold-lite); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 0.2rem; }
-        .ci-value { color: rgba(255,255,255,.85); font-size: 0.95rem; line-height: 1.6; }
-        .contact-form-box { background: var(--white); border-radius: 18px; padding: 2.5rem; }
-        .contact-form-box h3 { font-family:'Playfair Display',serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 1.75rem; }
-        .contact-submit { width: 100%; background: var(--gold); color: white; }
-        .contact-submit:hover { background: var(--gold-lite); }
-
-        /* ── FOOTER ──────────────────────────────── */
-        footer { background: #0a1628; color: rgba(255,255,255,.75); padding: 3.5rem 2rem 2rem; }
-        .footer-top {
-            max-width: 1160px; margin: 0 auto;
-            display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; gap: 2rem; padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(255,255,255,.1);
-        }
-        .footer-brand .logo-text { color: white; }
-        .footer-brand p { font-size: 0.85rem; opacity: .6; margin-top: 0.4rem; max-width: 280px; line-height: 1.5; }
-        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-        .footer-links a { color: rgba(255,255,255,.65); text-decoration: none; font-size: 0.88rem; transition: color .2s; }
-        .footer-links a:hover { color: var(--gold-lite); }
-        .footer-social { display: flex; gap: 0.75rem; }
-        .social-btn {
-            width: 38px; height: 38px; background: rgba(255,255,255,.08);
-            border-radius: 8px; display: flex; align-items: center;
-            justify-content: center; color: white; text-decoration: none;
-            font-size: 0.9rem; font-weight: 700; transition: all .25s;
-        }
-        .social-btn:hover { background: var(--gold); transform: translateY(-2px); }
-        .footer-bottom {
-            max-width: 1160px; margin: 1.5rem auto 0;
-            font-size: 0.82rem; opacity: .45; text-align: center;
-        }
-
-        /* ── RESPONSIVE ──────────────────────────── */
-        @media (max-width: 1024px) {
-            .services-grid { grid-template-columns: repeat(2,1fr); }
-            .countries-grid { grid-template-columns: repeat(2,1fr); }
-        }
-        @media (max-width: 900px) {
-            .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
-            .hero-stats { grid-template-columns: repeat(2,1fr); }
-            .about-grid { grid-template-columns: 1fr; }
-            .about-floater { position: relative; bottom: auto; right: auto; margin-top: 1.5rem; display: inline-block; }
-            .integrations-grid { grid-template-columns: 1fr; }
-            .blog-layout { grid-template-columns: 1fr; }
-            .reviews-layout { grid-template-columns: 1fr; }
-            .contact-grid { grid-template-columns: 1fr; }
-            .nav-center, .nav-actions { display: none; }
-            .hamburger { display: flex; }
-            .process-track { grid-template-columns: repeat(2,1fr); }
-            .process-track::before { display: none; }
-        }
-        @media (max-width: 620px) {
-            .hero { padding: 5rem 1.5rem 4rem; }
-            .hero-stats { grid-template-columns: 1fr 1fr; }
-            .services-grid, .why-grid, .values-row { grid-template-columns: 1fr; }
-            .countries-grid { grid-template-columns: 1fr 1fr; }
-            .form-row { grid-template-columns: 1fr; }
-            .process-track { grid-template-columns: 1fr; }
-            section { padding-left: 1.25rem; padding-right: 1.25rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NUMETRIC — Global Accounting & Bookkeeping Solutions</title>
+<meta name="description" content="Offshore accounting and bookkeeping for practices and businesses across the US, Canada, the UK and Australia. Certified Xero Partner. 40–60% cost reduction vs. onshore staffing.">
+<link rel="canonical" href="https://www.numetricinc.com/">
+<meta property="og:title" content="NUMETRIC — Global Accounting &amp; Bookkeeping Solutions">
+<meta property="og:description" content="Offshore expertise serving practices and businesses across the US, Canada, Australia and the UK.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
 </head>
-<body>
+<body data-page="home">
 
-<!-- ══ LOGIN MODAL ═══════════════════════════════ -->
-<div class="modal-overlay" id="loginModal">
-    <div class="modal-box">
-        <div class="modal-header">
-            <h2>Admin Login</h2>
-            <button class="modal-close" onclick="closeModal()">×</button>
-        </div>
-        <div class="login-error" id="loginError"></div>
-        <div class="modal-info">
-            <strong>Demo Credentials</strong><br>
-            Email: owner@numetric.com &nbsp;·&nbsp; Password: Admin@2024
-        </div>
-        <form onsubmit="handleLogin(event)">
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" id="loginEmail" required placeholder="owner@numetric.com">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="loginPassword" required placeholder="••••••••">
-            </div>
-            <button type="submit" class="btn btn-navy" style="width:100%">Login to Admin Panel</button>
-        </form>
-    </div>
-</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header data-site-header></header>
 
-<!-- ══ HEADER ════════════════════════════════════ -->
-<header id="siteHeader">
-    <nav>
-        <a href="#hero" class="logo">
-            <svg class="logo-mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="lg1" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1"/>
-                        <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1"/>
-                    </linearGradient>
-                </defs>
-                <circle cx="100" cy="100" r="95" fill="none" stroke="#0f2244" stroke-width="3"/>
-                <rect x="65" y="120" width="12" height="30" fill="#0f2244" rx="2"/>
-                <rect x="85" y="105" width="12" height="45" fill="url(#lg1)" rx="2"/>
-                <rect x="105" y="85" width="12" height="65" fill="#0f2244" rx="2"/>
-                <rect x="125" y="70" width="12" height="80" fill="url(#lg1)" rx="2"/>
-                <path d="M60 100 L75 115 L95 85" stroke="#c8973a" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="logo-text">NUMETRIC</span>
-        </a>
+<main id="main">
 
-        <ul class="nav-center">
-            <li class="dropdown">
-                <button>Solutions <span class="dropdown-arrow">▾</span></button>
-                <div class="dropdown-menu">
-                    <a href="#services">Our Services</a>
-                    <a href="#integrations">Software Integrations</a>
-                    <a href="#process">Our Workflow</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <button>Global Presence <span class="dropdown-arrow">▾</span></button>
-                <div class="dropdown-menu">
-                    <a href="#countries">Markets We Serve</a>
-                    <a href="#why">Why Choose Numetric</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <button>Resources <span class="dropdown-arrow">▾</span></button>
-                <div class="dropdown-menu">
-                    <a href="#blog">Industry Insights</a>
-                    <a href="#reviews">Client Reviews</a>
-                    <a href="#faq">FAQs</a>
-                </div>
-            </li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-
-        <div class="nav-actions">
-            <button class="btn btn-ghost" id="loginBtn" onclick="openModal()">Admin Login</button>
-            <a href="#contact" class="btn btn-gold">Get Started</a>
-        </div>
-
-        <!-- Hamburger -->
-        <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Toggle menu">
-            <span></span><span></span><span></span>
-        </button>
-    </nav>
-
-    <!-- Mobile drawer -->
-    <div class="mobile-nav" id="mobileNav">
-        <div class="mobile-nav-group">
-            <span class="mobile-nav-label">Solutions</span>
-            <a href="#services" onclick="closeMobile()">Our Services</a>
-            <a href="#integrations" onclick="closeMobile()">Software Integrations</a>
-            <a href="#process" onclick="closeMobile()">Our Workflow</a>
-        </div>
-        <div class="mobile-nav-group">
-            <span class="mobile-nav-label">Global Presence</span>
-            <a href="#countries" onclick="closeMobile()">Markets We Serve</a>
-            <a href="#why" onclick="closeMobile()">Why Choose Numetric</a>
-        </div>
-        <div class="mobile-nav-group">
-            <span class="mobile-nav-label">Resources</span>
-            <a href="#blog" onclick="closeMobile()">Industry Insights</a>
-            <a href="#reviews" onclick="closeMobile()">Client Reviews</a>
-            <a href="#faq" onclick="closeMobile()">FAQs</a>
-        </div>
-        <a href="#about" onclick="closeMobile()">About</a>
-        <a href="#contact" onclick="closeMobile()">Contact</a>
-        <div class="mobile-nav-actions">
-            <button class="btn btn-ghost" onclick="closeMobile(); openModal()">Admin Login</button>
-            <a href="#contact" class="btn btn-gold" onclick="closeMobile()">Get Started</a>
-        </div>
-    </div>
-</header>
-
-<!-- ══ HERO ══════════════════════════════════════ -->
-<section id="hero" class="hero">
-    <div class="hero-grid-bg"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-glow2"></div>
-    <div class="hero-inner">
+<!-- ══ HERO ═══════════════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+    <div class="container hero-inner">
         <div>
-            <div class="hero-badge">
-                <span>🌍</span> Offshore Accounting Experts
-            </div>
-            <h1>Global Accounting &<em> Bookkeeping Solutions</em> for Businesses and Practices</h1>
-            <p class="hero-sub">Offshore expertise serving practices and businesses across the US, Canada, Australia, and the UK. We handle the accounting — you focus on client relationships and growth.</p>
-            <div class="hero-cta">
-                <a href="#contact" class="btn btn-gold">Get Started Today</a>
-                <a href="#services" class="btn btn-outline">Explore Services</a>
+            <span class="hero-badge">🌍 Offshore Accounting Experts</span>
+            <h1>Global Accounting & <em>Bookkeeping Solutions</em> for Businesses and Practices</h1>
+            <p class="hero-sub">Offshore expertise serving practices and businesses across the US, Canada,
+                Australia and the UK. We handle the accounting — you focus on client relationships and growth.</p>
+            <div class="hero-actions">
+                <a class="btn btn-gold" href="#contact">Get Started Today</a>
+                <a class="btn btn-outline" href="#services">Explore Services</a>
             </div>
         </div>
         <div class="hero-stats">
-            <div class="stat-card accent">
+            <div class="stat featured">
                 <div class="stat-icon">💰</div>
                 <div class="stat-num">40–60%</div>
                 <div class="stat-label">Cost reduction vs. onshore staffing</div>
             </div>
-            <div class="stat-card">
+            <div class="stat">
                 <div class="stat-icon">🌍</div>
                 <div class="stat-num">4</div>
                 <div class="stat-label">Major global markets served</div>
             </div>
-            <div class="stat-card">
+            <div class="stat">
                 <div class="stat-icon">✓</div>
                 <div class="stat-num">Xero</div>
-                <div class="stat-label">L1 & L2 Certified Partner</div>
+                <div class="stat-label">L1 &amp; L2 Certified Partner</div>
             </div>
-            <div class="stat-card">
+            <div class="stat">
                 <div class="stat-icon">⚡</div>
                 <div class="stat-num">2–7</div>
                 <div class="stat-label">Business day turnaround</div>
@@ -921,809 +59,571 @@
     </div>
 </section>
 
-<!-- ══ TRUST BAR ════════════════════════════════ -->
-<div class="trust-bar">
-    <div class="trust-bar-inner">
+<!-- ══ TRUST BAR ══════════════════════════════════════════════════════ -->
+<div class="trust">
+    <div class="trust-inner">
         <span class="trust-label">Trusted for</span>
         <div class="trust-items">
-            <div class="trust-item"><span class="icon">🏦</span> Bank-level Security</div>
-            <div class="trust-item"><span class="icon">📋</span> GAAP · IFRS · FRS · AASB Compliant</div>
-            <div class="trust-item"><span class="icon">✓</span> Xero Certified Partner</div>
-            <div class="trust-item"><span class="icon">🔒</span> Strict Confidentiality</div>
-            <div class="trust-item"><span class="icon">⏰</span> 24-hr Response SLA</div>
+            <span class="trust-item">🏦 Bank-level Security</span>
+            <span class="trust-item">📋 GAAP · IFRS · FRS · AASB Compliant</span>
+            <span class="trust-item">✓ Xero Certified Partner</span>
+            <span class="trust-item">🔒 Strict Confidentiality</span>
+            <span class="trust-item">⏰ 24-hr Response SLA</span>
         </div>
     </div>
 </div>
 
-<!-- ══ ABOUT ════════════════════════════════════ -->
-<section id="about" class="about">
-    <div class="container">
-        <div class="about-grid">
-            <div>
-                <span class="section-label">About Numetric</span>
-                <div class="divider"></div>
-                <h2 class="section-title">Redefining Offshore Accounting for the Modern World</h2>
-                <p style="color:var(--slate);line-height:1.8;margin-bottom:1.25rem;">Our mission is to redefine global bookkeeping by providing seamless offshore solutions for accounting professionals and businesses worldwide. From London to Sydney, we deliver the accuracy and reliability your standards demand.</p>
-                <p style="color:var(--slate);line-height:1.8;margin-bottom:2rem;">We handle the technical complexities so that you can actually exercise control over your business and focus on what matters most — your clients and your growth. Whether you're in New York, Toronto, Sydney, or London, we deliver the same level of accuracy, reliability, and compliance that your clients expect.</p>
-                <a href="#contact" class="btn btn-navy">Start the Conversation →</a>
+<!-- ══ ABOUT ══════════════════════════════════════════════════════════ -->
+<section class="section" id="about">
+    <div class="container about-grid">
+        <div data-reveal>
+            <span class="eyebrow">About Numetric</span>
+            <div class="rule"></div>
+            <h2 class="section-title">Redefining Offshore Accounting for the Modern World</h2>
+            <p class="section-lead">Our mission is to redefine global bookkeeping with seamless offshore
+                solutions for accounting professionals and businesses worldwide. From London to Sydney,
+                we deliver the accuracy and reliability your standards demand.</p>
+            <p style="color:var(--slate);line-height:1.8;margin-top:1rem">We handle the technical
+                complexities so you can exercise real control over your business and focus on what matters
+                most — your clients and your growth. Whether you're in New York, Toronto, Sydney or London,
+                you get the same accuracy, reliability and compliance your clients expect.</p>
 
-                <div class="values-row">
-                    <div class="value-pill">
-                        <div class="v-icon">✓</div>
-                        <h4>Quality First</h4>
-                        <p>Every entry reviewed with meticulous detail and local-standard adherence.</p>
-                    </div>
-                    <div class="value-pill">
-                        <div class="v-icon">⚡</div>
-                        <h4>Speed & Efficiency</h4>
-                        <p>Fast turnaround without compromising quality — every time.</p>
-                    </div>
-                    <div class="value-pill">
-                        <div class="v-icon">💰</div>
-                        <h4>Cost Savings</h4>
-                        <p>Reduce operational costs significantly while receiving premium service.</p>
-                    </div>
-                </div>
+            <div class="flex-wrap-gap" style="margin-top:2rem">
+                <a class="btn btn-navy" href="#contact">Start the Conversation →</a>
+                <a class="btn btn-ghost" href="/team">Meet Our Team</a>
             </div>
-            <div class="about-visual">
-                <div class="about-card-main">
-                    <h3>🌍 Global Expertise, Local Standards</h3>
-                    <p>We serve accounting professionals across multiple countries with deep knowledge of different regulatory environments, tax codes, and compliance requirements. Our team stays current with jurisdictional changes in the US, Canada, UK, and Australia — so you never have to worry about falling behind.</p>
-                    <br>
-                    <p style="opacity:.75;font-size:.9rem;">📧 info@numetricinc.com &nbsp;·&nbsp; <a href="https://www.linkedin.com/company/numetricinc/" target="_blank" style="color:var(--gold-lite);">LinkedIn ↗</a></p>
-                </div>
-                <div class="about-floater">
-                    <div class="big">24h</div>
-                    <div class="small">Response SLA</div>
-                </div>
+
+            <div class="values">
+                <div class="value"><div class="v-icon">✓</div>
+                    <h4>Quality First</h4>
+                    <p>Every entry reviewed with meticulous detail and local-standard adherence.</p></div>
+                <div class="value"><div class="v-icon">⚡</div>
+                    <h4>Speed &amp; Efficiency</h4>
+                    <p>Fast turnaround without compromising quality — every time.</p></div>
+                <div class="value"><div class="v-icon">💰</div>
+                    <h4>Cost Savings</h4>
+                    <p>Reduce operational costs significantly while receiving premium service.</p></div>
+            </div>
+        </div>
+
+        <div class="about-visual" data-reveal>
+            <div class="about-panel">
+                <h3>🌍 Global Expertise, Local Standards</h3>
+                <p>We serve accounting professionals across multiple countries with deep knowledge of
+                   different regulatory environments, tax codes and compliance requirements. Our team stays
+                   current with jurisdictional changes in the US, Canada, UK and Australia — so you never
+                   have to worry about falling behind.</p>
+                <p style="margin-top:1.25rem;opacity:.8">📧 info@numetricinc.com ·
+                   <a href="https://www.linkedin.com/company/numetricinc/" target="_blank" rel="noopener"
+                      style="color:var(--gold-300)">LinkedIn ↗</a></p>
+            </div>
+            <div class="about-float">
+                <div class="big">24h</div>
+                <div class="small">Response SLA</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ══ SERVICES ══════════════════════════════════ -->
-<section id="services" class="services">
+<!-- ══ SERVICES ═══════════════════════════════════════════════════════ -->
+<section class="section section-tint" id="services">
     <div class="container">
-        <span class="section-label">What We Offer</span>
-        <div class="divider"></div>
-        <h2 class="section-title">Comprehensive Accounting Solutions</h2>
-        <p class="section-body">End-to-end financial operations support for accounting firms and businesses of all sizes — tailored to your jurisdiction.</p>
-        <div class="services-grid">
-            <div class="svc-card">
-                <div class="svc-icon">📊</div>
-                <h3>Monthly Bookkeeping & Accounting</h3>
-                <p>Complete accounting support including journal entries, account reconciliation, financial statement preparation, and comprehensive reporting.</p>
+        <div class="section-head" data-reveal>
+            <span class="eyebrow">What We Offer</span>
+            <div class="rule"></div>
+            <h2 class="section-title">Comprehensive Accounting Solutions</h2>
+            <p class="section-lead">End-to-end financial operations support for accounting firms and
+                businesses of all sizes — tailored to your jurisdiction.</p>
+        </div>
+
+        <div class="grid grid-3">
+            <article class="card card-hover card-accent svc" data-reveal>
+                <div class="icon-tile">📊</div>
+                <h3>Monthly Bookkeeping &amp; Accounting</h3>
+                <p>Complete accounting support including journal entries, account reconciliation,
+                   financial statement preparation and comprehensive reporting.</p>
                 <ul class="svc-list">
-                    <li>General ledger management</li>
-                    <li>Account reconciliation</li>
-                    <li>Financial statements preparation</li>
-                    <li>Monthly/quarterly/annual closing</li>
+                    <li>General ledger management</li><li>Account reconciliation</li>
+                    <li>Financial statements preparation</li><li>Monthly/quarterly/annual closing</li>
                     <li>Audit trail documentation</li>
                 </ul>
-            </div>
-            <div class="svc-card">
-                <div class="svc-icon">💼</div>
+            </article>
+            <article class="card card-hover card-accent svc" data-reveal>
+                <div class="icon-tile">💼</div>
                 <h3>Payroll Processing</h3>
-                <p>End-to-end payroll services compliant with employment laws, tax withholding requirements, and benefit obligations in your country.</p>
+                <p>End-to-end payroll compliant with employment laws, tax withholding requirements and
+                   benefit obligations in your country.</p>
                 <ul class="svc-list">
-                    <li>Weekly/bi-weekly/monthly payroll</li>
-                    <li>Tax withholding calculations</li>
-                    <li>Benefit administration</li>
-                    <li>Leave/vacation tracking</li>
+                    <li>Weekly/bi-weekly/monthly payroll</li><li>Tax withholding calculations</li>
+                    <li>Benefit administration</li><li>Leave/vacation tracking</li>
                     <li>Statutory reporting</li>
                 </ul>
-            </div>
-            <div class="svc-card">
-                <div class="svc-icon">📈</div>
-                <h3>Financial Statements & Reporting</h3>
-                <p>Professional financial statements prepared in compliance with local accounting standards for management, lenders, or regulatory purposes.</p>
+            </article>
+            <article class="card card-hover card-accent svc" data-reveal>
+                <div class="icon-tile">📈</div>
+                <h3>Financial Statements &amp; Reporting</h3>
+                <p>Professional statements prepared in compliance with local accounting standards for
+                   management, lenders or regulatory purposes.</p>
                 <ul class="svc-list">
-                    <li>Balance sheet preparation</li>
-                    <li>Income statement compilation</li>
-                    <li>Cash flow statements</li>
-                    <li>Notes to financial statements</li>
+                    <li>Balance sheet preparation</li><li>Income statement compilation</li>
+                    <li>Cash flow statements</li><li>Notes to financial statements</li>
                     <li>Management/analytical reports</li>
                 </ul>
-            </div>
-            <div class="svc-card">
-                <div class="svc-icon">🔍</div>
+            </article>
+            <article class="card card-hover card-accent svc" data-reveal>
+                <div class="icon-tile">🔍</div>
                 <h3>Account Reconciliation</h3>
-                <p>Detailed reconciliation ensuring accuracy and identifying discrepancies across all asset, liability, and equity accounts.</p>
+                <p>Detailed reconciliation ensuring accuracy and identifying discrepancies across all
+                   asset, liability and equity accounts.</p>
                 <ul class="svc-list">
-                    <li>Bank reconciliation</li>
-                    <li>Credit card matching</li>
-                    <li>Vendor statement reconciliation</li>
-                    <li>Balance sheet account reviews</li>
+                    <li>Bank reconciliation</li><li>Credit card matching</li>
+                    <li>Vendor statement reconciliation</li><li>Balance sheet account reviews</li>
                     <li>Discrepancy investigation</li>
                 </ul>
-            </div>
-            <div class="svc-card">
-                <div class="svc-icon">⚙️</div>
+            </article>
+            <article class="card card-hover card-accent svc" data-reveal>
+                <div class="icon-tile">⚙️</div>
                 <h3>Tax Compliance Support</h3>
-                <p>Specialized support for tax filing, documentation, and compliance based on your country's requirements and standards.</p>
+                <p>Specialised support for tax filing, documentation and compliance based on your
+                   country's requirements and standards.</p>
                 <ul class="svc-list">
-                    <li>Tax documentation preparation</li>
-                    <li>Compliance checklists</li>
-                    <li>Record organization</li>
-                    <li>Deduction optimization</li>
+                    <li>Tax documentation preparation</li><li>Compliance checklists</li>
+                    <li>Record organisation</li><li>Deduction optimisation</li>
                     <li>Audit support preparation</li>
                 </ul>
-            </div>
-            <div class="svc-card">
-                <div class="svc-icon">🎓</div>
+            </article>
+            <article class="card card-hover card-accent svc" data-reveal>
+                <div class="icon-tile">🎓</div>
                 <h3>Accounting Software Support</h3>
-                <p>Expert support for your accounting software including setup, configuration, and ongoing optimization for maximum efficiency.</p>
+                <p>Expert support for your accounting software including setup, configuration and
+                   ongoing optimisation for maximum efficiency.</p>
                 <ul class="svc-list">
-                    <li>Software setup & configuration</li>
-                    <li>Chart of accounts optimization</li>
-                    <li>Workflow automation</li>
-                    <li>User support & training</li>
-                    <li>System optimization</li>
+                    <li>Software setup &amp; configuration</li><li>Chart of accounts optimisation</li>
+                    <li>Workflow automation</li><li>User support &amp; training</li>
+                    <li>System optimisation</li>
                 </ul>
-            </div>
+            </article>
         </div>
     </div>
 </section>
 
-<!-- ══ INTEGRATIONS ══════════════════════════════ -->
-<section id="integrations" class="integrations">
+<!-- ══ INTEGRATIONS ═══════════════════════════════════════════════════ -->
+<section class="section" id="integrations">
     <div class="container">
-        <span class="section-label">Integrations & Partnerships</span>
-        <div class="divider"></div>
-        <h2 class="section-title">Seamless Workflow Integration</h2>
-        <p class="section-body">We work with the platforms your firm already uses — no disruption, just deeper efficiency.</p>
-        <div class="integrations-grid">
-            <div class="intg-card timeki">
-                <div class="intg-logo-wrap timeki-wrap">⏱️</div>
+        <div class="section-head" data-reveal>
+            <span class="eyebrow">Integrations &amp; Partnerships</span>
+            <div class="rule"></div>
+            <h2 class="section-title">Seamless Workflow Integration</h2>
+            <p class="section-lead">We work with the platforms your firm already uses — no disruption,
+                just deeper efficiency.</p>
+        </div>
+
+        <div class="grid grid-2">
+            <article class="card card-hover card-accent intg" data-reveal>
+                <div class="intg-logo timeki">⏱️</div>
                 <h3>Timeki Integration</h3>
-                <p class="intg-sub">Time Tracking & Billable Hours Management</p>
-                <p>Seamlessly integrate Timeki time tracking with our accounting workflows. Capture precise billable hours, project-based time allocation, and convert time logs directly into invoice-ready data for your clients.</p>
+                <p class="intg-sub">Time Tracking &amp; Billable Hours Management</p>
+                <p>Seamlessly integrate Timeki time tracking with our accounting workflows. Capture precise
+                   billable hours and project-based allocation, then convert time logs directly into
+                   invoice-ready data for your clients.</p>
                 <ul class="intg-features">
-                    <li>Precise billable hours tracking</li>
-                    <li>Project-based time allocation</li>
-                    <li>Team productivity monitoring</li>
-                    <li>Invoice-ready time data</li>
+                    <li>Billable hours tracking</li><li>Project-based allocation</li>
+                    <li>Productivity monitoring</li><li>Invoice-ready data</li>
                     <li>Cost accounting integration</li>
                 </ul>
-            </div>
-            <div class="intg-card xero">
-                <div class="intg-logo-wrap xero-wrap">X</div>
-                <div class="intg-badge">✓ Certified Xero Partner</div>
+            </article>
+            <article class="card card-hover card-accent intg" data-reveal>
+                <div class="intg-logo xero">X</div>
+                <span class="tag tag-gold" style="margin-bottom:.75rem">✓ Certified Xero Partner</span>
                 <h3>Xero Expertise</h3>
-                <p class="intg-sub">Full Xero Integration & Support</p>
-                <p>As a certified Xero Partner (L1, L2 certified), we provide comprehensive accounting services fully integrated with your Xero workspace — real-time reporting and complete account synchronisation.</p>
+                <p class="intg-sub">Full Xero Integration &amp; Support</p>
+                <p>As a certified Xero Partner (L1 and L2 certified), we provide comprehensive accounting
+                   services fully integrated with your Xero workspace — real-time reporting and complete
+                   account synchronisation.</p>
                 <ul class="intg-features">
-                    <li>Xero L1, L2 certification</li>
-                    <li>Real-time account synchronization</li>
-                    <li>Automated reconciliation</li>
-                    <li>Compliance reporting</li>
-                    <li>Custom integrations & automation</li>
+                    <li>Xero L1 &amp; L2 certified</li><li>Real-time sync</li>
+                    <li>Automated reconciliation</li><li>Compliance reporting</li>
+                    <li>Custom automation</li>
                 </ul>
-            </div>
+            </article>
         </div>
-        <div class="intg-note">
+
+        <div class="note-panel" data-reveal>
             <h4>Why These Integrations Matter</h4>
-            <p>With Timeki and Xero integrated into our workflow, we capture precise billable hours from your team's time logs and seamlessly convert them into invoice-ready data. Real-time synchronisation ensures your accounting stays accurate and your clients are billed correctly for every minute of work.</p>
+            <p>With Timeki and Xero in our workflow, we capture precise billable hours from your team's
+               time logs and convert them into invoice-ready data. Real-time synchronisation keeps your
+               accounting accurate and ensures clients are billed correctly for every minute of work.</p>
         </div>
     </div>
 </section>
 
-<!-- ══ COUNTRIES ═════════════════════════════════ -->
-<section id="countries" class="countries">
-    <div class="container" style="position:relative;">
-        <span class="section-label">Global Reach</span>
-        <div class="divider" style="background:linear-gradient(90deg,var(--gold),var(--gold-lite))"></div>
-        <h2 class="section-title">Local Expertise Across Major Markets</h2>
-        <p class="section-body">We serve accounting professionals and businesses in the world's largest English-speaking markets — with deep knowledge of each jurisdiction's unique requirements.</p>
-        <div class="countries-grid">
-            <div class="country-card">
-                <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg" alt="United States" class="country-flag">
+<!-- ══ COUNTRIES ══════════════════════════════════════════════════════ -->
+<section class="section section-deep" id="countries">
+    <div class="container">
+        <div class="section-head" data-reveal>
+            <span class="eyebrow">Global Reach</span>
+            <div class="rule"></div>
+            <h2 class="section-title">Local Expertise Across Major Markets</h2>
+            <p class="section-lead">We serve accounting professionals and businesses in the world's largest
+                English-speaking markets — with deep knowledge of each jurisdiction's requirements.</p>
+        </div>
+
+        <div class="grid grid-4">
+            <div class="country" data-reveal>
+                <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg" alt="" loading="lazy">
                 <h4>United States</h4>
-                <p>GAAP, Federal & State Tax Compliance, 1099/W2 Processing, Multi-state payroll</p>
+                <p>GAAP, Federal &amp; State Tax Compliance, 1099/W2 Processing, Multi-state payroll</p>
             </div>
-            <div class="country-card">
-                <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/CA.svg" alt="Canada" class="country-flag">
+            <div class="country" data-reveal>
+                <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/CA.svg" alt="" loading="lazy">
                 <h4>Canada</h4>
                 <p>IFRS/ASPE, GST/PST, Provincial Tax, T4/T1 Filing, CRA compliance</p>
             </div>
-            <div class="country-card">
-                <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg" alt="United Kingdom" class="country-flag">
+            <div class="country" data-reveal>
+                <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg" alt="" loading="lazy">
                 <h4>United Kingdom</h4>
                 <p>FRS Standards, Corporation Tax, PAYE, VAT Compliance, Making Tax Digital</p>
             </div>
-            <div class="country-card">
-                <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/AU.svg" alt="Australia" class="country-flag">
+            <div class="country" data-reveal>
+                <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/AU.svg" alt="" loading="lazy">
                 <h4>Australia</h4>
                 <p>AASB Standards, Income Tax, BAS, Superannuation Compliance, STP</p>
             </div>
         </div>
-        <p class="countries-more"><strong>Not seeing your country?</strong> We work with accounting professionals globally — contact us to discuss your needs.</p>
+
+        <p class="countries-more" data-reveal><strong>Not seeing your country?</strong>
+            We work with accounting professionals globally — <a href="#contact"
+            style="color:var(--gold-300);text-decoration:underline;text-underline-offset:3px">contact us</a>
+            to discuss your needs.</p>
     </div>
 </section>
 
-<!-- ══ WHY CHOOSE ════════════════════════════════ -->
-<section id="why" class="why">
+<!-- ══ WHY ════════════════════════════════════════════════════════════ -->
+<section class="section" id="why">
     <div class="container">
-        <span class="section-label">Why Numetric</span>
-        <div class="divider"></div>
-        <h2 class="section-title">The Strategic Advantage for Forward-Thinking Firms</h2>
-        <p class="section-body">More than a service provider — we're your growth partner, delivering the back-office capacity that lets you scale.</p>
-        <div class="why-grid">
-            <div class="why-card">
-                <div class="why-icon">💰</div>
+        <div class="section-head" data-reveal>
+            <span class="eyebrow">Why Numetric</span>
+            <div class="rule"></div>
+            <h2 class="section-title">The Strategic Advantage for Forward-Thinking Firms</h2>
+            <p class="section-lead">More than a service provider — a growth partner delivering the
+                back-office capacity that lets you scale.</p>
+        </div>
+
+        <div class="grid grid-3">
+            <article class="card card-hover why-card" data-reveal><div class="icon-tile">💰</div>
                 <h3>Significant Cost Savings</h3>
-                <p>Reduce back-office costs by 40–60% compared to onshore staffing while maintaining premium quality. Improve your firm's profitability immediately.</p>
-            </div>
-            <div class="why-card">
-                <div class="why-icon">✨</div>
+                <p>Reduce back-office costs by 40–60% compared to onshore staffing while maintaining
+                   premium quality. Improve your firm's profitability immediately.</p></article>
+            <article class="card card-hover why-card" data-reveal><div class="icon-tile">✨</div>
                 <h3>Premium Quality</h3>
-                <p>Certified accountants with extensive expertise. Every transaction reviewed with meticulous attention to detail and full compliance with local standards.</p>
-            </div>
-            <div class="why-card">
-                <div class="why-icon">⚡</div>
+                <p>Certified accountants with extensive expertise. Every transaction reviewed with
+                   meticulous attention to detail and full compliance with local standards.</p></article>
+            <article class="card card-hover why-card" data-reveal><div class="icon-tile">⚡</div>
                 <h3>Fast Turnaround</h3>
-                <p>Quick, reliable delivery without delays. Our efficient processes ensure your clients receive timely reports and filings, meeting all regulatory deadlines.</p>
-            </div>
-            <div class="why-card">
-                <div class="why-icon">📋</div>
+                <p>Quick, reliable delivery without delays. Efficient processes ensure your clients
+                   receive timely reports and filings, meeting all regulatory deadlines.</p></article>
+            <article class="card card-hover why-card" data-reveal><div class="icon-tile">📋</div>
                 <h3>Compliance Assured</h3>
-                <p>Deep expertise across multiple regulatory environments. We stay current with jurisdictional changes so you're always a step ahead.</p>
-            </div>
-            <div class="why-card">
-                <div class="why-icon">👥</div>
+                <p>Deep expertise across multiple regulatory environments. We stay current with
+                   jurisdictional changes so you're always a step ahead.</p></article>
+            <article class="card card-hover why-card" data-reveal><div class="icon-tile">👥</div>
                 <h3>Dedicated Relationship</h3>
-                <p>Your dedicated team understands your clients' needs and maintains continuity — personalised service that consistently exceeds expectations.</p>
-            </div>
-            <div class="why-card">
-                <div class="why-icon">🔒</div>
+                <p>Your dedicated team understands your clients' needs and maintains continuity —
+                   personalised service that consistently exceeds expectations.</p></article>
+            <article class="card card-hover why-card" data-reveal><div class="icon-tile">🔒</div>
                 <h3>Enterprise-Grade Security</h3>
-                <p>Bank-level encryption, secure data handling, and strict confidentiality protocols. Your clients' financial information is always protected.</p>
-            </div>
+                <p>Bank-level encryption, secure data handling and strict confidentiality protocols.
+                   Your clients' financial information is always protected.</p></article>
         </div>
     </div>
 </section>
 
-<!-- ══ PROCESS ═══════════════════════════════════ -->
-<section id="process" class="process">
+<!-- ══ PROCESS ════════════════════════════════════════════════════════ -->
+<section class="section section-tint" id="process">
     <div class="container">
-        <span class="section-label">How We Work</span>
-        <div class="divider"></div>
-        <h2 class="section-title">The Value You Get — Step by Step</h2>
-        <p class="section-body">A streamlined onboarding and delivery process designed to get you results quickly and sustainably.</p>
+        <div class="section-head" data-reveal>
+            <span class="eyebrow">How We Work</span>
+            <div class="rule"></div>
+            <h2 class="section-title">The Value You Get — Step by Step</h2>
+            <p class="section-lead">A streamlined onboarding and delivery process designed to get you
+                results quickly and sustainably.</p>
+        </div>
+
         <div class="process-track">
-            <div class="process-step">
-                <div class="step-circle">1</div>
+            <div class="step" data-reveal><div class="step-num">1</div>
                 <h4>Strategic Alignment</h4>
-                <p>We analyse your current workflows and specific requirements to align our expertise with your firm's goals and client expectations.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-circle">2</div>
+                <p>We analyse your current workflows and requirements to align our expertise with your
+                   firm's goals and client expectations.</p></div>
+            <div class="step" data-reveal><div class="step-num">2</div>
                 <h4>Seamless Integration</h4>
-                <p>A smooth transition where we sync with your systems, review documentation, and establish secure communication channels — zero disruption.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-circle">3</div>
+                <p>A smooth transition where we sync with your systems, review documentation and establish
+                   secure communication channels — zero disruption.</p></div>
+            <div class="step" data-reveal><div class="step-num">3</div>
                 <h4>Precision Delivery</h4>
-                <p>Accurate, compliant reporting delivered on schedule — giving you and your clients the financial clarity and control needed to make confident decisions.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-circle">4</div>
+                <p>Accurate, compliant reporting delivered on schedule — giving you and your clients the
+                   financial clarity needed to make confident decisions.</p></div>
+            <div class="step" data-reveal><div class="step-num">4</div>
                 <h4>Scalable Partnership</h4>
-                <p>As you grow, we scale with you — providing the back-office capacity you need to take on more clients and bigger opportunities.</p>
-            </div>
+                <p>As you grow, we scale with you — providing the back-office capacity to take on more
+                   clients and bigger opportunities.</p></div>
         </div>
     </div>
 </section>
 
-<!-- ══ BLOG ══════════════════════════════════════ -->
-<section id="blog" class="blog">
+<!-- ══ BLOG PREVIEW ═══════════════════════════════════════════════════ -->
+<section class="section" id="blog">
     <div class="container">
-        <span class="section-label">Industry Insights</span>
-        <div class="divider"></div>
-        <h2 class="section-title">Blog & Accounting Resources</h2>
-        <p class="section-body">Tips, trends, and best practices for accounting professionals worldwide.</p>
-        <div class="blog-layout">
-            <div>
-                <div class="blog-grid" id="blogGrid">
-                    <div class="no-content">
-                        <p>No articles yet. Check back soon for accounting insights and industry analysis!</p>
-                    </div>
-                </div>
+        <div class="section-head" data-reveal>
+            <span class="eyebrow">Industry Insights</span>
+            <div class="rule"></div>
+            <h2 class="section-title">Latest From the Blog</h2>
+            <p class="section-lead">Tips, trends and best practices for accounting professionals
+                worldwide — written by the team that does the work.</p>
+            <div class="flex-wrap-gap" style="margin-top:1.5rem">
+                <a class="btn btn-navy" href="/blog">Browse all articles →</a>
             </div>
-            <div class="blog-sidebar" id="blogSidebar">
-                <!-- Populated by JS -->
-            </div>
+        </div>
+
+        <div class="grid grid-3" id="homePosts"></div>
+
+        <div class="text-center mt-lg" data-reveal>
+            <a class="btn btn-ghost" href="/blog">View the full blog →</a>
         </div>
     </div>
 </section>
 
-<!-- ══ REVIEWS ═══════════════════════════════════ -->
-<section id="reviews" class="reviews">
+<!-- ══ REVIEWS ════════════════════════════════════════════════════════ -->
+<section class="section section-tint" id="reviews">
     <div class="container">
-        <span class="section-label">Client Testimonials</span>
-        <div class="divider"></div>
-        <h2 class="section-title">What Our Clients Say</h2>
-        <p class="section-body">Real feedback from accounting professionals we partner with worldwide.</p>
+        <div class="section-head" data-reveal>
+            <span class="eyebrow">Client Testimonials</span>
+            <div class="rule"></div>
+            <h2 class="section-title">What Our Clients Say</h2>
+            <p class="section-lead">Real feedback from accounting professionals we partner with worldwide.</p>
+        </div>
+
         <div class="reviews-layout">
-            <div class="reviews-stats-box">
-                <div class="avg-rating-display">
-                    <div class="avg-num" id="avgNum">0.0</div>
+            <div class="rating-summary" data-reveal>
+                <div class="rating-top">
+                    <div class="rating-num" id="avgNum">0.0</div>
                     <div>
-                        <div class="avg-stars" id="avgStars">☆☆☆☆☆</div>
-                        <div class="avg-count"><span id="totalRev">0</span> reviews</div>
+                        <div class="rating-stars" id="avgStars">☆☆☆☆☆</div>
+                        <div class="rating-count"><span id="totalRev">0</span> reviews</div>
                     </div>
                 </div>
-                <div class="rating-bars">
-                    <div class="r-bar-row"><div class="r-bar-lbl">5 ★</div><div class="r-bar-track"><div class="r-bar-fill" id="bar5" style="width:0%"></div></div><div class="r-bar-cnt" id="cnt5">0</div></div>
-                    <div class="r-bar-row"><div class="r-bar-lbl">4 ★</div><div class="r-bar-track"><div class="r-bar-fill" id="bar4" style="width:0%"></div></div><div class="r-bar-cnt" id="cnt4">0</div></div>
-                    <div class="r-bar-row"><div class="r-bar-lbl">3 ★</div><div class="r-bar-track"><div class="r-bar-fill" id="bar3" style="width:0%"></div></div><div class="r-bar-cnt" id="cnt3">0</div></div>
-                    <div class="r-bar-row"><div class="r-bar-lbl">2 ★</div><div class="r-bar-track"><div class="r-bar-fill" id="bar2" style="width:0%"></div></div><div class="r-bar-cnt" id="cnt2">0</div></div>
-                    <div class="r-bar-row"><div class="r-bar-lbl">1 ★</div><div class="r-bar-track"><div class="r-bar-fill" id="bar1" style="width:0%"></div></div><div class="r-bar-cnt" id="cnt1">0</div></div>
-                </div>
+                <div id="ratingBars"></div>
             </div>
-            <div class="review-form-box">
+
+            <div class="panel" data-reveal>
                 <h3>Share Your Experience</h3>
-                <p class="sub">Have you worked with NUMETRIC? Your review helps other professionals make informed decisions.</p>
-                <div class="success-toast" id="reviewSuccess">✓ Thank you! Your review has been posted.</div>
-                <form id="reviewForm" onsubmit="submitReview(event)">
+                <p class="panel-sub">Worked with NUMETRIC? Your review helps other professionals decide.</p>
+                <div class="toast" id="revToast">✓ Thank you! Your review has been submitted for moderation.</div>
+                <form id="reviewForm">
                     <div class="form-row">
-                        <div class="form-group">
-                            <label>Your Name *</label>
-                            <input type="text" id="revName" required placeholder="John Smith">
-                        </div>
-                        <div class="form-group">
-                            <label>Firm / Company *</label>
-                            <input type="text" id="revCompany" required placeholder="Smith & Associates CPA">
-                        </div>
+                        <div class="field"><label for="revName">Your Name *</label>
+                            <input id="revName" required placeholder="John Smith"></div>
+                        <div class="field"><label for="revCompany">Firm / Company *</label>
+                            <input id="revCompany" required placeholder="Smith &amp; Associates CPA"></div>
                     </div>
-                    <div class="form-group">
+                    <div class="field">
                         <label>Rating *</label>
-                        <div class="star-row" id="starRow">
-                            <span class="star-btn" data-v="1">★</span>
-                            <span class="star-btn" data-v="2">★</span>
-                            <span class="star-btn" data-v="3">★</span>
-                            <span class="star-btn" data-v="4">★</span>
-                            <span class="star-btn" data-v="5">★</span>
+                        <div class="star-input" id="starRow" role="radiogroup" aria-label="Rating">
+                            <span class="star-btn" data-v="1" role="radio" tabindex="0" aria-label="1 star">★</span>
+                            <span class="star-btn" data-v="2" role="radio" tabindex="0" aria-label="2 stars">★</span>
+                            <span class="star-btn" data-v="3" role="radio" tabindex="0" aria-label="3 stars">★</span>
+                            <span class="star-btn" data-v="4" role="radio" tabindex="0" aria-label="4 stars">★</span>
+                            <span class="star-btn" data-v="5" role="radio" tabindex="0" aria-label="5 stars">★</span>
                         </div>
-                        <input type="hidden" id="revRating" value="0">
                     </div>
-                    <div class="form-group">
-                        <label>Your Review *</label>
-                        <textarea id="revText" required placeholder="Share your experience with NUMETRIC…"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-navy review-submit">Submit Review</button>
+                    <div class="field"><label for="revText">Your Review *</label>
+                        <textarea id="revText" required placeholder="Share your experience with NUMETRIC…"></textarea></div>
+                    <button type="submit" class="btn btn-navy btn-block">Submit Review</button>
                 </form>
             </div>
         </div>
-        <h3 style="font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:1.25rem;">Recent Reviews</h3>
-        <div class="reviews-grid" id="reviewsGrid">
-            <div class="no-content" style="grid-column:1/-1">
-                <p>No reviews yet — be the first to share your experience!</p>
-            </div>
-        </div>
+
+        <h3 style="font-size:1.15rem;color:var(--navy-800);margin-bottom:1.25rem">Recent Reviews</h3>
+        <div class="grid grid-3" id="reviewsGrid"></div>
     </div>
 </section>
 
-<!-- ══ FAQ ═══════════════════════════════════════ -->
-<section id="faq" class="faq">
+<!-- ══ FAQ ════════════════════════════════════════════════════════════ -->
+<section class="section" id="faq">
     <div class="container">
-        <span class="section-label">FAQs</span>
-        <div class="divider"></div>
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        <p class="section-body">Common questions about our services, process, and partnerships.</p>
-        <div class="faq-wrap" id="faqWrap">
-            <!-- Rendered by JS -->
+        <div class="section-head center" data-reveal>
+            <span class="eyebrow">FAQs</span>
+            <div class="rule"></div>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-lead">Common questions about our services, process and partnerships.</p>
         </div>
+        <div class="faq-list" id="faqList"></div>
     </div>
 </section>
 
-<!-- ══ CONTACT ════════════════════════════════════ -->
-<section id="contact" class="contact">
+<!-- ══ CONTACT ════════════════════════════════════════════════════════ -->
+<section class="section section-deep" id="contact">
     <div class="container">
-        <span class="section-label">Get In Touch</span>
-        <div class="divider" style="background:linear-gradient(90deg,var(--gold),var(--gold-lite))"></div>
-        <h2 class="section-title" style="margin-bottom:0.5rem;">Ready to Transform Your Back Office?</h2>
-        <p style="color:rgba(255,255,255,.75);margin-bottom:3rem;font-size:1.05rem;">Reach out and let's discuss how NUMETRIC can support your firm's growth.</p>
+        <div class="section-head" data-reveal>
+            <span class="eyebrow">Get In Touch</span>
+            <div class="rule"></div>
+            <h2 class="section-title">Ready to Transform Your Back Office?</h2>
+            <p class="section-lead">Reach out and let's discuss how NUMETRIC can support your firm's growth.</p>
+        </div>
+
         <div class="contact-grid">
-            <div>
-                <div class="contact-info-item">
-                    <div class="ci-icon">✉️</div>
-                    <div>
-                        <div class="ci-label">Email</div>
-                        <div class="ci-value">info@numetricinc.com</div>
-                    </div>
-                </div>
-                <div class="contact-info-item">
-                    <div class="ci-icon">🌍</div>
-                    <div>
-                        <div class="ci-label">Global Service</div>
-                        <div class="ci-value">End-to-end financial operations for global businesses and accounting practices across the US, Canada, UK, and Australia. Real-time collaboration across all time zones.</div>
-                    </div>
-                </div>
-                <div class="contact-info-item">
-                    <div class="ci-icon">⏰</div>
-                    <div>
-                        <div class="ci-label">Response Time</div>
-                        <div class="ci-value">We typically respond within 24 hours and offer flexible meeting times to accommodate your schedule.</div>
-                    </div>
-                </div>
-                <div class="contact-info-item">
-                    <div class="ci-icon">💼</div>
-                    <div>
-                        <div class="ci-label">LinkedIn</div>
-                        <div class="ci-value"><a href="https://www.linkedin.com/company/numetricinc/" target="_blank" style="color:var(--gold-lite);">linkedin.com/company/numetricinc ↗</a></div>
-                    </div>
-                </div>
+            <div data-reveal>
+                <div class="contact-item"><div class="ci-icon">✉️</div>
+                    <div><div class="ci-label">Email</div>
+                    <div class="ci-value"><a href="mailto:info@numetricinc.com">info@numetricinc.com</a></div></div></div>
+                <div class="contact-item"><div class="ci-icon">🌍</div>
+                    <div><div class="ci-label">Global Service</div>
+                    <div class="ci-value">End-to-end financial operations for businesses and practices across
+                        the US, Canada, UK and Australia. Real-time collaboration across all time zones.</div></div></div>
+                <div class="contact-item"><div class="ci-icon">⏰</div>
+                    <div><div class="ci-label">Response Time</div>
+                    <div class="ci-value">We typically respond within 24 hours and offer flexible meeting
+                        times to suit your schedule.</div></div></div>
+                <div class="contact-item"><div class="ci-icon">💼</div>
+                    <div><div class="ci-label">LinkedIn</div>
+                    <div class="ci-value"><a href="https://www.linkedin.com/company/numetricinc/"
+                        target="_blank" rel="noopener">linkedin.com/company/numetricinc ↗</a></div></div></div>
             </div>
-            <div class="contact-form-box">
+
+            <div class="panel" data-reveal>
                 <h3>Send Us a Message</h3>
-                <form id="contactForm" onsubmit="submitContact(event)">
+                <p class="panel-sub">We'll get back to you within one business day.</p>
+                <div class="toast" id="contactToast"></div>
+                <form id="contactForm">
                     <div class="form-row">
-                        <div class="form-group">
-                            <label>Full Name *</label>
-                            <input type="text" id="cName" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Email Address *</label>
-                            <input type="email" id="cEmail" required>
-                        </div>
+                        <div class="field"><label for="cName">Full Name *</label><input id="cName" required></div>
+                        <div class="field"><label for="cEmail">Email Address *</label><input id="cEmail" type="email" required></div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group">
-                            <label>Firm / Company</label>
-                            <input type="text" id="cCompany">
-                        </div>
-                        <div class="form-group">
-                            <label>Country</label>
-                            <input type="text" id="cCountry" placeholder="e.g., United States">
-                        </div>
+                        <div class="field"><label for="cCompany">Firm / Company</label><input id="cCompany"></div>
+                        <div class="field"><label for="cCountry">Country</label><input id="cCountry" placeholder="e.g. United States"></div>
                     </div>
-                    <div class="form-group">
-                        <label>Message *</label>
-                        <textarea id="cMessage" required placeholder="Tell us about your accounting needs…"></textarea>
-                    </div>
-                    <button type="submit" class="btn contact-submit btn-gold">Send Message →</button>
+                    <div class="field"><label for="cMessage">Message *</label>
+                        <textarea id="cMessage" required placeholder="Tell us about your accounting needs…"></textarea></div>
+                    <button type="submit" class="btn btn-gold btn-block">Send Message →</button>
                 </form>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ══ FOOTER ════════════════════════════════════ -->
-<footer>
-    <div class="footer-top">
-        <div class="footer-brand">
-            <div class="logo">
-                <svg class="logo-mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs><linearGradient id="lg2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1"/><stop offset="100%" style="stop-color:#0891b2;stop-opacity:1"/></linearGradient></defs>
-                    <circle cx="100" cy="100" r="95" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="3"/>
-                    <rect x="65" y="120" width="12" height="30" fill="white" rx="2"/>
-                    <rect x="85" y="105" width="12" height="45" fill="url(#lg2)" rx="2"/>
-                    <rect x="105" y="85" width="12" height="65" fill="white" rx="2"/>
-                    <rect x="125" y="70" width="12" height="80" fill="url(#lg2)" rx="2"/>
-                    <path d="M60 100 L75 115 L95 85" stroke="#c8973a" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span class="logo-text">NUMETRIC</span>
-            </div>
-            <p>Global Accounting & Bookkeeping Solutions for Businesses and Practices.</p>
-        </div>
-        <div class="footer-links">
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#integrations">Integrations</a>
-            <a href="#countries">Global Reach</a>
-            <a href="#why">Why Us</a>
-            <a href="#blog">Blog</a>
-            <a href="#reviews">Reviews</a>
-            <a href="#faq">FAQ</a>
-            <a href="#contact">Contact</a>
-        </div>
-        <div class="footer-social">
-            <a href="https://www.linkedin.com/company/numetricinc/" target="_blank" class="social-btn" title="LinkedIn">in</a>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        © 2024–2026 NUMETRIC. All rights reserved. · Global Accounting & Bookkeeping Solutions for Businesses and Practices
-    </div>
-</footer>
+</main>
 
+<footer data-site-footer></footer>
+
+<script src="/assets/site.js"></script>
 <script>
-/* ── AUTH STATE ─────────────────────────────── */
-let isAdmin = localStorage.getItem('nmAdminIn') === 'true';
-const CREDS = { email: 'owner@numetric.com', password: 'Admin@2024' };
+NM.ready(async () => {
 
-function openModal()  { document.getElementById('loginModal').classList.add('show'); }
-function closeModal() {
-    document.getElementById('loginModal').classList.remove('show');
-    document.getElementById('loginEmail').value = '';
-    document.getElementById('loginPassword').value = '';
-    document.getElementById('loginError').classList.remove('show');
-}
-function handleLogin(e) {
-    e.preventDefault();
-    const email = document.getElementById('loginEmail').value;
-    const pass  = document.getElementById('loginPassword').value;
-    const err   = document.getElementById('loginError');
-    if (email === CREDS.email && pass === CREDS.password) {
-        isAdmin = true;
-        localStorage.setItem('nmAdminIn','true');
-        closeModal();
-        updateAuthUI();
-        alert('✅ Welcome! You are now logged in as Admin.');
-    } else {
-        err.textContent = '❌ Invalid credentials. Try: owner@numetric.com / Admin@2024';
-        err.classList.add('show');
-    }
-}
-function logout() {
-    isAdmin = false;
-    localStorage.setItem('nmAdminIn','false');
-    updateAuthUI();
-}
-function updateAuthUI() {
-    const loginBtn = document.getElementById('loginBtn');
-    const sidebar  = document.getElementById('blogSidebar');
-    if (isAdmin) {
-        loginBtn.style.display = 'none';
-        sidebar.innerHTML = `
-            <div class="blog-form-box">
-                <h3>✏️ New Article <span class="admin-tag">ADMIN</span></h3>
-                <form id="blogForm" onsubmit="submitPost(event)">
-                    <div class="form-group"><label>Title *</label><input type="text" id="bTitle" required placeholder="e.g., Tax Planning Tips for 2025"></div>
-                    <div class="form-group"><label>Summary *</label><textarea id="bExcerpt" required placeholder="Brief summary…" style="min-height:80px"></textarea></div>
-                    <div class="form-group"><label>Full Content *</label><textarea id="bContent" required placeholder="Write your article here…"></textarea></div>
-                    <button type="submit" class="btn btn-navy blog-submit">Publish Article</button>
-                </form>
-                <button class="blog-logout" onclick="logout();renderBlogSidebar()">Logout</button>
-            </div>`;
-    } else {
-        loginBtn.style.display = '';
-        sidebar.innerHTML = '';
-        renderBlogSidebar();
-    }
-    renderReviews(); updateRatingStats();
-}
-function renderBlogSidebar() {
-    const sidebar = document.getElementById('blogSidebar');
-    if (!isAdmin) sidebar.innerHTML = '';
-}
+    /* ── Latest three posts, newest first ──────────────────────────── */
+    const posts = await NM.getPosts();
+    const grid = document.getElementById('homePosts');
+    grid.innerHTML = posts.length
+        ? posts.slice(0, 3).map(p => NM.postCard(p)).join('')
+        : NM.emptyState('No articles yet',
+            'New insights are on the way. Publish your first post from the studio route.');
+    NM.observeNew();
 
-/* ── HAMBURGER ──────────────────────────────── */
-function toggleMobile() {
-    const ham = document.getElementById('hamburger');
-    const nav = document.getElementById('mobileNav');
-    ham.classList.toggle('active');
-    nav.classList.toggle('open');
-    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
-}
-function closeMobile() {
-    document.getElementById('hamburger').classList.remove('active');
-    document.getElementById('mobileNav').classList.remove('open');
-    document.body.style.overflow = '';
-}
+    /* ── FAQ ───────────────────────────────────────────────────────── */
+    NM.mountFaq(document.getElementById('faqList'));
 
-/* ── SCROLL HEADER SHADOW ───────────────────── */
-window.addEventListener('scroll', () => {
-    document.getElementById('siteHeader').classList.toggle('scrolled', window.scrollY > 20);
-});
+    /* ── Reviews ───────────────────────────────────────────────────── */
+    let rating = 0;
+    const starRow = document.getElementById('starRow');
+    const stars = [...starRow.querySelectorAll('.star-btn')];
+    const paint = (n) => stars.forEach(s => s.classList.toggle('lit', +s.dataset.v <= n));
 
-/* ── BLOG ───────────────────────────────────── */
-function getPosts()       { return JSON.parse(localStorage.getItem('nmPosts') || '[]'); }
-function savePosts(p)     { localStorage.setItem('nmPosts', JSON.stringify(p)); }
-function esc(t)           { return t.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
-
-function submitPost(e) {
-    e.preventDefault();
-    const post = {
-        id: Date.now(),
-        title:   document.getElementById('bTitle').value,
-        excerpt: document.getElementById('bExcerpt').value,
-        content: document.getElementById('bContent').value,
-        author: CREDS.email,
-        date: new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})
-    };
-    const posts = getPosts(); posts.unshift(post); savePosts(posts);
-    document.getElementById('blogForm').reset();
-    renderPosts();
-    alert('✅ Article published!');
-}
-
-function renderPosts() {
-    const posts = getPosts();
-    const grid  = document.getElementById('blogGrid');
-    if (!posts.length) {
-        grid.innerHTML = `<div class="no-content"><p>No articles yet. Check back soon for accounting insights!</p></div>`;
-        return;
-    }
-    grid.innerHTML = posts.map(p => `
-        <div class="blog-card">
-            <div class="blog-card-head">
-                <div class="blog-card-date">${p.date}</div>
-                <div class="blog-card-title">${esc(p.title)}</div>
-            </div>
-            <div class="blog-card-body">
-                <p class="blog-card-excerpt">${esc(p.excerpt)}</p>
-                <details style="cursor:pointer;">
-                    <summary style="color:var(--teal);font-weight:700;font-size:.88rem;">Read Full Article</summary>
-                    <div style="margin-top:.75rem;color:var(--slate);font-size:.88rem;line-height:1.7;">${esc(p.content).replace(/\n/g,'<br>')}</div>
-                </details>
-            </div>
-        </div>`).join('');
-}
-
-/* ── REVIEWS ────────────────────────────────── */
-let selRating = 0;
-document.querySelectorAll('.star-btn').forEach(s => {
-    s.addEventListener('click', function() {
-        selRating = +this.dataset.v;
-        document.getElementById('revRating').value = selRating;
-        refreshStars();
+    stars.forEach(s => {
+        const pick = () => { rating = +s.dataset.v; paint(rating); };
+        s.addEventListener('click', pick);
+        s.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); }
+        });
+        s.addEventListener('mouseenter', () => paint(+s.dataset.v));
     });
-    s.addEventListener('mouseenter', function() {
-        document.querySelectorAll('.star-btn').forEach(x => x.classList.toggle('lit', +x.dataset.v <= +this.dataset.v));
-    });
-});
-document.getElementById('starRow').addEventListener('mouseleave', refreshStars);
-function refreshStars() {
-    document.querySelectorAll('.star-btn').forEach(x => x.classList.toggle('lit', +x.dataset.v <= selRating));
-}
+    starRow.addEventListener('mouseleave', () => paint(rating));
 
-function getReviews()   { return JSON.parse(localStorage.getItem('nmReviews') || '[]'); }
-function saveReviews(r) { localStorage.setItem('nmReviews', JSON.stringify(r)); }
-
-function submitReview(e) {
-    e.preventDefault();
-    if (!selRating) { alert('Please select a star rating.'); return; }
-    const rev = {
-        id: Date.now(),
-        name:    document.getElementById('revName').value,
-        company: document.getElementById('revCompany').value,
-        rating:  selRating,
-        text:    document.getElementById('revText').value,
-        date:    new Date().toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}),
-        responses: []
-    };
-    const revs = getReviews(); revs.unshift(rev); saveReviews(revs);
-    const toast = document.getElementById('reviewSuccess');
-    toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3500);
-    document.getElementById('reviewForm').reset(); selRating = 0; refreshStars();
-    renderReviews(); updateRatingStats();
-}
-
-function renderReviews() {
-    const revs = getReviews();
-    const grid = document.getElementById('reviewsGrid');
-    if (!revs.length) {
-        grid.innerHTML = `<div class="no-content" style="grid-column:1/-1"><p>No reviews yet — be the first to share your experience!</p></div>`;
-        return;
-    }
-    grid.innerHTML = revs.map(r => `
-        <div class="review-card">
-            <div class="review-card-top">
-                <div>
-                    <div class="reviewer-name">${esc(r.name)}</div>
-                    <div class="reviewer-co">${esc(r.company)}</div>
-                </div>
-                <div class="review-stars">${'★'.repeat(r.rating)}</div>
-            </div>
-            <p class="review-text">"${esc(r.text)}"</p>
-            <div class="review-date">${r.date}</div>
-            ${r.responses && r.responses.length ? r.responses.map(resp => `
-                <div class="review-response">
-                    <div class="response-label">NUMETRIC Response</div>
-                    <div class="response-text-r">${esc(resp.text)}</div>
-                    <div class="response-date-r">${resp.date}</div>
-                </div>`).join('') : ''}
-            ${isAdmin ? `
-                <button class="response-toggle" onclick="toggleResp(${r.id})">
-                    ${r.responses && r.responses.length ? '+ Add Response' : '↩ Respond'}
-                </button>
-                <div id="rf-${r.id}" class="response-input-area" style="display:none;">
-                    <textarea id="rt-${r.id}" class="form-group" style="width:100%;border:1.5px solid var(--border);padding:.65rem;border-radius:8px;font-family:inherit;font-size:.88rem;" placeholder="Write your response…"></textarea>
-                    <div class="response-btns">
-                        <button class="resp-submit" onclick="submitResp(${r.id})">Post Response</button>
-                        <button class="resp-cancel" onclick="toggleResp(${r.id})">Cancel</button>
+    async function renderReviews() {
+        const revs = await NM.getReviews();
+        const box = document.getElementById('reviewsGrid');
+        box.innerHTML = revs.length
+            ? revs.map(r => `
+                <article class="card review-card" data-reveal>
+                    <div class="review-top">
+                        <div>
+                            <div class="reviewer">${NM.esc(r.name)}</div>
+                            <div class="reviewer-co">${NM.esc(r.company)}</div>
+                        </div>
+                        <div class="review-stars">${'★'.repeat(r.rating)}</div>
                     </div>
-                </div>` : ''}
-        </div>`).join('');
-}
+                    <p class="review-text">“${NM.esc(r.text)}”</p>
+                    <div class="review-date">${NM.esc(NM.fmtDate(r.date))}</div>
+                </article>`).join('')
+            : NM.emptyState('No reviews published yet',
+                'Be the first to share your experience using the form above.');
 
-function toggleResp(id) {
-    const el = document.getElementById(`rf-${id}`);
-    el.style.display = el.style.display === 'none' ? 'block' : 'none';
-}
-function submitResp(id) {
-    const txt = document.getElementById(`rt-${id}`).value.trim();
-    if (!txt) { alert('Please write a response.'); return; }
-    const revs = getReviews();
-    const rev  = revs.find(r => r.id === id);
-    if (rev) {
-        rev.responses.push({ text: txt, date: new Date().toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}) });
-        saveReviews(revs); renderReviews(); updateRatingStats();
+        /* Aggregate rating panel */
+        const bars = document.getElementById('ratingBars');
+        const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+        revs.forEach(r => { if (counts[r.rating] != null) counts[r.rating]++; });
+        const total = revs.length;
+        const avg = total ? (revs.reduce((s, r) => s + r.rating, 0) / total) : 0;
+
+        document.getElementById('avgNum').textContent = avg.toFixed(1);
+        document.getElementById('totalRev').textContent = total;
+        document.getElementById('avgStars').textContent =
+            total ? '★'.repeat(Math.round(avg)).padEnd(5, '☆') : '☆☆☆☆☆';
+        bars.innerHTML = [5, 4, 3, 2, 1].map(n => `
+            <div class="bar-row">
+                <span class="bar-lbl">${n} ★</span>
+                <span class="bar-track"><span class="bar-fill"
+                      style="width:${total ? (counts[n] / total * 100).toFixed(0) : 0}%"></span></span>
+                <span class="bar-cnt">${counts[n]}</span>
+            </div>`).join('');
+        NM.observeNew();
     }
-}
+    await renderReviews();
 
-function updateRatingStats() {
-    const revs = getReviews();
-    if (!revs.length) {
-        document.getElementById('avgNum').textContent = '0.0';
-        document.getElementById('avgStars').textContent = '☆☆☆☆☆';
-        document.getElementById('totalRev').textContent = '0';
-        [1,2,3,4,5].forEach(i => { document.getElementById(`bar${i}`).style.width='0%'; document.getElementById(`cnt${i}`).textContent='0'; });
-        return;
-    }
-    const total = revs.reduce((s,r) => s + r.rating, 0);
-    const avg   = (total / revs.length).toFixed(1);
-    document.getElementById('avgNum').textContent   = avg;
-    document.getElementById('totalRev').textContent = revs.length;
-    const fs = Math.floor(avg);
-    document.getElementById('avgStars').textContent = '★'.repeat(fs) + (avg % 1 >= .5 ? '☆' : '');
-    const cnts = {1:0,2:0,3:0,4:0,5:0};
-    revs.forEach(r => cnts[r.rating]++);
-    [1,2,3,4,5].forEach(i => {
-        const pct = (cnts[i] / revs.length * 100).toFixed(0);
-        document.getElementById(`bar${i}`).style.width = pct + '%';
-        document.getElementById(`cnt${i}`).textContent = cnts[i];
+    document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const toast = document.getElementById('revToast');
+        if (!rating) {
+            toast.textContent = 'Please select a star rating before submitting.';
+            toast.className = 'toast error show';
+            return;
+        }
+        /* Held locally until an admin exports and commits it — see /studio. */
+        const list = NM.readLocal(NM.KEYS.reviews);
+        list.unshift({
+            id: Date.now(),
+            name: document.getElementById('revName').value.trim(),
+            company: document.getElementById('revCompany').value.trim(),
+            rating,
+            text: document.getElementById('revText').value.trim(),
+            date: new Date().toISOString().slice(0, 10)
+        });
+        NM.writeLocal(NM.KEYS.reviews, list);
+
+        toast.textContent = '✓ Thank you! Your review has been submitted for moderation.';
+        toast.className = 'toast show';
+        e.target.reset(); rating = 0; paint(0);
+        await renderReviews();
     });
-}
 
-/* ── FAQ ────────────────────────────────────── */
-const FAQS = [
-    { q: "Is my clients' data secure with an offshore provider?",
-      a: "Yes, absolutely. We implement enterprise-grade security protocols, encrypted data transfers, secure file handling, and strict confidentiality agreements. Your clients' financial information is protected with the same rigour as any onshore provider." },
-    { q: "How do you ensure compliance with different country requirements?",
-      a: "We maintain expertise in the accounting standards, tax requirements, and regulatory rules of the countries we serve. Our processes are built around these standards, and we stay current with regulatory changes. Every report and entry is reviewed for compliance specific to your jurisdiction." },
-    { q: "What's your typical turnaround time?",
-      a: "Turnaround times depend on the service: Monthly accounting — typically 5–7 business days. Payroll — within 2–3 business days. Financial statements — 7–10 business days. We can discuss specific timelines based on your needs." },
-    { q: "Can you handle multiple clients and full back-office work?",
-      a: "Yes! We can support a single client or manage your entire back-office portfolio. We scale with your firm's growth and can handle multiple clients simultaneously with dedicated account management for each relationship." },
-    { q: "How do I integrate NUMETRIC with my existing systems?",
-      a: "We work with the systems you already use, supporting all major accounting software platforms. We establish secure, efficient data transfer methods and maintain regular communication protocols to ensure smooth integration with your existing workflows." },
-    { q: "What's the cost structure and pricing model?",
-      a: "We offer flexible pricing based on service complexity and volume. Most firms see cost savings of 40–60% compared to local staffing. We'll work with you to understand your specific needs and provide transparent, competitive quotes." },
-    { q: "How does the onboarding process work?",
-      a: "We provide a structured onboarding: initial discovery meeting → system setup and configuration → detailed documentation review → knowledge transfer sessions → ramp-up period with close oversight. We ensure you're completely comfortable before full handoff." },
-    { q: "Are you a certified Xero Partner?",
-      a: "Yes! We are a certified Xero Partner with L1 and L2 certifications. Our team has deep expertise in Xero's full suite of features and can help optimise your workflow, set up automations, and ensure accurate real-time reporting." }
-];
-
-function renderFAQ() {
-    document.getElementById('faqWrap').innerHTML = FAQS.map((f, i) => `
-        <div class="faq-item" id="faq-${i}">
-            <div class="faq-q" onclick="toggleFAQ(${i})">
-                <span>${f.q}</span>
-                <div class="faq-chevron">▼</div>
-            </div>
-            <div class="faq-a"><p>${f.a}</p></div>
-        </div>`).join('');
-}
-function toggleFAQ(i) {
-    document.querySelectorAll('.faq-item').forEach((el, idx) => {
-        if (idx === i) el.classList.toggle('open');
-        else el.classList.remove('open');
+    /* ── Contact ───────────────────────────────────────────────────── */
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const toast = document.getElementById('contactToast');
+        const name = document.getElementById('cName').value.trim();
+        toast.innerHTML = `✓ Thanks ${NM.esc(name)} — we've noted your enquiry. ` +
+            `For an immediate response, email <strong>info@numetricinc.com</strong>.`;
+        toast.className = 'toast show';
+        e.target.reset();
     });
-}
-
-/* ── CONTACT FORM ───────────────────────────── */
-function submitContact(e) {
-    e.preventDefault();
-    const name = document.getElementById('cName').value;
-    alert(`Thank you, ${name}! We've received your message and will get back to you within 24 hours.\n\nFor immediate enquiries: info@numetricinc.com`);
-    document.getElementById('contactForm').reset();
-}
-
-/* ── CLOSE MODAL OUTSIDE ────────────────────── */
-window.addEventListener('click', e => {
-    if (e.target === document.getElementById('loginModal')) closeModal();
-});
-
-/* ── INIT ───────────────────────────────────── */
-window.addEventListener('DOMContentLoaded', () => {
-    updateAuthUI();
-    renderPosts();
-    renderReviews();
-    updateRatingStats();
-    renderFAQ();
 });
 </script>
 </body>
