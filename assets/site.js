@@ -16,6 +16,42 @@ const NM = window.NM = {};
    Set before anything else so a later failure can't leave content hidden. */
 document.documentElement.classList.add('js');
 
+/* ── 0. SITE CONFIG ────────────────────────────────────────────────────── */
+/* Every external ID the site needs lives here and nowhere else. A blank
+   value is not an error — each feature degrades to the old browser-local
+   behaviour when its ID is missing, so the site never breaks half-configured.
+
+   Filling these in is a copy-paste job: run tools/google-forms-setup.gs once
+   in Google Apps Script and it prints this whole block back to you. See
+   docs/GOOGLE-FORMS.md.                                                     */
+const CONFIG = NM.CONFIG = {
+
+    /* Where the "Write a review on Google" button sends people. Replace with
+       the exact link the QR code opens (scan it once, copy the address —
+       it looks like https://g.page/r/XXXXXXXX/review). Until then this
+       generic search lands visitors on the Google business profile.        */
+    googleReviewUrl: 'https://www.google.com/search?q=NumetricInc+reviews',
+
+    /* Google Form that receives client reviews.
+       `action` ends in /formResponse — NOT /viewform.                      */
+    reviewForm: {
+        action: '',
+        fields: { name: '', company: '', rating: '', text: '' }
+    },
+
+    /* Google Form that receives contact enquiries. */
+    contactForm: {
+        action: '',
+        fields: { name: '', email: '', company: '', country: '', message: '' }
+    },
+
+    /* Published-to-web CSV of the review response sheet. File → Share →
+       Publish to web → (review sheet) → Comma-separated values.
+       Rows are only shown once the Approved column says TRUE, so nothing
+       reaches the site unmoderated.                                        */
+    reviewSheetCsv: ''
+};
+
 /* ── 1. NAVIGATION MODEL ───────────────────────────────────────────────── */
 /* Single source of truth for the header, drawer and footer link columns.
    `to` values starting with '#' are resolved against the home page so the
@@ -362,9 +398,147 @@ NM.getPosts = async function () {
     return [...bySlug.values()].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 };
 
+/* ── 6b. GOOGLE SHEET / FORM BRIDGE ────────────────────────────────────── */
+/* A static host has nowhere to POST, so the two live forms hand their data
+   to a Google Form; its responses land in a Sheet; the Sheet is published as
+   CSV and read straight back here. That closes the loop with no backend and
+   no build step — see docs/GOOGLE-FORMS.md.                                */
+
+/* Minimal RFC-4180 reader: handles quoted fields containing commas, quotes
+   and newlines, which review text absolutely will contain. */
+const parseCsv = NM.parseCsv = function (text) {
+    const rows = [];
+    let row = [], field = '', quoted = false;
+
+    for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        if (quoted) {
+            if (c === '"') {
+                if (text[i + 1] === '"') { field += '"'; i++; }   /* escaped quote */
+                else quoted = false;
+            } else field += c;
+            continue;
+        }
+        if (c === '"') { quoted = true; continue; }
+        if (c === ',') { row.push(field); field = ''; continue; }
+        if (c === '\r') continue;
+        if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; continue; }
+        field += c;
+    }
+    if (field !== '' || row.length) { row.push(field); rows.push(row); }
+    return rows;
+};
+
+/* CSV → array of objects keyed by a normalised header ("Your Name" → "yourname"). */
+const csvToObjects = function (text) {
+    const rows = parseCsv(text).filter(r => r.some(c => c.trim() !== ''));
+    if (rows.length < 2) return [];
+    const keys = rows[0].map(h => h.trim().toLowerCase().replace(/[^a-z0-9]/g, ''));
+    return rows.slice(1).map(r => {
+        const o = {};
+        keys.forEach((k, i) => { o[k] = (r[i] || '').trim(); });
+        return o;
+    });
+};
+
+/* Column names are matched loosely so renaming a Google Form question from
+   "Your Review" to "Review" doesn't silently empty the section. */
+const pick = (row, ...names) => {
+    for (const n of names) if (row[n]) return row[n];
+    const keys = Object.keys(row);
+    for (const n of names) {
+        const hit = keys.find(k => k.includes(n));
+        if (hit && row[hit]) return row[hit];
+    }
+    return '';
+};
+
+const isApproved = (v) =>
+    /^(true|yes|y|1|approved|publish(ed)?)$/i.test(String(v || '').trim());
+
+NM.getSheetReviews = async function () {
+    if (!CONFIG.reviewSheetCsv) return [];
+    try {
+        const res = await fetch(CONFIG.reviewSheetCsv, { cache: 'no-cache' });
+        if (!res.ok) throw new Error(res.status);
+        return csvToObjects(await res.text())
+            /* Un-moderated rows stay invisible. An absent Approved column
+               means the sheet was set up without moderation — show them. */
+            .filter(r => !('approved' in r) || isApproved(r.approved))
+            .map(r => ({
+                id: pick(r, 'timestamp') || Math.random().toString(36).slice(2),
+                name: pick(r, 'name') || 'Anonymous',
+                company: pick(r, 'company', 'firm', 'firmcompany'),
+                rating: Math.min(5, Math.max(1, parseInt(pick(r, 'rating'), 10) || 5)),
+                text: pick(r, 'review', 'text', 'yourreview', 'experience'),
+                date: toIsoDate(pick(r, 'timestamp')),
+                source: 'sheet'
+            }))
+            .filter(r => r.text);
+    } catch {
+        /* Sheet unpublished, offline, or renamed — fall back to the rest. */
+        return [];
+    }
+};
+
+/* Google's timestamps come through as "22/08/2026 15:04:11" or ISO,
+   depending on the sheet locale. Normalise both to YYYY-MM-DD. */
+function toIsoDate(v) {
+    const today = new Date().toISOString().slice(0, 10);
+    if (!v) return today;
+    const dmy = String(v).match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/);
+    if (dmy) {
+        const [, d, m, y] = dmy;
+        return `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+    }
+    const t = Date.parse(v);
+    return isNaN(t) ? today : new Date(t).toISOString().slice(0, 10);
+}
+
+/* Posts a plain object to a Google Form.
+   Google does not send CORS headers on /formResponse, so the request must go
+   out as no-cors and the response is opaque — a resolved promise means "sent",
+   not "stored". That is the accepted trade-off for a backend-free form; the
+   Sheet is the record of truth. Returns false when unconfigured so callers
+   can fall back to local storage.                                          */
+NM.submitToGoogleForm = async function (form, values) {
+    if (!form || !form.action) return false;
+    const body = new FormData();
+    let mapped = 0;
+    Object.entries(values).forEach(([key, val]) => {
+        const entry = form.fields[key];
+        if (entry && val != null && val !== '') { body.append(entry, val); mapped++; }
+    });
+    if (!mapped) return false;
+    try {
+        await fetch(form.action, { method: 'POST', mode: 'no-cors', body });
+        return true;
+    } catch {
+        return false;
+    }
+};
+
+/* Same author, same words — used to retire a local copy once the real one
+   comes back from the sheet, so the author doesn't see themselves twice. */
+const reviewFingerprint = (r) =>
+    (String(r.name || '') + '|' + String(r.text || ''))
+        .toLowerCase().replace(/\s+/g, ' ').trim();
+
 NM.getReviews = async function () {
-    const published = await fetchJson('/data/reviews.json', []);
-    return [...readLocal(DRAFT_REVIEWS), ...published]
+    const [sheet, published] = await Promise.all([
+        NM.getSheetReviews(),
+        fetchJson('/data/reviews.json', [])
+    ]);
+
+    const live = [...sheet, ...published];
+    const seen = new Set(live.map(reviewFingerprint));
+
+    /* Local drafts first so a visitor sees their own submission immediately
+       while it waits for moderation — but only until the approved copy
+       arrives, at which point the local one is redundant. */
+    const drafts = readLocal(DRAFT_REVIEWS).filter(r => !seen.has(reviewFingerprint(r)));
+
+    return [...drafts, ...live]
         .sort((a, b) => (a.date < b.date ? 1 : -1));
 };
 

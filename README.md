@@ -140,15 +140,53 @@ Everyone shown on `/team` comes from the `TEAM` object at the bottom of **`team.
     bio: 'Two or three sentences.',
     focus: ['Payroll Operations', 'Client Onboarding'],
     links: [
-        { label: 'LinkedIn ↗', url: 'https://www.linkedin.com/in/...' },
-        { label: 'Email',      url: 'mailto:info@numetricinc.com' }
+        { type: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/in/...' },
+        { type: 'email',    label: 'name@numetricinc.com', url: 'mailto:name@numetricinc.com' }
     ]
 }
 ```
 
+`type` selects the icon (`linkedin` or `email`) and is the only thing that
+distinguishes them. Omit a link entirely rather than pointing it somewhere
+generic — a member with no published email simply has one link.
+
+Photos live in **`/assets/team/`** with slug filenames (`firstname-lastname.jpeg`).
+Keep them there and keep the names free of spaces and `&`, both of which end up
+percent-encoded in the URL.
+
 Array order is page order, and the grid reflows on its own.
 
-The CEO and CFO entries are currently **placeholders**. While any value still contains the word `PLACEHOLDER`, an amber editor banner appears at the top of the page as a reminder — it disappears once real details are filled in.
+While any value still contains the word `PLACEHOLDER`, an amber editor banner
+appears at the top of the page as a reminder. All three current entries are
+real, so the banner is not showing — do not invent biographical detail to keep
+it that way.
+
+---
+
+## Forms and client reviews
+
+The contact and review forms post to **Google Forms**; the responses land in a
+Google Sheet; the sheet is published as CSV and read back into the reviews
+section, so approved reviews appear on the site without a commit.
+
+Everything is driven by the `CONFIG` block at the top of **`assets/site.js`**.
+Until it is filled in, both forms fall back to browser-local storage — which
+means **nobody receives them**. Setting it up takes about ten minutes:
+
+1. Run `tools/google-forms-setup.gs` once at [script.google.com](https://script.google.com) —
+   it creates both forms, links the sheet, adds the moderation column, and
+   prints the config block to paste in.
+2. Publish the review sheet to the web as CSV and paste that URL into
+   `CONFIG.reviewSheetCsv`.
+
+Full walkthrough: **[docs/GOOGLE-FORMS.md](docs/GOOGLE-FORMS.md)**.
+
+To moderate, open the sheet and tick **Approved** — the review appears on the
+site within a minute or two. Untick it and it disappears. Nothing to commit.
+
+> Reviews left on the **Google Business profile** (via the QR card in the
+> reviews section) stay on Google. Pulling those onto the site would need the
+> Google Places API — an API key, a billing account and a five-review cap.
 
 ---
 
@@ -165,7 +203,10 @@ assets/site.css     Design system — all styling for every page
 assets/site.js      Shared runtime — nav, footer, content loading, Markdown
 
 data/blogs.json     Published blog posts
-data/reviews.json   Published client reviews
+data/reviews.json   Published client reviews (legacy — the sheet is now primary)
+
+tools/              google-forms-setup.gs — one-shot Google Forms creator
+docs/               GOOGLE-FORMS.md — form/sheet setup and moderation
 
 vercel.json         Routing and redirects
 dev-server.py       Local development server
