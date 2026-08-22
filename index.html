@@ -220,17 +220,30 @@
 
         <div class="grid grid-2">
             <article class="card card-hover card-accent intg" data-reveal>
-                <div class="intg-logo timeki">⏱️</div>
-                <h3>Timeki Integration</h3>
-                <p class="intg-sub">Time Tracking &amp; Billable Hours Management</p>
-                <p>Seamlessly integrate Timeki time tracking with our accounting workflows. Capture precise
-                   billable hours and project-based allocation, then convert time logs directly into
-                   invoice-ready data for your clients.</p>
+                <div class="intg-logo biologs" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3a7 7 0 0 0-7 7v1a12 12 0 0 1-.9 4.5"/>
+                        <path d="M12 6.5A3.5 3.5 0 0 0 8.5 10v1.5a9 9 0 0 1-1 4"/>
+                        <path d="M12 10v2a13 13 0 0 1-1.6 6.3"/>
+                        <path d="M15.5 10a3.5 3.5 0 0 0-1.6-2.9"/>
+                        <path d="M15.5 11.5a15 15 0 0 1-.8 5.4"/>
+                        <path d="M19 10a7 7 0 0 0-2.5-5.4"/>
+                    </svg>
+                </div>
+                <span class="tag" style="margin-bottom:.75rem">Attendance &amp; Time Data</span>
+                <h3>BioLogs Integration</h3>
+                <p class="intg-sub">Biometric Access Intelligence — Secure, Real-Time, Multi-Tenant</p>
+                <p>BioLogs captures attendance at the door, not on an honour system. Biometric punch data
+                   flows straight into our payroll and cost-accounting workflows, so hours billed, hours
+                   paid and hours actually worked reconcile against one verified record.</p>
                 <ul class="intg-features">
-                    <li>Billable hours tracking</li><li>Project-based allocation</li>
-                    <li>Productivity monitoring</li><li>Invoice-ready data</li>
+                    <li>Biometric attendance capture</li><li>Real-time access logs</li>
+                    <li>Multi-tenant, multi-site</li><li>Payroll-ready hours</li>
                     <li>Cost accounting integration</li>
                 </ul>
+                <a class="intg-link" href="https://gatekeeperlogs.com" target="_blank" rel="noopener">
+                    gatekeeperlogs.com ↗</a>
             </article>
             <article class="card card-hover card-accent intg" data-reveal>
                 <div class="intg-logo xero">X</div>
@@ -250,9 +263,10 @@
 
         <div class="note-panel" data-reveal>
             <h4>Why These Integrations Matter</h4>
-            <p>With Timeki and Xero in our workflow, we capture precise billable hours from your team's
-               time logs and convert them into invoice-ready data. Real-time synchronisation keeps your
-               accounting accurate and ensures clients are billed correctly for every minute of work.</p>
+            <p>With BioLogs and Xero in our workflow, attendance is evidence rather than estimate.
+               Verified biometric hours feed payroll runs and project costing, then reconcile inside
+               Xero — so under-billing, over-payment and disputed timesheets are caught before they
+               reach an invoice rather than after.</p>
         </div>
     </div>
 </section>
@@ -403,15 +417,30 @@
         </div>
 
         <div class="reviews-layout">
-            <div class="rating-summary" data-reveal>
-                <div class="rating-top">
-                    <div class="rating-num" id="avgNum">0.0</div>
-                    <div>
-                        <div class="rating-stars" id="avgStars">☆☆☆☆☆</div>
-                        <div class="rating-count"><span id="totalRev">0</span> reviews</div>
+            <div class="reviews-aside">
+                <div class="rating-summary" data-reveal>
+                    <div class="rating-top">
+                        <div class="rating-num" id="avgNum">0.0</div>
+                        <div>
+                            <div class="rating-stars" id="avgStars">☆☆☆☆☆</div>
+                            <div class="rating-count"><span id="totalRev">0</span> reviews</div>
+                        </div>
                     </div>
+                    <div id="ratingBars"></div>
                 </div>
-                <div id="ratingBars"></div>
+
+                <!-- Scan-to-review card. The artwork already carries the Google
+                     wordmark, so the card adds no competing heading — only the
+                     tap route a phone user needs, since nobody can scan a code
+                     on the screen they are holding. -->
+                <div class="gr-card" data-reveal>
+                    <img class="gr-qr" src="/assets/google-review-qr.jpeg" width="486" height="543"
+                         alt="QR code linking to NUMETRIC's Google review page" loading="lazy">
+                    <p class="gr-note">Point your phone camera at the code to leave a public
+                        review on our Google Business profile.</p>
+                    <a class="btn btn-navy btn-block gr-btn" id="googleReviewBtn"
+                       href="#" target="_blank" rel="noopener">Write a Google review ↗</a>
+                </div>
             </div>
 
             <div class="panel" data-reveal>
@@ -442,7 +471,10 @@
             </div>
         </div>
 
-        <h3 style="font-size:1.15rem;color:var(--navy-800);margin-bottom:1.25rem">Recent Reviews</h3>
+        <div class="reviews-head">
+            <h3>Recent Reviews</h3>
+            <span class="live-dot" id="reviewsLive" hidden>Live from client submissions</span>
+        </div>
         <div class="grid grid-3" id="reviewsGrid"></div>
     </div>
 </section>
@@ -547,9 +579,16 @@ NM.ready(async () => {
     });
     starRow.addEventListener('mouseleave', () => paint(rating));
 
+    /* Scan-to-review card: the QR is baked into the artwork, the button is the
+       tap route for the phone that cannot scan its own screen. */
+    document.getElementById('googleReviewBtn').href = NM.CONFIG.googleReviewUrl;
+
     async function renderReviews() {
         const revs = await NM.getReviews();
         const box = document.getElementById('reviewsGrid');
+        /* Only claim "live" when the sheet is actually wired up and answering. */
+        document.getElementById('reviewsLive').hidden =
+            !revs.some(r => r.source === 'sheet');
         box.innerHTML = revs.length
             ? revs.map(r => `
                 <article class="card review-card" data-reveal>
@@ -596,33 +635,61 @@ NM.ready(async () => {
             toast.className = 'toast error show';
             return;
         }
-        /* Held locally until an admin exports and commits it — see /studio. */
-        const list = NM.readLocal(NM.KEYS.reviews);
-        list.unshift({
+        const btn = e.target.querySelector('button[type=submit]');
+        const entry = {
             id: Date.now(),
             name: document.getElementById('revName').value.trim(),
             company: document.getElementById('revCompany').value.trim(),
             rating,
             text: document.getElementById('revText').value.trim(),
             date: new Date().toISOString().slice(0, 10)
-        });
+        };
+
+        btn.disabled = true;
+        const sent = await NM.submitToGoogleForm(NM.CONFIG.reviewForm, entry);
+        btn.disabled = false;
+
+        /* Whether or not the Google Form is wired up yet, keep a local copy so
+           the visitor sees their own words straight away and no submission is
+           ever lost. Once approved in the sheet it returns for everyone. */
+        const list = NM.readLocal(NM.KEYS.reviews);
+        list.unshift(entry);
         NM.writeLocal(NM.KEYS.reviews, list);
 
-        toast.textContent = '✓ Thank you! Your review has been submitted for moderation.';
+        toast.textContent = sent
+            ? '✓ Thank you! Your review has been received and will appear once approved.'
+            : '✓ Thank you! Your review has been saved and is awaiting moderation.';
         toast.className = 'toast show';
         e.target.reset(); rating = 0; paint(0);
         await renderReviews();
     });
 
     /* ── Contact ───────────────────────────────────────────────────── */
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const toast = document.getElementById('contactToast');
+        const btn = e.target.querySelector('button[type=submit]');
         const name = document.getElementById('cName').value.trim();
-        toast.innerHTML = `✓ Thanks ${NM.esc(name)} — we've noted your enquiry. ` +
-            `For an immediate response, email <strong>info@numetricinc.com</strong>.`;
-        toast.className = 'toast show';
-        e.target.reset();
+
+        btn.disabled = true;
+        const sent = await NM.submitToGoogleForm(NM.CONFIG.contactForm, {
+            name,
+            email: document.getElementById('cEmail').value.trim(),
+            company: document.getElementById('cCompany').value.trim(),
+            country: document.getElementById('cCountry').value.trim(),
+            message: document.getElementById('cMessage').value.trim()
+        });
+        btn.disabled = false;
+
+        /* Unconfigured forms must not pretend the message went anywhere —
+           point the visitor at email instead of quietly dropping it. */
+        toast.innerHTML = sent
+            ? `✓ Thanks ${NM.esc(name)} — your enquiry has reached us. ` +
+              `We reply within one business day.`
+            : `Thanks ${NM.esc(name)} — please email <strong>info@numetricinc.com</strong> ` +
+              `so we can pick this up right away.`;
+        toast.className = sent ? 'toast show' : 'toast error show';
+        if (sent) e.target.reset();
     });
 });
 </script>
