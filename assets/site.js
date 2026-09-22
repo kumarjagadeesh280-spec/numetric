@@ -57,6 +57,10 @@ const CONFIG = NM.CONFIG = {
    `to` values starting with '#' are resolved against the home page so the
    section anchors keep working from /blog, /team, etc.                    */
 const NAV = [
+    { label: 'Divisions', children: [
+        { label: 'Numetric Financial',  to: '/financial', key: 'financial' },
+        { label: 'Numetric Cloud & IT', to: '/it-cloud',  key: 'it-cloud' }
+    ]},
     { label: 'Solutions', children: [
         { label: 'Our Services',          to: '#services' },
         { label: 'Software Integrations', to: '#integrations' },
@@ -153,12 +157,18 @@ function buildFooter() {
     <div class="footer-top">
         <div class="footer-brand">
             <div class="brand">${LOGO_SVG(true)}<span class="brand-text">NUMETRIC</span></div>
-            <p>Global accounting &amp; bookkeeping solutions for businesses and practices
-               across the US, Canada, the UK and Australia.</p>
+            <p>Delivering comprehensive business process outsourcing and managed IT solutions to help organizations scale efficiently.</p>
             <div style="margin-top:1.5rem">
                 <a class="social-btn" href="https://www.linkedin.com/company/numetricinc/"
                    target="_blank" rel="noopener" title="LinkedIn">in</a>
             </div>
+        </div>
+        <div class="footer-col">
+            <h5>Divisions</h5>
+            <a href="/financial">Numetric Financial</a>
+            <a href="/it-cloud">Numetric Cloud &amp; IT</a>
+            <a href="${href('#services')}">Service Overview</a>
+            <a href="${href('#integrations')}">Tech Integrations</a>
         </div>
         <div class="footer-col">
             <h5>Company</h5>
@@ -170,11 +180,9 @@ function buildFooter() {
         </div>
         <div class="footer-col">
             <h5>Resources</h5>
-            <a href="/blog">Blog &amp; Insights</a>
-            <a href="${href('#services')}">Services</a>
-            <a href="${href('#integrations')}">Integrations</a>
+            <a href="/blog">Insights &amp; Blog</a>
             <a href="${href('#reviews')}">Client Reviews</a>
-            <a href="${href('#faq')}">FAQ</a>
+            <a href="${href('#faq')}">FAQs</a>
         </div>
     </div>
     <div class="footer-bottom">
@@ -584,22 +592,22 @@ NM.emptyState = (title, body) => `
 
 /* ── 8. FAQ ────────────────────────────────────────────────────────────── */
 NM.FAQS = [
-    { q: "Is my clients' data secure with an offshore provider?",
-      a: "Yes. We implement enterprise-grade security protocols, encrypted data transfers, secure file handling, and strict confidentiality agreements. Your clients' financial information is protected with the same rigour as any onshore provider." },
-    { q: "How do you ensure compliance with different country requirements?",
-      a: "We maintain expertise in the accounting standards, tax requirements, and regulatory rules of the countries we serve, and stay current with regulatory changes. Every report and entry is reviewed for compliance specific to your jurisdiction." },
-    { q: "What's your typical turnaround time?",
-      a: "Monthly accounting is typically 5–7 business days, payroll within 2–3 business days, and financial statements 7–10 business days. We can agree specific timelines based on your needs." },
-    { q: "Can you handle multiple clients and full back-office work?",
-      a: "Yes. We can support a single client or manage your entire back-office portfolio, scaling with your firm's growth and providing dedicated account management for each relationship." },
-    { q: "How do I integrate NUMETRIC with my existing systems?",
-      a: "We work with the systems you already use, supporting all major accounting software platforms. We establish secure data transfer methods and regular communication protocols so integration doesn't disrupt your workflow." },
-    { q: "What's the cost structure and pricing model?",
-      a: "Pricing is flexible, based on service complexity and volume. Most firms see cost savings of 40–60% compared to local staffing. We provide transparent quotes once we understand your needs." },
-    { q: "How does the onboarding process work?",
-      a: "A structured path: discovery meeting → system setup and configuration → documentation review → knowledge transfer → a ramp-up period with close oversight, so you're comfortable before full handoff." },
-    { q: "Are you a certified Xero Partner?",
-      a: "Yes — a certified Xero Partner with L1 and L2 certifications. Our team can optimise your workflow, set up automations, and ensure accurate real-time reporting." }
+    { q: "How do you ensure data security and confidentiality?",
+      a: "We implement enterprise-grade security protocols, end-to-end encrypted data transfers, SOC-ready access controls, and strict confidentiality agreements. Your firm's and clients' financial data is protected with multi-tenant isolation and strict permissioning." },
+    { q: "How do you maintain multi-jurisdiction accounting compliance?",
+      a: "Our certified finance professionals maintain deep expertise across US GAAP, Canadian ASPE/IFRS, UK FRS, and Australian AASB standards. Every close package and financial report is subject to rigorous review specific to the client's jurisdiction." },
+    { q: "What does your Financial IT & Systems Consulting arm do?",
+      a: "Our technology team builds bespoke financial middleware, custom ERP integrations (including Tally Cloud setups and Xero API connectors), and automated accounts payable/receivable pipelines using Python, Supabase, Firebase, and Flutter. We eliminate manual data re-keying and build unified data infrastructure." },
+    { q: "Are you a certified Xero Partner practice?",
+      a: "Yes. We are a certified Xero Partner with Level 1 and Level 2 certifications. We design scalable charts of accounts, optimize bank reconciliation rules, handle complex multi-entity consolidation, and automate real-time ledger sync." },
+    { q: "How do you eliminate duplicate data entry between disparate software?",
+      a: "We deploy custom Python middleware and automated ETL pipelines that synchronize operational sources (such as time-tracking systems, billing engines, CRMs, or inventory databases) directly with your general ledger, validating and sanitizing records automatically." },
+    { q: "What is your typical delivery SLA and turnaround time?",
+      a: "We operate with a guaranteed 24-hour response SLA across all communications. Standard monthly close cycles run within 3–5 business days, payroll processing within 2 business days, and bespoke IT middleware modules are delivered in iterative agile sprints." },
+    { q: "What cost savings can our firm expect?",
+      a: "Firms typically achieve a 40–60% reduction in operational back-office overhead while unlocking custom software automation that would otherwise require separate, costly IT consulting retainers." },
+    { q: "How does the onboarding process work for a new practice?",
+      a: "Our structured onboarding comprises: 1) Practice & Systems Discovery, 2) Workflow & Middleware Integration, 3) Parallel Test Run with strict quality gates, and 4) Full Operational Handoff with dedicated account ownership and ongoing optimization." }
 ];
 
 NM.mountFaq = function (el) {
